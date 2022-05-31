@@ -1,0 +1,478 @@
+# Methodology
+
+```{r method-libs, echo=FALSE, message=FALSE}
+library(here)
+library(knitr)
+library(tidyverse)
+library(lubridate)
+
+`%!in%` <- Negate(`%in%`)
+```
+
+
+### Variables
+
+#### Categories that would be useful (things to predict?)
+
+ Owner-occupied?
+ Investor-owned?
+ Vacant?
+ Demolition in the past year (no construction since)
+ Construction in the past year
+
+#### factor analysis Variables
+
+The variables made it into the initial factor analysis were:
+
+* Accessibility
+
+  * Distance to transit  (use number of transit stops within 1/2 mile walkshed)
+  * Share of old/new homes (use average age of homes within 1/2 mile walkshed)
+  * Transit frequency (use transit stops per hour within 1/2 mile walkshed)
+* Affordability
+  * Average Condition of homes in half-mile walkshed
+  * Median rent of block-groups with centroids within 1/2 mile walkshed.
+  * Median income of block groups with centroids within 1/2 mile walkshed.
+  * Median ownership cost of block groups with centroids within 1/2 mile walkshed.
+
+* Close
+  * 
+* Diverse buildings
+  * Entropy of housing types (apartment, townhomes, etc) within 1/2 mile walkshed
+* Other
+  
+  * Standard deviation of building age within 1/2 mile walkshed
+
+## Data
+
+We obtained data on property addresses, land uses, assessed values (for both 
+land and buildings), and the dates and prices of as many as the three 
+most-recent sales from  
+@allegheny_county_office_of_property_assessments_allegheny_2022, which 
+includes information on 582,116 properties in Allegheny County.
+
+We also obtained latitude and longitude coordinates for each property from a 
+geocoder file provided by @western_pennsylvania_regional_data_center_geocoders_2021. 
+Over 99.5 percent of properties included in the assessment dataset are included
+in the geocoder file. Properties without geocoded locations are excluded from 
+our analysis, leaving a total of 579,473 properties.
+
+Potential development sites were identified as those 
+
+1. classified as "residential"
+(indicating residential properties with one to four housing units) or "commercial"
+(which includes mixed-use developments and residential properties with more than four 
+housing units) and 
+2. with a land use description in one of 59 possible categories^[One site (3008 Phillip Dr in Clairton) is missing a land use description in the assessment data. We checked this address on Zillow to determine that this is a single-family home and classified it as such in our data.]. The most common of 
+these are listed Table \@ref(tab:list-site-uses)^[The land use descriptions that were 
+classified as potential development sites but are not listed in Table 
+\@ref(tab:list-site-uses), which combine to represent less than one percent of all sites
+are  "RIGHTOF WAY - RESIDENTIAL", "CONDOMINIUM UNIT", "DWG USED AS OFFICE", 
+"APART:20-39 UNITS", "CONDO GARAGE UNITS", "COMMON AREA", "CONDO DEVELOPMENTAL 
+LAND", "CONDEMNED/BOARDED-UP", "CONDOMINIUM OFFICE BUILDING", "INDEPENDENT LIVING
+(SENIORS)", "DWG USED AS RETAIL", "OTHER COMMERCIAL", "MOBILE HOMES/TRAILER PKS",
+"RIGHT OF WAY - COMMERCIAL", "GROUP HOME", "TOTAL/MAJOR FIRE DAMAGE - COMM", 
+"OTHER COMMERCIAL HOUSING", "TOTAL/MAJOR FIRE DAMAGE", "COMM APRTM CONDOS 5-19 
+UNITS", "MUNICIPAL URBAN RENEWAL", "COMMERCIAL LAND", "CAMPGROUNDS", "COMMON AREA
+OR GREENBELT", "CHARITABLE EXEMPTION/HOS/HOMES", "INCOME PRODUCING PARKING LOT", 
+"DWG APT CONVERSION", ">10 ACRES VACANT", "MINOR FIRE DAMAGE", "COMM APRTM CONDOS
+20-39 UNITS", "COMMERCIAL/UTILITY", 
+"H.O.A RECREATIONS AREA", "COMM APRTM CONDOS 40+ UNITS", "MINOR FIRE DAMAGE - COMM", 
+"OTHER", "OTHER RESIDENTIAL STRUCTURE", "OWNED BY METRO HOUSING AU", "RESIDENTIAL VACANT
+LAND", "HUD PROJ #221", and "VACANT LAND 0-9 ACRES"].
+
+```{r filter-site-uses, include=FALSE, warning=FALSE}
+uses <- here("data",
+             "uses.csv") %>%
+  read_csv(show_col_types = FALSE)
+
+parcel_locs <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
+                   options = c("X_POSSIBLE_NAMES=x", 
+                               "Y_POSSIBLE_NAMES=y")) %>%
+  rename(PARID = PIN) %>%
+  st_set_crs("WGS84")
+
+parcel_data <- read_csv('https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-643557229491/resource/f2b8d575-e256-4718-94ad-1e12239ddb92/download/assessments.csv',
+                        show_col_types = FALSE) %>%
+  select(PARID, 
+         PROPERTYHOUSENUM,
+         PROPERTYADDRESS,
+         PROPERTYFRACTION,
+         PROPERTYCITY,
+         PROPERTYSTATE,
+         PROPERTYUNIT,
+         PROPERTYZIP,
+         CLASSDESC,
+         USEDESC,
+         LOTAREA,
+         SALEDATE,
+         SALEPRICE,
+         PREVSALEDATE,
+         PREVSALEPRICE,
+         PREVSALEDATE2,
+         PREVSALEPRICE2,
+         FAIRMARKETLAND,
+         FAIRMARKETBUILDING,
+         FAIRMARKETTOTAL,
+         ASOFDATE,
+         YEARBLT,
+         GRADEDESC,
+         CONDITIONDESC) %>%
+  mutate(address = paste(PROPERTYHOUSENUM,
+                         PROPERTYADDRESS,
+                         PROPERTYFRACTION,
+                         PROPERTYZIP)) %>%
+  mutate(USEDESC = ifelse(PARID == "0880H00194000000",
+                          "SINGLE FAMILY",
+                          USEDESC)) %>%
+  inner_join(parcel_locs) %>%
+  left_join(uses) 
+
+sites <- parcel_data %>%
+  filter(Category == "site") %>%
+  filter(CLASSDESC == "RESIDENTIAL" |
+           CLASSDESC == "COMMERCIAL") 
+```
+
+```{r list-site-uses, echo=FALSE, tidy=FALSE}
+site_use_summary <- sites %>%
+  group_by(USEDESC) %>%
+  summarise(`Number of potential sites` = n()) %>%
+  arrange(desc(`Number of potential sites`)) %>%
+  mutate(`Percent of potential sites` = 100 *
+           (`Number of potential sites` / sum(`Number of potential sites`))) %>%
+  mutate(`Cumulative percent of potential sites` = 
+           cumsum(`Percent of potential sites`))
+
+kable(
+  head(site_use_summary, 20), 
+  caption = 'Most common land uses categorized as potential sites',
+  booktabs = TRUE,
+  digits = 1,
+  format.args = (list(big.mark = ','))
+)
+```
+
+The above criteria yield 531,811 potential sites. Potential building sites were 
+further filtered to exclude those with missing data on the most recent sale 
+(6,574 sites, or about one percent of all sites).^[Four sites had sales prices 
+listed that were unreasonably high. 3039 Liberty Avenue in Pittsburgh is listed 
+as having sold for \$511,945,000 on August 30, 2021. Zillow lists this property 
+as having sold on that date for \$511,945 
+(https://www.zillow.com/homedetails/3039-W-Liberty-Ave-Pittsburgh-PA-15216/2070262638_zpid/, accessed 5/4/2022),
+so the value was corrected for what appears to have been a typo. 220 Hyeholde Dr 
+in Coraopolis is listed as having sold for \$28,100,000 in 1967. This may also 
+be a typo, and it also does not seem to be the most recent sale. Zillow lists 
+this home as having sold for \$350,000 in 2004
+(https://www.zillow.com/homes/220-hyeholde-dr,-Coraopolis,-PA_rb/11552817_zpid/, 
+accessed 5/4/2022), so the data was corrected to add that as the most recent sale. 
+Two other sites were identified as having unreasonably high sales values: 1339 
+Arlington Avenue in Pittsburgh is a three-bedroom single-family home that is 
+listed as having sold for \$57,010,813 in 1976 and a 0.06-acre vacant lot with 
+tax ID 0165G00270000000 is listed as having sold for \$24,920,232 in 1936. The 
+sales data for these sites were treated as missing.] for a total of 526,237 
+potential sites.  
+
+The focus of this analysis is on potential development sites rather than on 
+properties. Some properties in the assessor dataset are condominums where 
+multiple properties share a single parcel of land. We aggregated these to the 
+site level by identifying all properties with an assessed building value 
+greater than zero, a land value of zero, and a land use description that did
+not indicate the land was vacant. If multiple such properties share an address,
+we classified all properties at that address as a condominium and aggregated 
+them to the parcel level. This led to a final sample of 518,316 sites.
+
+```{r outliers, echo=FALSE}
+sites <- sites %>%
+  filter(!is.na(SALEDATE) & !is.na(SALEPRICE)) %>%
+  filter(PARID != "0014G00199000000" &
+           PARID != "0165G00270000000") %>%
+  mutate(SALEPRICE = 
+           ifelse(PARID == "0098C00044000000", 
+                  (SALEPRICE / 1000), 
+                  SALEPRICE)) %>%
+  mutate(PREVSALEDATE = ifelse(PARID == "0596M00299000000",
+                           SALEDATE,
+                           PREVSALEDATE)) %>%
+  mutate(PREVSALEPRICE = ifelse(PARID == "0596M00299000000",
+                           SALEPRICE,
+                           PREVSALEPRICE)) %>%
+  mutate(SALEDATE = ifelse(PARID == "0596M00299000000",
+                           "10-24-2004",
+                           SALEDATE)) %>%
+  mutate(SALEPRICE = ifelse(PARID == "0596M00299000000",
+                           350000,
+                           SALEPRICE)) 
+```
+
+### Aspatial data
+
+Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the assessment data for use in our analysis. We calculated two additional variables from the assessment data: the inflation-adjusted sales price and the average number of years between sales, which we calculated as the average of:
+
+1. The number of years between the most recent sale and the publication data of the assessment data (May 1, 2022);
+2. The number of years between the most recent sale and the second-most recent sale^[If no date is listed for the second-most recent sale, we used January 1, 1950. The data user guide notes that, although deeds have been recorded in Allegheny County since 1788 (and the earliest sale listed in the data is from November 24, 1806), early sales may not be included in the electronic system and may default to a 1950 sale date  [@western_pennsylvania_regional_data_center_allegheny_2017]. This effects about one third of parcels in our dataset.]; and
+3. The number of years between the second-most recent sale and the third-most recent sale, if a third-most recent sale is listed.
+
+```{r aspatial-calc, echo=FALSE, message=FALSE}
+inflation <- here("data",
+                  "inflation.csv") %>%
+  read_csv(show_col_types = FALSE)
+
+sites <- sites %>%
+  mutate(PREVSALEDATE = ifelse(is.na(PREVSALEDATE), 
+                               "01-01-1950", 
+                               PREVSALEDATE)) %>%
+  mutate(SALEDATE = mdy(SALEDATE),
+         PREVSALEDATE = mdy(PREVSALEDATE),
+         PREVSALEDATE2 = mdy(PREVSALEDATE2),
+         ASOFDATE = dmy(ASOFDATE)) %>%
+  mutate(years_since_sale = as.numeric(ASOFDATE - SALEDATE)/365.25,
+         btw_sales_1 = as.numeric(SALEDATE - PREVSALEDATE)/365.25,
+         btw_sales_2 = as.numeric(PREVSALEDATE - PREVSALEDATE2)/365.25) %>%
+  mutate(btw_sales_1 = case_when(btw_sales_1 > 0 ~ btw_sales_1,
+                                 btw_sales_1 == 0 ~ btw_sales_2,
+                                 btw_sales_1 < 0 ~ -1 * btw_sales_1)) %>%
+  mutate(btw_sales_avg = ifelse(is.na(btw_sales_2), 
+                                btw_sales_1,
+                                (btw_sales_1 + btw_sales_2)/2)) %>%
+  mutate(year = year(SALEDATE)) %>%
+  left_join(inflation) %>%
+  mutate(infl_adj_price = SALEPRICE * adj) 
+```
+
+To aggregate properties identified as condominiums to the site level, we summed 
+the total values for lot area, assessed land value, assessed building value, and
+inflation-adjusted sale price and averaged values for the average number of 
+years between sales.
+
+```{r, echo=FALSE}
+zero_land_val <- sites %>%
+  filter(FAIRMARKETLAND == 0 &
+           FAIRMARKETBUILDING > 0 &
+           substr(USEDESC, 1, 6) != "VACANT") 
+
+condo_addresses <- zero_land_val %>%
+  group_by(address) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n))
+
+condos <- sites %>%
+  filter(address %in% condo_addresses$address) %>%
+  group_by(address) %>%
+  summarise(n_condos = n(),
+            PARID = first(PARID),
+            FAIRMARKETTOTAL = sum(FAIRMARKETTOTAL),
+            FAIRMARKETBUILDING = sum(FAIRMARKETBUILDING),
+            LOTAREA = sum(LOTAREA),
+            btw_sales_avg = mean(btw_sales_avg, na.rm = TRUE),
+            infl_adj_price = sum(infl_adj_price, na.rm = TRUE)) %>%
+  filter(n_condos > 1)
+
+sites <- sites %>%
+  mutate(n_condos = 1) %>%
+  filter(sites$address %!in% condos$address) %>%
+  select(address,
+         n_condos,
+         PARID,
+         FAIRMARKETTOTAL, 
+         FAIRMARKETBUILDING, 
+         LOTAREA,
+         btw_sales_avg,
+         infl_adj_price) %>%
+  rbind(condos) %>%
+  select(-address, -n_condos)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+write_csv(sites,
+          here("data",
+               "sites.csv"))
+```
+
+### Accessibilty data
+
+Accessibilty was calculated from each of the 518,316 sites in our sample to
+each of several location types described below.
+
+We used land use codes from the county assessor parcel data to identify 
+*destination parcels* that residents might value access to. The most common 
+land use codes of identified destination parcels are listed in \@ref(tab:dest-uses).
+
+```{r dest-uses, echo=FALSE}
+dest_parcels <- parcel_data %>%
+  filter(Category == "destination") %>%
+  group_by(USEDESC) %>%
+  summarise(`Number of identified destinations` = n()) %>%
+  arrange(desc(`Number of identified destinations`)) %>%
+  mutate(`Percent of identified destinations` = 100 *
+           (`Number of identified destinations` / 
+              sum(`Number of identified destinations`))) %>%
+  mutate(`Cumulative percent of identified destinations` = 
+           cumsum(`Percent of identified destinations`))
+
+kable(
+  dest_parcels, 
+  caption = 'Land uses identified as potential destinations',
+  booktabs = TRUE,
+  digits = 2,
+  format.args = (list(big.mark = ','))
+  )
+```
+
+We identified _job locations_ based on data from a Longitudinal 
+Employer-Household Dynamics (LEHD) dataset published by the United States Census
+Bureau [@united_states_census_bureau_lehd_2021]. The LEHD dataset provides the 
+total number of jobs in each census block in the United States, based on 
+employment tax records. The location of each job was defined as the centroid of
+the block in which it was located. We downloaded job location data for 
+Pennsylvania and filtered it to include locations in the Pittsburgh metropolitan
+area (Allegheny, Armstrong, Beaver, Butler, Fayette, Washington, and 
+Westmoreland counties).
+
+In addition to calculating the accessibility to jobs of all categories, we also
+calculated accessibility to several subsets of jobs. We disaggregated jobs by 
+earnings, reasoning that the usefulness of a job might vary depending on how 
+well it matches a workers skills or wage expectations. _High-paying job locations_ 
+are a subset of job locations where the worker earns more than \$3333 per month.
+_Low-paying job locations_ are those where the worker earns \$1250 per month or less. 
+
+We also disaggregated jobs based on employment industry, based on the North 
+American Industry Classification System (NAICS), reasoning that the presence of
+jobs particular industries might represent a shopping or recreation destination.
+_Retail job locations_ are a subset of job locations in NAICS sector 44-45 
+(retail trade); _Entertainment job locations_ are those in NAICS sector 71 
+(arts, entertainment, and recreation); and _Hospitality job locations_ are 
+those in NAICS sector 72 (accommodation and food services).  
+
+Finally, we identified three location types that correspond with common non-work
+trips: schools, grocery stores, and parks. _Grocery store locations_ were 
+identified as vendors participating in the Supplemental Nutrition Program for
+Women, Infants, and Children (WIC). WIC vendor locations and _school locations_ 
+were obtained from the Allegheny County GIS portal 
+[@allegheny_county_office_of_information_technology_allegheny_2018; 
+@allegheny_county_office_of_information_technology_allegheny_2020]. 
+_Park locations_ were taken from the Pennsylvania Geospatial Data Clearinghouse 
+[@pennsylvania_department_of_conservation_and_natural_resources_pennsylvania_2015].
+Park locations were downloaded for Pennsylvania and filtered to Allegheny county.
+
+We used the r5r package in the R programming language [@pereira_r5r_2021] to 
+calculate accessibility each destination type described above,
+for each of four transportation modes (walking, cycling, driving, and transit). 
+The r5r package calculates accessibility as the weighted total number of 
+destinations reachable by a given mode, where destinations are weighted 
+according to a decay function, such that destinations that can be reached within
+less time are assigned greater weight. We used a logistic decay function, as 
+illustrated in \@ref(fig:show-decay-func). For motorized modes, the decay 
+function had a mean (inflection) of 40 minutes and a standard deviation of 10 
+minutes. For non-motorized modes, the decay function had a mean of 20 minutes 
+and a standard deviation of 5 minutes.
+
+```{r show-decay-func, fig.cap='Decay functions for accessibility calculations', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot illustrating two logistic decay functions.'}
+travel_time <- seq(0, 100, by = 0.1)
+
+weight_motor <- (8.380076 - cumsum(dlogis(travel_time, 
+                                  location = 40, 
+                                  scale = 20, 
+                                  log = FALSE))) / 8.380076
+
+weight_active <- (8.380076 - cumsum(dlogis(travel_time[1:510], 
+                                   location = 20, 
+                                   scale = 10, 
+                                   log = FALSE))) / 8.380076
+
+logistic_sample <- tibble(
+  `Travel time from site` = c(travel_time, travel_time[1:510]),
+  `Weight assigned to destination` = c(weight_motor, weight_active),
+  Mode = c(rep("Motorized", 1001), rep("Active", 510)))
+
+ggplot(logistic_sample) +
+  geom_line(aes(x = `Travel time from site`,
+                y = `Weight assigned to destination`,
+                lty = Mode)) +
+  theme_minimal()
+```
+
+Calculating accessibility metrics for a combination of four transportation 
+modes and ten destination types yeilds 40 different accessibility variables.
+
+### Density data
+
+```{r bad-uses, include=FALSE}
+big_coal <- parcel_data %>%
+  filter(PARID == "0187E00175000000")
+
+bad_parcels <- parcel_locs %>%
+  inner_join(parcel_data) %>%
+  filter(Category == "disamenity") %>%
+  filter((x != big_coal$x &
+           y != big_coal$y) |
+           PARID == big_coal$PARID)
+
+bad_parcel_list <- bad_parcels %>%
+  st_drop_geometry() %>%
+  group_by(USEDESC) %>%
+  summarise(`Number of identified locations` = n()) %>%
+  arrange(desc(`Number of identified locations`)) %>%
+  mutate(`Percent of identified locations` = 100 *
+           (`Number of identified locations` / 
+              sum(`Number of identified locations`))) %>%
+  mutate(`Cumulative percent of identified locations` = 
+           cumsum(`Percent of identified locations`))
+```
+
+For each site, we calculated the density of four different amenities or 
+disamenities in the immediate vicinity (defined as the area within a 
+one-kilometer radius): homes, pedestrian paths (including sidewalks and
+all routes open to pedestrians), roads that are not open to pedestrians
+(such as freeways), railroad tracks, and land uses identified in county
+assessor data as one of several land uses that we categorized as 
+disamenities. The land use codes we used to identify disamenities are 
+listed in \@ref(tab:bad-use-list)^[289 properties related to coal mining 
+(with land use descriptions of either "COAL RIGHTS, WORKING INTERESTS" or 
+"COAL LAND, SURFACE RIGHTS") are co-located and are treated as a single 
+site.].
+
+```{r bad-use-list, echo=FALSE, message=FALSE, results='hide'}
+kable(
+  bad_parcel_list, 
+  caption = 'Land uses identified as disamenities',
+  booktabs = TRUE,
+  digits = 2,
+  format.args = (list(big.mark = ','))
+  )
+```
+
+Instead of counting them, try average of distance to nearest and 
+nth nearest.
+
+```{r, include=FALSE}
+PA_st_plane <- "+proj=lcc +lat_1=39.93333333333333 +lat_2=40.96666666666667 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000.0000000001 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs"
+
+Sys.time()
+site_buffers <- inner_join(parcel_locs, sites) %>%
+  st_transform(PA_st_plane) %>%
+  st_buffer(3280.84) %>%
+  st_transform("WGS84") 
+
+site_buffers <- site_buffers %>%
+  mutate(num_disamenity = 
+           lengths(st_intersects(site_buffers, bad_parcels)))
+Sys.time()
+```
+
+We obtained the locations of homes and disamentity land uses from county 
+assessor data and we obtained locations of railroads and streets from Open Street Map, using geofabrik (cite) and osmextract (cite) R packages.
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+### Diversity data
+
+

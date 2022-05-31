@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Methodology | A Minimal Book Example</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Methodology | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Methodology | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="John Doe" />
+
+
+<meta name="date" content="2022-05-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cross.html"/>
+<link rel="next" href="footnotes-and-citations.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section<span></span></a>
+<ul>
+<li><a href="hello-bookdown.html#an-unnumbered-section">An unnumbered section<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>3.1</b> Chapters and sub-chapters<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.2</b> Captioned figures and tables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>4</b> Methodology<span></span></a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="methodology.html"><a href="methodology.html#variables"><i class="fa fa-check"></i><b>4.0.1</b> Variables<span></span></a></li>
+<li class="chapter" data-level="4.1" data-path="methodology.html"><a href="methodology.html#data"><i class="fa fa-check"></i><b>4.1</b> Data<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="methodology.html"><a href="methodology.html#aspatial-data"><i class="fa fa-check"></i><b>4.1.1</b> Aspatial data<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="methodology.html"><a href="methodology.html#accessibilty-data"><i class="fa fa-check"></i><b>4.1.2</b> Accessibilty data<span></span></a></li>
+<li class="chapter" data-level="4.1.3" data-path="methodology.html"><a href="methodology.html#density-data"><i class="fa fa-check"></i><b>4.1.3</b> Density data<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks<span></span></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs<span></span></a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing<span></span></a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages<span></span></a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing<span></span></a></li>
+</ul></li>
+<li><a href="references.html#references">References<span></span></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="methodology" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Methodology<a href="methodology.html#methodology" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="variables" class="section level3 hasAnchor" number="4.0.1">
+<h3><span class="header-section-number">4.0.1</span> Variables<a href="methodology.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="categories-that-would-be-useful-things-to-predict" class="section level4 hasAnchor" number="4.0.1.1">
+<h4><span class="header-section-number">4.0.1.1</span> Categories that would be useful (things to predict?)<a href="methodology.html#categories-that-would-be-useful-things-to-predict" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Owner-occupied?
+Investor-owned?
+Vacant?
+Demolition in the past year (no construction since)
+Construction in the past year</p>
+</div>
+<div id="factor-analysis-variables" class="section level4 hasAnchor" number="4.0.1.2">
+<h4><span class="header-section-number">4.0.1.2</span> factor analysis Variables<a href="methodology.html#factor-analysis-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The variables made it into the initial factor analysis were:</p>
+<ul>
+<li><p>Accessibility</p>
+<ul>
+<li>Distance to transit (use number of transit stops within 1/2 mile walkshed)</li>
+<li>Share of old/new homes (use average age of homes within 1/2 mile walkshed)</li>
+<li>Transit frequency (use transit stops per hour within 1/2 mile walkshed)</li>
+</ul></li>
+<li><p>Affordability</p>
+<ul>
+<li>Average Condition of homes in half-mile walkshed</li>
+<li>Median rent of block-groups with centroids within 1/2 mile walkshed.</li>
+<li>Median income of block groups with centroids within 1/2 mile walkshed.</li>
+<li>Median ownership cost of block groups with centroids within 1/2 mile walkshed.</li>
+</ul></li>
+<li><p>Close</p>
+<ul>
+<li></li>
+</ul></li>
+<li><p>Diverse buildings</p>
+<ul>
+<li>Entropy of housing types (apartment, townhomes, etc) within 1/2 mile walkshed</li>
+</ul></li>
+<li><p>Other</p>
+<ul>
+<li>Standard deviation of building age within 1/2 mile walkshed</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="data" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Data<a href="methodology.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We obtained data on property addresses, land uses, assessed values (for both
+land and buildings), and building condition from the property assessment data
+<span class="citation">(<a href="#ref-allegheny_county_office_of_property_assessments_allegheny_2022" role="doc-biblioref">Allegheny County Office of Property Assessments 2022</a>)</span>, which
+includes information on 582,116 properties in Allegheny County.</p>
+<p>We also obtained latitude and longitude coordinates for each property from a
+geocoder file provided by <span class="citation">Western Pennsylvania Regional Data Center (<a href="#ref-western_pennsylvania_regional_data_center_geocoders_2021" role="doc-biblioref">2021</a>)</span>.
+Over 99.5 percent of properties included in the assessment dataset are included
+in the geocoder file. Properties without geocoded locations are excluded from
+our analysis, leaving a total of 579,473 properties.</p>
+<p>Potential development sites were identified as those</p>
+<ol style="list-style-type: decimal">
+<li>classified as “residential”
+(indicating residential properties with one to four housing units) or “commercial”
+(which includes mixed-use developments and residential properties with more than four
+housing units) and</li>
+<li>with a land use description in one of 59 possible categories. The most common of
+these are listed Table <a href="methodology.html#tab:list-site-uses">4.1</a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. One site (3008 Phillip Dr in Clairton) is missing a land use description in the assessment data. We checked this address on Zillow to determine that this is a single-family home and classified it as such in our data.</li>
+</ol>
+<table>
+<caption><span id="tab:list-site-uses">Table 4.1: </span>Most common land uses categorized as potential sites</caption>
+<colgroup>
+<col width="23%" />
+<col width="21%" />
+<col width="22%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">USEDESC</th>
+<th align="right">Number of potential sites</th>
+<th align="right">Percent of potential sites</th>
+<th align="right">Cumulative percent of potential sites</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">SINGLE FAMILY</td>
+<td align="right">371,064</td>
+<td align="right">69.8</td>
+<td align="right">69.8</td>
+</tr>
+<tr class="even">
+<td align="left">VACANT LAND</td>
+<td align="right">63,603</td>
+<td align="right">12.0</td>
+<td align="right">81.7</td>
+</tr>
+<tr class="odd">
+<td align="left">TWO FAMILY</td>
+<td align="right">17,330</td>
+<td align="right">3.3</td>
+<td align="right">85.0</td>
+</tr>
+<tr class="even">
+<td align="left">CONDOMINIUM</td>
+<td align="right">16,683</td>
+<td align="right">3.1</td>
+<td align="right">88.1</td>
+</tr>
+<tr class="odd">
+<td align="left">TOWNHOUSE</td>
+<td align="right">14,953</td>
+<td align="right">2.8</td>
+<td align="right">90.9</td>
+</tr>
+<tr class="even">
+<td align="left">ROWHOUSE</td>
+<td align="right">11,129</td>
+<td align="right">2.1</td>
+<td align="right">93.0</td>
+</tr>
+<tr class="odd">
+<td align="left">VACANT COMMERCIAL LAND</td>
+<td align="right">6,103</td>
+<td align="right">1.1</td>
+<td align="right">94.2</td>
+</tr>
+<tr class="even">
+<td align="left">THREE FAMILY</td>
+<td align="right">3,977</td>
+<td align="right">0.7</td>
+<td align="right">94.9</td>
+</tr>
+<tr class="odd">
+<td align="left">RES AUX BUILDING (NO HOUSE)</td>
+<td align="right">3,635</td>
+<td align="right">0.7</td>
+<td align="right">95.6</td>
+</tr>
+<tr class="even">
+<td align="left">RETL/APT’S OVER</td>
+<td align="right">3,366</td>
+<td align="right">0.6</td>
+<td align="right">96.2</td>
+</tr>
+<tr class="odd">
+<td align="left">COMM AUX BUILDING</td>
+<td align="right">3,040</td>
+<td align="right">0.6</td>
+<td align="right">96.8</td>
+</tr>
+<tr class="even">
+<td align="left">APART: 5-19 UNITS</td>
+<td align="right">2,800</td>
+<td align="right">0.5</td>
+<td align="right">97.3</td>
+</tr>
+<tr class="odd">
+<td align="left">MOBILE HOME (IN PARK)</td>
+<td align="right">2,563</td>
+<td align="right">0.5</td>
+<td align="right">97.8</td>
+</tr>
+<tr class="even">
+<td align="left">FOUR FAMILY</td>
+<td align="right">2,064</td>
+<td align="right">0.4</td>
+<td align="right">98.2</td>
+</tr>
+<tr class="odd">
+<td align="left">BUILDERS LOT</td>
+<td align="right">1,714</td>
+<td align="right">0.3</td>
+<td align="right">98.5</td>
+</tr>
+<tr class="even">
+<td align="left">CONDOMINIUM COMMON PROPERTY</td>
+<td align="right">1,307</td>
+<td align="right">0.2</td>
+<td align="right">98.8</td>
+</tr>
+<tr class="odd">
+<td align="left">PARKING GARAGE/LOTS</td>
+<td align="right">935</td>
+<td align="right">0.2</td>
+<td align="right">99.0</td>
+</tr>
+<tr class="even">
+<td align="left">OFFICE/APARTMENTS OVER</td>
+<td align="right">860</td>
+<td align="right">0.2</td>
+<td align="right">99.1</td>
+</tr>
+<tr class="odd">
+<td align="left">MOBILE HOME</td>
+<td align="right">676</td>
+<td align="right">0.1</td>
+<td align="right">99.2</td>
+</tr>
+<tr class="even">
+<td align="left">APART:40+ UNITS</td>
+<td align="right">545</td>
+<td align="right">0.1</td>
+<td align="right">99.3</td>
+</tr>
+</tbody>
+</table>
+<p>The above criteria yield 531,811 potential sites. Potential building sites were
+further filtered to exclude those with missing data on the most recent sale
+(6,574 sites, or about one percent of all sites).<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> for a total of 526,237
+potential sites.</p>
+<p>The focus of this analysis is on potential development sites rather than on
+properties. Some properties in the assessor dataset are condominums where
+multiple properties share a single parcel of land. We aggregated these to the
+site level by identifying all properties with an assessed building value
+greater than zero, a land value of zero, and a land use description that did
+not indicate the land was vacant. If multiple such properties share an address,
+we classified all properties at that address as a condominium and aggregated
+them to the parcel level. This led to a final sample of 518,316 sites.</p>
+<div id="aspatial-data" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Aspatial data<a href="methodology.html#aspatial-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the assessment data for use in our analysis. We calculated two additional variables from the assessment data: the inflation-adjusted sales price and the average number of years between sales. The average of:</p>
+<ol style="list-style-type: decimal">
+<li>The number of years between the most recent sale and the publication data of the assessment data (May 1, 2022);</li>
+<li>The number of years between the most recent sale and the second-most recent sale<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>; and</li>
+<li>The number of years between the second-most recent sale and the third-most recent sale, if a third-most recent sale is listed.</li>
+</ol>
+<p>To aggregate properties identified as condominiums to the site level, we summed
+the total values for lot area, assessed land value, assessed building value, and
+inflation-adjusted sale price and averaged values for the average number of
+years between sales.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="methodology.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(sites,</span>
+<span id="cb5-2"><a href="methodology.html#cb5-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">here</span>(<span class="st">&quot;data&quot;</span>,</span>
+<span id="cb5-3"><a href="methodology.html#cb5-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;sites.csv&quot;</span>))</span></code></pre></div>
+</div>
+<div id="accessibilty-data" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Accessibilty data<a href="methodology.html#accessibilty-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Accessibilty was calculated from each of the 518,316 sites in our sample to
+each of several location types described below.</p>
+<p>We used land use codes from the county assessor parcel data to identify
+<em>destination parcels</em> that residents might value access to. The most common
+land use codes of identified destination parcels are listed in <a href="methodology.html#tab:dest-uses">4.2</a>.</p>
+<table>
+<caption><span id="tab:dest-uses">Table 4.2: </span>Land uses identified as potential destinations</caption>
+<colgroup>
+<col width="21%" />
+<col width="23%" />
+<col width="23%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">USEDESC</th>
+<th align="right">Number of identified destinations</th>
+<th align="right">Percent of identified destinations</th>
+<th align="right">Cumulative percent of identified destinations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MUNICIPAL GOVERNMENT</td>
+<td align="right">10,378</td>
+<td align="right">29.88</td>
+<td align="right">29.88</td>
+</tr>
+<tr class="even">
+<td align="left">CHURCHES, PUBLIC WORSHIP</td>
+<td align="right">1,948</td>
+<td align="right">5.61</td>
+<td align="right">35.49</td>
+</tr>
+<tr class="odd">
+<td align="left">COMMERCIAL GARAGE</td>
+<td align="right">1,735</td>
+<td align="right">5.00</td>
+<td align="right">40.49</td>
+</tr>
+<tr class="even">
+<td align="left">OFFICE - 1-2 STORIES</td>
+<td align="right">1,649</td>
+<td align="right">4.75</td>
+<td align="right">45.23</td>
+</tr>
+<tr class="odd">
+<td align="left">SMALL DETACHED RET(UNDER 10000)</td>
+<td align="right">1,645</td>
+<td align="right">4.74</td>
+<td align="right">49.97</td>
+</tr>
+<tr class="even">
+<td align="left">OFFICE/WAREHOUSE</td>
+<td align="right">1,385</td>
+<td align="right">3.99</td>
+<td align="right">53.96</td>
+</tr>
+<tr class="odd">
+<td align="left">COUNTY GOVERNMENT</td>
+<td align="right">1,287</td>
+<td align="right">3.71</td>
+<td align="right">57.66</td>
+</tr>
+<tr class="even">
+<td align="left">WAREHOUSE</td>
+<td align="right">1,255</td>
+<td align="right">3.61</td>
+<td align="right">61.28</td>
+</tr>
+<tr class="odd">
+<td align="left">OWNED BY BOARD OF EDUCATION</td>
+<td align="right">1,086</td>
+<td align="right">3.13</td>
+<td align="right">64.41</td>
+</tr>
+<tr class="even">
+<td align="left">TOWNSHIP GOVERNMENT</td>
+<td align="right">853</td>
+<td align="right">2.46</td>
+<td align="right">66.86</td>
+</tr>
+<tr class="odd">
+<td align="left">LIVESTOCK O/T D &amp; P-CAUV</td>
+<td align="right">805</td>
+<td align="right">2.32</td>
+<td align="right">69.18</td>
+</tr>
+<tr class="even">
+<td align="left">LIGHT MANUFACTURING</td>
+<td align="right">799</td>
+<td align="right">2.30</td>
+<td align="right">71.48</td>
+</tr>
+<tr class="odd">
+<td align="left">PUBLIC PARK</td>
+<td align="right">710</td>
+<td align="right">2.04</td>
+<td align="right">73.52</td>
+</tr>
+<tr class="even">
+<td align="left">RESTAURANT, CAFET AND/OR BAR</td>
+<td align="right">697</td>
+<td align="right">2.01</td>
+<td align="right">75.53</td>
+</tr>
+<tr class="odd">
+<td align="left">GENERAL FARM</td>
+<td align="right">607</td>
+<td align="right">1.75</td>
+<td align="right">77.28</td>
+</tr>
+<tr class="even">
+<td align="left">OWNED BY COLLEGE/UNIV/ACADEMY</td>
+<td align="right">458</td>
+<td align="right">1.32</td>
+<td align="right">78.60</td>
+</tr>
+<tr class="odd">
+<td align="left">MEDICAL CLINICS/OFFICES</td>
+<td align="right">445</td>
+<td align="right">1.28</td>
+<td align="right">79.88</td>
+</tr>
+<tr class="even">
+<td align="left">RETL/OFF OVER</td>
+<td align="right">442</td>
+<td align="right">1.27</td>
+<td align="right">81.15</td>
+</tr>
+<tr class="odd">
+<td align="left">OFFICE-ELEVATOR -3 + STORIES</td>
+<td align="right">413</td>
+<td align="right">1.19</td>
+<td align="right">82.34</td>
+</tr>
+<tr class="even">
+<td align="left">LODGE HALL/AMUSEMENT PARK</td>
+<td align="right">386</td>
+<td align="right">1.11</td>
+<td align="right">83.45</td>
+</tr>
+<tr class="odd">
+<td align="left">AUTO SALES &amp; SERVICE</td>
+<td align="right">364</td>
+<td align="right">1.05</td>
+<td align="right">84.50</td>
+</tr>
+<tr class="even">
+<td align="left">RETL/STOR OVER</td>
+<td align="right">344</td>
+<td align="right">0.99</td>
+<td align="right">85.49</td>
+</tr>
+<tr class="odd">
+<td align="left">CEMETERY/MONUMENTS</td>
+<td align="right">340</td>
+<td align="right">0.98</td>
+<td align="right">86.47</td>
+</tr>
+<tr class="even">
+<td align="left">STATE GOVERNMENT</td>
+<td align="right">331</td>
+<td align="right">0.95</td>
+<td align="right">87.42</td>
+</tr>
+<tr class="odd">
+<td align="left">CONVENIENCE STORE/GAS</td>
+<td align="right">304</td>
+<td align="right">0.88</td>
+<td align="right">88.30</td>
+</tr>
+<tr class="even">
+<td align="left">BANK</td>
+<td align="right">298</td>
+<td align="right">0.86</td>
+<td align="right">89.16</td>
+</tr>
+<tr class="odd">
+<td align="left">NEIGH SHOP CENTER</td>
+<td align="right">297</td>
+<td align="right">0.86</td>
+<td align="right">90.01</td>
+</tr>
+<tr class="even">
+<td align="left">BARS</td>
+<td align="right">240</td>
+<td align="right">0.69</td>
+<td align="right">90.70</td>
+</tr>
+<tr class="odd">
+<td align="left">FUNERAL HOMES</td>
+<td align="right">194</td>
+<td align="right">0.56</td>
+<td align="right">91.26</td>
+</tr>
+<tr class="even">
+<td align="left">DAYCARE/PRIVATE SCHOOL</td>
+<td align="right">191</td>
+<td align="right">0.55</td>
+<td align="right">91.81</td>
+</tr>
+<tr class="odd">
+<td align="left">MINI WAREHOUSE</td>
+<td align="right">182</td>
+<td align="right">0.52</td>
+<td align="right">92.34</td>
+</tr>
+<tr class="even">
+<td align="left">MEDIUM MANUFACTURING</td>
+<td align="right">172</td>
+<td align="right">0.50</td>
+<td align="right">92.83</td>
+</tr>
+<tr class="odd">
+<td align="left">NURSING HOME/PRIVATE HOS</td>
+<td align="right">171</td>
+<td align="right">0.49</td>
+<td align="right">93.32</td>
+</tr>
+<tr class="even">
+<td align="left">DRIVE IN REST OR FOOD SERVICE</td>
+<td align="right">170</td>
+<td align="right">0.49</td>
+<td align="right">93.81</td>
+</tr>
+<tr class="odd">
+<td align="left">OFFICE-WALKUP -3 + STORIES</td>
+<td align="right">164</td>
+<td align="right">0.47</td>
+<td align="right">94.28</td>
+</tr>
+<tr class="even">
+<td align="left">AUTO SERV STATION</td>
+<td align="right">137</td>
+<td align="right">0.39</td>
+<td align="right">94.68</td>
+</tr>
+<tr class="odd">
+<td align="left">COMMUNITY SHOPPING CENTER</td>
+<td align="right">137</td>
+<td align="right">0.39</td>
+<td align="right">95.07</td>
+</tr>
+<tr class="even">
+<td align="left">OTHER RETAIL STRUCTURES</td>
+<td align="right">135</td>
+<td align="right">0.39</td>
+<td align="right">95.46</td>
+</tr>
+<tr class="odd">
+<td align="left">WAREHOUSE/MULTI-TENANT</td>
+<td align="right">126</td>
+<td align="right">0.36</td>
+<td align="right">95.82</td>
+</tr>
+<tr class="even">
+<td align="left">BOWLING ALLEYS/REC FACILITY</td>
+<td align="right">120</td>
+<td align="right">0.35</td>
+<td align="right">96.17</td>
+</tr>
+<tr class="odd">
+<td align="left">HOTELS</td>
+<td align="right">113</td>
+<td align="right">0.33</td>
+<td align="right">96.50</td>
+</tr>
+<tr class="even">
+<td align="left">DISCOUNT STORE</td>
+<td align="right">110</td>
+<td align="right">0.32</td>
+<td align="right">96.81</td>
+</tr>
+<tr class="odd">
+<td align="left">CAR WASH</td>
+<td align="right">103</td>
+<td align="right">0.30</td>
+<td align="right">97.11</td>
+</tr>
+<tr class="even">
+<td align="left">FAST FOOD/DRIVE THRU WINDOW</td>
+<td align="right">85</td>
+<td align="right">0.24</td>
+<td align="right">97.35</td>
+</tr>
+<tr class="odd">
+<td align="left">PHARMACY (CHAIN)</td>
+<td align="right">85</td>
+<td align="right">0.24</td>
+<td align="right">97.60</td>
+</tr>
+<tr class="even">
+<td align="left">SMALL SHOP</td>
+<td align="right">81</td>
+<td align="right">0.23</td>
+<td align="right">97.83</td>
+</tr>
+<tr class="odd">
+<td align="left">SUPERMARKETS</td>
+<td align="right">75</td>
+<td align="right">0.22</td>
+<td align="right">98.05</td>
+</tr>
+<tr class="even">
+<td align="left">OFFICE/STORAGE OVER</td>
+<td align="right">66</td>
+<td align="right">0.19</td>
+<td align="right">98.24</td>
+</tr>
+<tr class="odd">
+<td align="left">COUNTRY CLUBS</td>
+<td align="right">55</td>
+<td align="right">0.16</td>
+<td align="right">98.40</td>
+</tr>
+<tr class="even">
+<td align="left">REGIONAL SHOPPING CENTER</td>
+<td align="right">50</td>
+<td align="right">0.14</td>
+<td align="right">98.54</td>
+</tr>
+<tr class="odd">
+<td align="left">OFFICE/RETAIL OVER</td>
+<td align="right">46</td>
+<td align="right">0.13</td>
+<td align="right">98.67</td>
+</tr>
+<tr class="even">
+<td align="left">DRY CLEANING PLANTS/LAUNDRIES</td>
+<td align="right">44</td>
+<td align="right">0.13</td>
+<td align="right">98.80</td>
+</tr>
+<tr class="odd">
+<td align="left">MOTEL &amp; TOURIST CABINS</td>
+<td align="right">42</td>
+<td align="right">0.12</td>
+<td align="right">98.92</td>
+</tr>
+<tr class="even">
+<td align="left">BIG BOX RETAIL</td>
+<td align="right">38</td>
+<td align="right">0.11</td>
+<td align="right">99.03</td>
+</tr>
+<tr class="odd">
+<td align="left">CONVENIENCE STORE</td>
+<td align="right">36</td>
+<td align="right">0.10</td>
+<td align="right">99.13</td>
+</tr>
+<tr class="even">
+<td align="left">LIVE STOCK FARM</td>
+<td align="right">34</td>
+<td align="right">0.10</td>
+<td align="right">99.23</td>
+</tr>
+<tr class="odd">
+<td align="left">MARINA</td>
+<td align="right">34</td>
+<td align="right">0.10</td>
+<td align="right">99.33</td>
+</tr>
+<tr class="even">
+<td align="left">DEPARTMENT STORE</td>
+<td align="right">32</td>
+<td align="right">0.09</td>
+<td align="right">99.42</td>
+</tr>
+<tr class="odd">
+<td align="left">GREENHOUSES, VEG &amp; FLORACULTURE</td>
+<td align="right">29</td>
+<td align="right">0.08</td>
+<td align="right">99.50</td>
+</tr>
+<tr class="even">
+<td align="left">THEATER</td>
+<td align="right">29</td>
+<td align="right">0.08</td>
+<td align="right">99.59</td>
+</tr>
+<tr class="odd">
+<td align="left">GOLF DRIVING RANGE/MINIATURE</td>
+<td align="right">22</td>
+<td align="right">0.06</td>
+<td align="right">99.65</td>
+</tr>
+<tr class="even">
+<td align="left">GOLF COURSES (PUBLIC)</td>
+<td align="right">20</td>
+<td align="right">0.06</td>
+<td align="right">99.71</td>
+</tr>
+<tr class="odd">
+<td align="left">BED &amp; BREAKFAST</td>
+<td align="right">15</td>
+<td align="right">0.04</td>
+<td align="right">99.75</td>
+</tr>
+<tr class="even">
+<td align="left">OTHER AGRICULTURAL - CAUV</td>
+<td align="right">14</td>
+<td align="right">0.04</td>
+<td align="right">99.79</td>
+</tr>
+<tr class="odd">
+<td align="left">SAVINGS AND LOANS</td>
+<td align="right">12</td>
+<td align="right">0.03</td>
+<td align="right">99.83</td>
+</tr>
+<tr class="even">
+<td align="left">OTHER FOOD SERVICE</td>
+<td align="right">11</td>
+<td align="right">0.03</td>
+<td align="right">99.86</td>
+</tr>
+<tr class="odd">
+<td align="left">NURSERY</td>
+<td align="right">9</td>
+<td align="right">0.03</td>
+<td align="right">99.88</td>
+</tr>
+<tr class="even">
+<td align="left">CASINO</td>
+<td align="right">7</td>
+<td align="right">0.02</td>
+<td align="right">99.90</td>
+</tr>
+<tr class="odd">
+<td align="left">CONVENIENCE STORE GAS/REPAIRS</td>
+<td align="right">7</td>
+<td align="right">0.02</td>
+<td align="right">99.93</td>
+</tr>
+<tr class="even">
+<td align="left">MARINE SERV FACILITY</td>
+<td align="right">7</td>
+<td align="right">0.02</td>
+<td align="right">99.95</td>
+</tr>
+<tr class="odd">
+<td align="left">FORESTRY WITH BUILDING</td>
+<td align="right">5</td>
+<td align="right">0.01</td>
+<td align="right">99.96</td>
+</tr>
+<tr class="even">
+<td align="left">HEAVY EQUIPMENT SALES/RENTAL</td>
+<td align="right">5</td>
+<td align="right">0.01</td>
+<td align="right">99.97</td>
+</tr>
+<tr class="odd">
+<td align="left">GAS STATION KIOSK</td>
+<td align="right">3</td>
+<td align="right">0.01</td>
+<td align="right">99.98</td>
+</tr>
+<tr class="even">
+<td align="left">VEGETABLE FARM</td>
+<td align="right">3</td>
+<td align="right">0.01</td>
+<td align="right">99.99</td>
+</tr>
+<tr class="odd">
+<td align="left">TIMBER OR FOREST LAND</td>
+<td align="right">2</td>
+<td align="right">0.01</td>
+<td align="right">100.00</td>
+</tr>
+<tr class="even">
+<td align="left">FORESTRY W/BUILDINGS</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+<td align="right">100.00</td>
+</tr>
+</tbody>
+</table>
+<p>We identified <em>job locations</em> based on data from a Longitudinal
+Employer-Household Dynamics (LEHD) dataset published by the United States Census
+Bureau <span class="citation">(<a href="#ref-united_states_census_bureau_lehd_2021" role="doc-biblioref">United States Census Bureau 2021</a>)</span>. The LEHD dataset provides the
+total number of jobs in each census block in the United States, based on
+employment tax records. The location of each job was defined as the centroid of
+the block in which it was located. We downloaded job location data for
+Pennsylvania and filtered it to include locations in the Pittsburgh metropolitan
+area (Allegheny, Armstrong, Beaver, Butler, Fayette, Washington, and
+Westmoreland counties).</p>
+<p>In addition to calculating the accessibility to jobs of all categories, we also
+calculated accessibility to several subsets of jobs. We disaggregated jobs by
+earnings, reasoning that the usefulness of a job might vary depending on how
+well it matches a workers skills or wage expectations. <em>High-paying job locations</em>
+are a subset of job locations where the worker earns more than $3333 per month.
+<em>Low-paying job locations</em> are those where the worker earns $1250 per month or less.</p>
+<p>We also disaggregated jobs based on employment industry, based on the North
+American Industry Classification System (NAICS), reasoning that the presence of
+jobs particular industries might represent a shopping or recreation destination.
+<em>Retail job locations</em> are a subset of job locations in NAICS sector 44-45
+(retail trade); <em>Entertainment job locations</em> are those in NAICS sector 71
+(arts, entertainment, and recreation); and <em>Hospitality job locations</em> are
+those in NAICS sector 72 (accommodation and food services).</p>
+<p>Finally we identified three location types that correspond with common non-work
+trips: schools, grocery stores, and parks. <em>Grocery store locations</em> were
+identified as vendors participating in the Supplemental Nutrition Program for
+Women, Infants, and Children (WIC). WIC vendor locations and <em>school locations</em>
+were obtained from the and location data came from the Allegheny County GIS portal
+<span class="citation">(<a href="#ref-allegheny_county_office_of_information_technology_allegheny_2018" role="doc-biblioref">Allegheny County Office of Information Technology 2018</a>, <a href="#ref-allegheny_county_office_of_information_technology_allegheny_2020" role="doc-biblioref">2020</a>)</span>.
+<em>Park locations</em> were taken from the Pennsylvania Geospatial Data Clearinghouse
+<span class="citation">(<a href="#ref-pennsylvania_department_of_conservation_and_natural_resources_pennsylvania_2015" role="doc-biblioref">Pennsylvania Department of Conservation and Natural Resources 2015</a>)</span>.
+Data were downloaded for Pennsylvania and filtered to Allegheny county.</p>
+<p>We used the r5r package in the R programming language <span class="citation">(<a href="#ref-pereira_r5r_2021" role="doc-biblioref">Pereira et al. 2021</a>)</span> to
+calculate accessibility was calculated for each destination type described above
+for each of four transportation modes (walking, cycling, driving, and transit).
+The r5r package calculates accessibility as the weighted total number of
+destinations reachable by a given mode, where destinations are weighted
+according to a decay function, such that destinations that can be reached within
+less time are assigned greater weight. We used a logistic decay function, as
+illustrated in <a href="#fig:show-decay-func"><strong>??</strong></a>. For motorized modes, the decay
+function had a mean (inflection) of 40 minutes and a standard deviation of 10
+minutes. For non-motorized modes, the decay function had a mean of 20 minutes
+and a standard deviation of 5 minutes.</p>
+<p><img src="_main_files/figure-html/show-decay-func-1.png" width="672" /></p>
+<p>Calculating accessibility metrics for a combination of four transportation modes
+and ten destination types yeilds 40 different accessibility variables.</p>
+</div>
+<div id="density-data" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Density data<a href="methodology.html#density-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For each site, we calculated the density of four different (dis)amenites in the
+immediates vicinity (defined as the area within a one-kilometer radius): homes,
+pedestrian paths (including sidewalks and all routes open to pedestrians), roads
+that are not open to pedestrians (such as freeways), and land uses identified
+in county assessor data as one of several types that we categorized as
+disamenities. The land use codes we used to identify disamenities are listed in</p>
+<ul>
+<li>Housing density (use number of homes within 1/2 mile circle)</li>
+<li>Ped network density (use mileage of ped network within 1/2 mile circle)</li>
+<li>Number of disamenities in a 1/2 mile circle</li>
+<li>Mileage of non-ped roads in 1/2 mile circle</li>
+</ul>
+
+</div>
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-allegheny_county_office_of_information_technology_allegheny_2018" class="csl-entry">
+Allegheny County Office of Information Technology. 2018. <span>“Allegheny <span>County</span> <span>WIC</span> <span>Vendor</span> <span>Locations</span>.”</span> Allegheny County. <a href="https://openac-alcogis.opendata.arcgis.com/datasets/ab9ec54e46d8403db31cff6bdc890aff_0/explore?location=40.458725%2C-79.972398%2C10.20">https://openac-alcogis.opendata.arcgis.com/datasets/ab9ec54e46d8403db31cff6bdc890aff_0/explore?location=40.458725%2C-79.972398%2C10.20</a>.
+</div>
+<div id="ref-allegheny_county_office_of_information_technology_allegheny_2020" class="csl-entry">
+———. 2020. <span>“Allegheny <span>County</span> <span>Public</span> <span>Schools</span> / <span>Local</span> <span>Education</span> <span>Agency</span> (<span>LEAs</span>) <span>Locations</span>.”</span> Allegheny County. <a href="https://openac-alcogis.opendata.arcgis.com/datasets/AlCoGIS::allegheny-county-public-schools-local-education-agency-leas-locations/about">https://openac-alcogis.opendata.arcgis.com/datasets/AlCoGIS::allegheny-county-public-schools-local-education-agency-leas-locations/about</a>.
+</div>
+<div id="ref-allegheny_county_office_of_property_assessments_allegheny_2022" class="csl-entry">
+Allegheny County Office of Property Assessments. 2022. <span>“Allegheny <span>County</span> <span>Property</span> <span>Assessments</span>.”</span> Western Pennsylvania Regional Data Center. <a href="https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-643557229491">https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-643557229491</a>.
+</div>
+<div id="ref-pennsylvania_department_of_conservation_and_natural_resources_pennsylvania_2015" class="csl-entry">
+Pennsylvania Department of Conservation and Natural Resources. 2015. <span>“Pennsylvania <span>Local</span> <span>Parks</span> <span>Access</span> <span>Points</span>.”</span> The Pennsylvania Geospatial Data Clearinghouse. <a href="https://www.pasda.psu.edu/uci/DataSummary.aspx?dataset=308">https://www.pasda.psu.edu/uci/DataSummary.aspx?dataset=308</a>.
+</div>
+<div id="ref-pereira_r5r_2021" class="csl-entry">
+Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid</span> <span>Realistic</span> <span>Routing</span> on <span>Multimodal</span> <span>Transport</span> <span>Networks</span> with <span>R</span><span class="math inline">\(^{\textrm{5}}\)</span> in <span>R</span>.”</span> <em>Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
+</div>
+<div id="ref-united_states_census_bureau_lehd_2021" class="csl-entry">
+United States Census Bureau. 2021. <span>“<span>LEHD</span> <span>Origin</span>-<span>Destination</span> <span>Employment</span> <span>Statistics</span> (<span>LODES</span>).”</span> United States Census Bureau. <a href="https://lehd.ces.census.gov/data/#lodes">https://lehd.ces.census.gov/data/#lodes</a>.
+</div>
+<div id="ref-western_pennsylvania_regional_data_center_allegheny_2017" class="csl-entry">
+Western Pennsylvania Regional Data Center. 2017. <span>“Allegheny <span>County</span> <span>Property</span> <span>Assessment</span> <span>Data</span> <span>User</span> <span>Guide</span>.”</span> Pittsburgh, PA. <a href="https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-643557229491/resource/cc4bafd2-25b6-41d7-83aa-d16bc211b020/download/alleghenycountypropertyassessmentdatauserguide-4.pdf">https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-643557229491/resource/cc4bafd2-25b6-41d7-83aa-d16bc211b020/download/alleghenycountypropertyassessmentdatauserguide-4.pdf</a>.
+</div>
+<div id="ref-western_pennsylvania_regional_data_center_geocoders_2021" class="csl-entry">
+———. 2021. <span>“Geocoders.”</span> Western Pennsylvania Regional Data Center. <a href="https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a">https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>The land use descriptions that were
+classified as potential development sites but are not listed in Table
+<a href="methodology.html#tab:list-site-uses">4.1</a>, which combine to represent less than one percent of all sites
+are “RIGHTOF WAY - RESIDENTIAL”, “CONDOMINIUM UNIT”, “DWG USED AS OFFICE”, “APART:20-39
+UNITS”, “CONDO GARAGE UNITS”, “COMMON AREA”, “CONDO DEVELOPMENTAL LAND”,
+“CONDEMNED/BOARDED-UP”, “CONDOMINIUM OFFICE BUILDING”, “INDEPENDENT LIVING (SENIORS)”,
+“DWG USED AS RETAIL”, “OTHER COMMERCIAL”, “MOBILE HOMES/TRAILER PKS”, “RIGHT OF WAY -
+COMMERCIAL”, “GROUP HOME”, “TOTAL/MAJOR FIRE DAMAGE - COMM”, “OTHER COMMERCIAL HOUSING”,
+“TOTAL/MAJOR FIRE DAMAGE”, “COMM APRTM CONDOS 5-19 UNITS”, “MUNICIPAL URBAN RENEWAL”,
+“COMMERCIAL LAND”, “CAMPGROUNDS”, “COMMON AREA OR GREENBELT”, “CHARITABLE
+EXEMPTION/HOS/HOMES”, “INCOME PRODUCING PARKING LOT”, “DWG APT CONVERSION”, “&gt;10 ACRES
+VACANT”, “MINOR FIRE DAMAGE”, “COMM APRTM CONDOS 20-39 UNITS”, “COMMERCIAL/UTILITY”,
+“H.O.A RECREATIONS AREA”, “COMM APRTM CONDOS 40+ UNITS”, “MINOR FIRE DAMAGE - COMM”,
+“OTHER”, “OTHER RESIDENTIAL STRUCTURE”, “OWNED BY METRO HOUSING AU”, “RESIDENTIAL VACANT
+LAND”, “HUD PROJ #221”, and “VACANT LAND 0-9 ACRES”<a href="methodology.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Four sites had sales prices
+listed that were unreasonably high. 3039 Liberty Avenue in Pittsburgh is listed
+as having sold for $511,945,000 on August 30, 2021. Zillow lists this property
+as having sold on that date for $511,945
+(<a href="https://www.zillow.com/homedetails/3039-W-Liberty-Ave-Pittsburgh-PA-15216/2070262638_zpid/" class="uri">https://www.zillow.com/homedetails/3039-W-Liberty-Ave-Pittsburgh-PA-15216/2070262638_zpid/</a>, accessed 5/4/2022),
+so the value was corrected for what appears to have been a typo. 220 Hyeholde Dr
+in Coraopolis is listed as having sold for $28,100,000 in 1967. This may also
+be a typo, and it also does not seem to be the most recent sale. Zillow lists
+this home as having sold for $350,000 in 2004
+(<a href="https://www.zillow.com/homes/220-hyeholde-dr,-Coraopolis,-PA_rb/11552817_zpid/" class="uri">https://www.zillow.com/homes/220-hyeholde-dr,-Coraopolis,-PA_rb/11552817_zpid/</a>,
+accessed 5/4/2022), so the data was corrected to add that as the most recent sale.
+Two other sites were identified as having unreasonably high sales values: 1339
+Arlington Avenue in Pittsburgh is a three-bedroom single-family home that is
+listed as having sold for $57,010,813 in 1976 and a 0.06-acre vacant lot with
+tax ID 0165G00270000000 is listed as having sold for $24,920,232 in 1936. The
+sales data for these sites were treated as missing.<a href="methodology.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>If no date is listed for the second-most recent sale, we used January 1, 1950. The data user guide notes that, although deeds have been recorded in Allegheny County since 1788 (and the earliest sale listed in the data is from November 24, 1806), early sales may not be included in the electronic system and may default to a 1950 sale date <span class="citation">(<a href="#ref-western_pennsylvania_regional_data_center_allegheny_2017" role="doc-biblioref">Western Pennsylvania Regional Data Center 2017</a>)</span>. This effects about one third of parcels in our dataset.<a href="methodology.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cross.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="footnotes-and-citations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-method.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
