@@ -82,7 +82,7 @@ OR GREENBELT", "CHARITABLE EXEMPTION/HOS/HOMES", "INCOME PRODUCING PARKING LOT",
 LAND", "HUD PROJ #221", and "VACANT LAND 0-9 ACRES"].
 
 ```{r filter-site-uses, include=FALSE, warning=FALSE}
-uses <- here("data",
+uses <- here("02_data",
              "uses.csv") %>%
   read_csv(show_col_types = FALSE)
 
@@ -214,7 +214,7 @@ Three variables (total assessed fair market value, assessed fair market value of
 3. The number of years between the second-most recent sale and the third-most recent sale, if a third-most recent sale is listed.
 
 ```{r aspatial-calc, echo=FALSE, message=FALSE}
-inflation <- here("data",
+inflation <- here("02_data",
                   "inflation.csv") %>%
   read_csv(show_col_types = FALSE)
 

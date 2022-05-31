@@ -7,11 +7,11 @@ library(sf)
 library(tidyverse)
 library(tigris)
 
-sites <- here("data",
+sites <- here("02_data",
               "sites.csv") %>%
   read_csv(show_col_types = FALSE)
 
-uses <- here("data",
+uses <- here("02_data",
              "uses.csv") %>%
   read_csv(show_col_types = FALSE)
 
@@ -26,7 +26,7 @@ site_locs <- parcels %>%
   filter(id %in% sites$PARID)
 
 # #################################################
-# # Sample 100 sites for test (delete once we've confirmed it all works)
+# Sample 100 sites for test (delete once we've confirmed it all works)
 # sample_n <- 10
 # sample_inc <- round(length(site_locs$id) / sample_n)
 # sample_indices <- seq(1, sample_inc * sample_n, by = sample_inc)
