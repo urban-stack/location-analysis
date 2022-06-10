@@ -2,6 +2,7 @@ fig:nice-fig
 tab:nice-tab
 tab:list-site-uses
 tab:dest-uses
+fig:show-decay-func
 eq:binom
 about
 usage
@@ -19,7 +20,7 @@ factor-analysis-variables
 data
 aspatial-data
 accessibilty-data
-density-data
+proximity-data
 footnotes-and-citations
 footnotes
 citations

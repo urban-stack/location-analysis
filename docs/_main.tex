@@ -117,7 +117,7 @@
 
 \title{A Minimal Book Example}
 \author{John Doe}
-\date{2022-05-09}
+\date{2022-06-07}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -373,8 +373,9 @@ The variables made it into the initial factor analysis were:
 \section{Data}\label{data}}
 
 We obtained data on property addresses, land uses, assessed values (for both
-land and buildings), and building condition from the property assessment data
-\citep{allegheny_county_office_of_property_assessments_allegheny_2022}, which
+land and buildings), and the dates and prices of as many as the three
+most-recent sales from\\
+\citet{allegheny_county_office_of_property_assessments_allegheny_2022}, which
 includes information on 582,116 properties in Allegheny County.
 
 We also obtained latitude and longitude coordinates for each property from a
@@ -394,22 +395,23 @@ Potential development sites were identified as those
   (which includes mixed-use developments and residential properties with more than four
   housing units) and
 \item
-  with a land use description in one of 59 possible categories. The most common of
+  with a land use description in one of 59 possible categories\footnote{One site (3008 Phillip Dr in Clairton) is missing a land use description in the assessment data. We checked this address on Zillow to determine that this is a single-family home and classified it as such in our data.}. The most common of
   these are listed Table \ref{tab:list-site-uses}\footnote{The land use descriptions that were
     classified as potential development sites but are not listed in Table
     \ref{tab:list-site-uses}, which combine to represent less than one percent of all sites
-    are ``RIGHTOF WAY - RESIDENTIAL'', ``CONDOMINIUM UNIT'', ``DWG USED AS OFFICE'', ``APART:20-39
-    UNITS'', ``CONDO GARAGE UNITS'', ``COMMON AREA'', ``CONDO DEVELOPMENTAL LAND'',
-    ``CONDEMNED/BOARDED-UP'', ``CONDOMINIUM OFFICE BUILDING'', ``INDEPENDENT LIVING (SENIORS)'',
-    ``DWG USED AS RETAIL'', ``OTHER COMMERCIAL'', ``MOBILE HOMES/TRAILER PKS'', ``RIGHT OF WAY -
-    COMMERCIAL'', ``GROUP HOME'', ``TOTAL/MAJOR FIRE DAMAGE - COMM'', ``OTHER COMMERCIAL HOUSING'',
-    ``TOTAL/MAJOR FIRE DAMAGE'', ``COMM APRTM CONDOS 5-19 UNITS'', ``MUNICIPAL URBAN RENEWAL'',
-    ``COMMERCIAL LAND'', ``CAMPGROUNDS'', ``COMMON AREA OR GREENBELT'', ``CHARITABLE
-    EXEMPTION/HOS/HOMES'', ``INCOME PRODUCING PARKING LOT'', ``DWG APT CONVERSION'', ``\textgreater10 ACRES
-    VACANT'', ``MINOR FIRE DAMAGE'', ``COMM APRTM CONDOS 20-39 UNITS'', ``COMMERCIAL/UTILITY'',
+    are ``RIGHTOF WAY - RESIDENTIAL'', ``CONDOMINIUM UNIT'', ``DWG USED AS OFFICE'',
+    ``APART:20-39 UNITS'', ``CONDO GARAGE UNITS'', ``COMMON AREA'', ``CONDO DEVELOPMENTAL
+    LAND'', ``CONDEMNED/BOARDED-UP'', ``CONDOMINIUM OFFICE BUILDING'', ``INDEPENDENT LIVING
+    (SENIORS)'', ``DWG USED AS RETAIL'', ``OTHER COMMERCIAL'', ``MOBILE HOMES/TRAILER PKS'',
+    ``RIGHT OF WAY - COMMERCIAL'', ``GROUP HOME'', ``TOTAL/MAJOR FIRE DAMAGE - COMM'',
+    ``OTHER COMMERCIAL HOUSING'', ``TOTAL/MAJOR FIRE DAMAGE'', ``COMM APRTM CONDOS 5-19
+    UNITS'', ``MUNICIPAL URBAN RENEWAL'', ``COMMERCIAL LAND'', ``CAMPGROUNDS'', ``COMMON AREA
+    OR GREENBELT'', ``CHARITABLE EXEMPTION/HOS/HOMES'', ``INCOME PRODUCING PARKING LOT'',
+    ``DWG APT CONVERSION'', ``\textgreater10 ACRES VACANT'', ``MINOR FIRE DAMAGE'', ``COMM APRTM CONDOS
+    20-39 UNITS'', ``COMMERCIAL/UTILITY'',
     ``H.O.A RECREATIONS AREA'', ``COMM APRTM CONDOS 40+ UNITS'', ``MINOR FIRE DAMAGE - COMM'',
     ``OTHER'', ``OTHER RESIDENTIAL STRUCTURE'', ``OWNED BY METRO HOUSING AU'', ``RESIDENTIAL VACANT
-    LAND'', ``HUD PROJ \#221'', and ``VACANT LAND 0-9 ACRES''}. One site (3008 Phillip Dr in Clairton) is missing a land use description in the assessment data. We checked this address on Zillow to determine that this is a single-family home and classified it as such in our data.
+    LAND'', ``HUD PROJ \#221'', and ``VACANT LAND 0-9 ACRES''}.
 \end{enumerate}
 
 \begin{table}
@@ -420,29 +422,29 @@ Potential development sites were identified as those
 \toprule
 USEDESC & Number of potential sites & Percent of potential sites & Cumulative percent of potential sites\\
 \midrule
-SINGLE FAMILY & 371,064 & 69.8 & 69.8\\
-VACANT LAND & 63,603 & 12.0 & 81.7\\
-TWO FAMILY & 17,330 & 3.3 & 85.0\\
-CONDOMINIUM & 16,683 & 3.1 & 88.1\\
-TOWNHOUSE & 14,953 & 2.8 & 90.9\\
+SINGLE FAMILY & 370,521 & 70.4 & 70.4\\
+VACANT LAND & 62,857 & 11.9 & 82.4\\
+TWO FAMILY & 17,294 & 3.3 & 85.6\\
+CONDOMINIUM & 16,591 & 3.2 & 88.8\\
+TOWNHOUSE & 14,765 & 2.8 & 91.6\\
 \addlinespace
-ROWHOUSE & 11,129 & 2.1 & 93.0\\
-VACANT COMMERCIAL LAND & 6,103 & 1.1 & 94.2\\
-THREE FAMILY & 3,977 & 0.7 & 94.9\\
-RES AUX BUILDING (NO HOUSE) & 3,635 & 0.7 & 95.6\\
-RETL/APT'S OVER & 3,366 & 0.6 & 96.2\\
+ROWHOUSE & 11,084 & 2.1 & 93.7\\
+VACANT COMMERCIAL LAND & 5,847 & 1.1 & 94.8\\
+THREE FAMILY & 3,969 & 0.8 & 95.6\\
+RES AUX BUILDING (NO HOUSE) & 3,605 & 0.7 & 96.3\\
+RETL/APT'S OVER & 3,360 & 0.6 & 96.9\\
 \addlinespace
-COMM AUX BUILDING & 3,040 & 0.6 & 96.8\\
-APART: 5-19 UNITS & 2,800 & 0.5 & 97.3\\
-MOBILE HOME (IN PARK) & 2,563 & 0.5 & 97.8\\
-FOUR FAMILY & 2,064 & 0.4 & 98.2\\
-BUILDERS LOT & 1,714 & 0.3 & 98.5\\
+COMM AUX BUILDING & 2,838 & 0.5 & 97.4\\
+APART: 5-19 UNITS & 2,778 & 0.5 & 98.0\\
+FOUR FAMILY & 2,058 & 0.4 & 98.4\\
+BUILDERS LOT & 1,249 & 0.2 & 98.6\\
+CONDOMINIUM COMMON PROPERTY & 1,149 & 0.2 & 98.8\\
 \addlinespace
-CONDOMINIUM COMMON PROPERTY & 1,307 & 0.2 & 98.8\\
-PARKING GARAGE/LOTS & 935 & 0.2 & 99.0\\
-OFFICE/APARTMENTS OVER & 860 & 0.2 & 99.1\\
-MOBILE HOME & 676 & 0.1 & 99.2\\
-APART:40+ UNITS & 545 & 0.1 & 99.3\\
+PARKING GARAGE/LOTS & 900 & 0.2 & 99.0\\
+OFFICE/APARTMENTS OVER & 856 & 0.2 & 99.1\\
+MOBILE HOME & 667 & 0.1 & 99.3\\
+APART:40+ UNITS & 531 & 0.1 & 99.4\\
+CONDOMINIUM UNIT & 454 & 0.1 & 99.5\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -479,7 +481,7 @@ them to the parcel level. This led to a final sample of 518,316 sites.
 \hypertarget{aspatial-data}{%
 \subsection{Aspatial data}\label{aspatial-data}}
 
-Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the assessment data for use in our analysis. We calculated two additional variables from the assessment data: the inflation-adjusted sales price and the average number of years between sales. The average of:
+Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the assessment data for use in our analysis. We calculated two additional variables from the assessment data: the inflation-adjusted sales price and the average number of years between sales, which we calculated as the average of:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -497,14 +499,6 @@ the total values for lot area, assessed land value, assessed building value, and
 inflation-adjusted sale price and averaged values for the average number of
 years between sales.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write\_csv}\NormalTok{(sites,}
-          \FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{,}
-               \StringTok{"sites.csv"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{accessibilty-data}{%
 \subsection{Accessibilty data}\label{accessibilty-data}}
 
@@ -512,7 +506,7 @@ Accessibilty was calculated from each of the 518,316 sites in our sample to
 each of several location types described below.
 
 We used land use codes from the county assessor parcel data to identify
-\emph{destination parcels} that residents might value access to. The most common
+destination parcels that residents might value access to. The most common
 land use codes of identified destination parcels are listed in \ref{tab:dest-uses}.
 
 \begin{table}
@@ -523,77 +517,77 @@ land use codes of identified destination parcels are listed in \ref{tab:dest-use
 \toprule
 USEDESC & Number of identified destinations & Percent of identified destinations & Cumulative percent of identified destinations\\
 \midrule
-MUNICIPAL GOVERNMENT & 10,378 & 29.88 & 29.88\\
-CHURCHES, PUBLIC WORSHIP & 1,948 & 5.61 & 35.49\\
-COMMERCIAL GARAGE & 1,735 & 5.00 & 40.49\\
+MUNICIPAL GOVERNMENT & 10,376 & 29.88 & 29.88\\
+CHURCHES, PUBLIC WORSHIP & 1,946 & 5.60 & 35.49\\
+COMMERCIAL GARAGE & 1,735 & 5.00 & 40.48\\
 OFFICE - 1-2 STORIES & 1,649 & 4.75 & 45.23\\
-SMALL DETACHED RET(UNDER 10000) & 1,645 & 4.74 & 49.97\\
+SMALL DETACHED RET(UNDER 10000) & 1,646 & 4.74 & 49.97\\
 \addlinespace
-OFFICE/WAREHOUSE & 1,385 & 3.99 & 53.96\\
-COUNTY GOVERNMENT & 1,287 & 3.71 & 57.66\\
-WAREHOUSE & 1,255 & 3.61 & 61.28\\
-OWNED BY BOARD OF EDUCATION & 1,086 & 3.13 & 64.41\\
-TOWNSHIP GOVERNMENT & 853 & 2.46 & 66.86\\
+OFFICE/WAREHOUSE & 1,386 & 3.99 & 53.96\\
+COUNTY GOVERNMENT & 1,287 & 3.71 & 57.67\\
+WAREHOUSE & 1,252 & 3.61 & 61.27\\
+OWNED BY BOARD OF EDUCATION & 1,086 & 3.13 & 64.40\\
+TOWNSHIP GOVERNMENT & 855 & 2.46 & 66.86\\
 \addlinespace
 LIVESTOCK O/T D \& P-CAUV & 805 & 2.32 & 69.18\\
 LIGHT MANUFACTURING & 799 & 2.30 & 71.48\\
-PUBLIC PARK & 710 & 2.04 & 73.52\\
-RESTAURANT, CAFET AND/OR BAR & 697 & 2.01 & 75.53\\
+PUBLIC PARK & 710 & 2.04 & 73.53\\
+RESTAURANT, CAFET AND/OR BAR & 697 & 2.01 & 75.54\\
 GENERAL FARM & 607 & 1.75 & 77.28\\
 \addlinespace
 OWNED BY COLLEGE/UNIV/ACADEMY & 458 & 1.32 & 78.60\\
 MEDICAL CLINICS/OFFICES & 445 & 1.28 & 79.88\\
-RETL/OFF OVER & 442 & 1.27 & 81.15\\
-OFFICE-ELEVATOR -3 + STORIES & 413 & 1.19 & 82.34\\
-LODGE HALL/AMUSEMENT PARK & 386 & 1.11 & 83.45\\
+RETL/OFF OVER & 442 & 1.27 & 81.16\\
+OFFICE-ELEVATOR -3 + STORIES & 412 & 1.19 & 82.34\\
+LODGE HALL/AMUSEMENT PARK & 386 & 1.11 & 83.46\\
 \addlinespace
-AUTO SALES \& SERVICE & 364 & 1.05 & 84.50\\
+AUTO SALES \& SERVICE & 363 & 1.05 & 84.50\\
 RETL/STOR OVER & 344 & 0.99 & 85.49\\
 CEMETERY/MONUMENTS & 340 & 0.98 & 86.47\\
 STATE GOVERNMENT & 331 & 0.95 & 87.42\\
 CONVENIENCE STORE/GAS & 304 & 0.88 & 88.30\\
 \addlinespace
-BANK & 298 & 0.86 & 89.16\\
-NEIGH SHOP CENTER & 297 & 0.86 & 90.01\\
-BARS & 240 & 0.69 & 90.70\\
-FUNERAL HOMES & 194 & 0.56 & 91.26\\
-DAYCARE/PRIVATE SCHOOL & 191 & 0.55 & 91.81\\
+BANK & 299 & 0.86 & 89.16\\
+NEIGH SHOP CENTER & 297 & 0.86 & 90.02\\
+BARS & 240 & 0.69 & 90.71\\
+FUNERAL HOMES & 194 & 0.56 & 91.27\\
+DAYCARE/PRIVATE SCHOOL & 191 & 0.55 & 91.82\\
 \addlinespace
 MINI WAREHOUSE & 182 & 0.52 & 92.34\\
 MEDIUM MANUFACTURING & 172 & 0.50 & 92.83\\
-NURSING HOME/PRIVATE HOS & 171 & 0.49 & 93.32\\
-DRIVE IN REST OR FOOD SERVICE & 170 & 0.49 & 93.81\\
-OFFICE-WALKUP -3 + STORIES & 164 & 0.47 & 94.28\\
+NURSING HOME/PRIVATE HOS & 171 & 0.49 & 93.33\\
+DRIVE IN REST OR FOOD SERVICE & 170 & 0.49 & 93.82\\
+OFFICE-WALKUP -3 + STORIES & 164 & 0.47 & 94.29\\
 \addlinespace
 AUTO SERV STATION & 137 & 0.39 & 94.68\\
-COMMUNITY SHOPPING CENTER & 137 & 0.39 & 95.07\\
-OTHER RETAIL STRUCTURES & 135 & 0.39 & 95.46\\
-WAREHOUSE/MULTI-TENANT & 126 & 0.36 & 95.82\\
-BOWLING ALLEYS/REC FACILITY & 120 & 0.35 & 96.17\\
+COMMUNITY SHOPPING CENTER & 137 & 0.39 & 95.08\\
+OTHER RETAIL STRUCTURES & 135 & 0.39 & 95.47\\
+WAREHOUSE/MULTI-TENANT & 126 & 0.36 & 95.83\\
+BOWLING ALLEYS/REC FACILITY & 120 & 0.35 & 96.18\\
 \addlinespace
 HOTELS & 113 & 0.33 & 96.50\\
-DISCOUNT STORE & 110 & 0.32 & 96.81\\
+DISCOUNT STORE & 110 & 0.32 & 96.82\\
 CAR WASH & 103 & 0.30 & 97.11\\
-FAST FOOD/DRIVE THRU WINDOW & 85 & 0.24 & 97.35\\
+FAST FOOD/DRIVE THRU WINDOW & 85 & 0.24 & 97.36\\
 PHARMACY (CHAIN) & 85 & 0.24 & 97.60\\
 \addlinespace
-SMALL SHOP & 81 & 0.23 & 97.83\\
+SMALL SHOP & 81 & 0.23 & 97.84\\
 SUPERMARKETS & 75 & 0.22 & 98.05\\
 OFFICE/STORAGE OVER & 66 & 0.19 & 98.24\\
 COUNTRY CLUBS & 55 & 0.16 & 98.40\\
-REGIONAL SHOPPING CENTER & 50 & 0.14 & 98.54\\
+REGIONAL SHOPPING CENTER & 50 & 0.14 & 98.55\\
 \addlinespace
-OFFICE/RETAIL OVER & 46 & 0.13 & 98.67\\
+OFFICE/RETAIL OVER & 45 & 0.13 & 98.68\\
 DRY CLEANING PLANTS/LAUNDRIES & 44 & 0.13 & 98.80\\
 MOTEL \& TOURIST CABINS & 42 & 0.12 & 98.92\\
 BIG BOX RETAIL & 38 & 0.11 & 99.03\\
-CONVENIENCE STORE & 36 & 0.10 & 99.13\\
+CONVENIENCE STORE & 36 & 0.10 & 99.14\\
 \addlinespace
 LIVE STOCK FARM & 34 & 0.10 & 99.23\\
 MARINA & 34 & 0.10 & 99.33\\
 DEPARTMENT STORE & 32 & 0.09 & 99.42\\
-GREENHOUSES, VEG \& FLORACULTURE & 29 & 0.08 & 99.50\\
-THEATER & 29 & 0.08 & 99.59\\
+THEATER & 29 & 0.08 & 99.51\\
+GREENHOUSES, VEG \& FLORACULTURE & 28 & 0.08 & 99.59\\
 \addlinespace
 GOLF DRIVING RANGE/MINIATURE & 22 & 0.06 & 99.65\\
 GOLF COURSES (PUBLIC) & 20 & 0.06 & 99.71\\
@@ -643,18 +637,18 @@ jobs particular industries might represent a shopping or recreation destination.
 (arts, entertainment, and recreation); and \emph{Hospitality job locations} are
 those in NAICS sector 72 (accommodation and food services).
 
-Finally we identified three location types that correspond with common non-work
+Finally, we identified three location types that correspond with common non-work
 trips: schools, grocery stores, and parks. \emph{Grocery store locations} were
 identified as vendors participating in the Supplemental Nutrition Program for
 Women, Infants, and Children (WIC). WIC vendor locations and \emph{school locations}
-were obtained from the and location data came from the Allegheny County GIS portal
+were obtained from the Allegheny County GIS portal
 \citep{allegheny_county_office_of_information_technology_allegheny_2018, allegheny_county_office_of_information_technology_allegheny_2020}.
 \emph{Park locations} were taken from the Pennsylvania Geospatial Data Clearinghouse
 \citep{pennsylvania_department_of_conservation_and_natural_resources_pennsylvania_2015}.
-Data were downloaded for Pennsylvania and filtered to Allegheny county.
+Park locations were downloaded for Pennsylvania and filtered to Allegheny county.
 
 We used the r5r package in the R programming language \citep{pereira_r5r_2021} to
-calculate accessibility was calculated for each destination type described above
+calculate accessibility each destination type described above,
 for each of four transportation modes (walking, cycling, driving, and transit).
 The r5r package calculates accessibility as the weighted total number of
 destinations reachable by a given mode, where destinations are weighted
@@ -665,32 +659,28 @@ function had a mean (inflection) of 40 minutes and a standard deviation of 10
 minutes. For non-motorized modes, the decay function had a mean of 20 minutes
 and a standard deviation of 5 minutes.
 
-\includegraphics{_main_files/figure-latex/show-decay-func-1.pdf}
+\begin{figure}
 
-Calculating accessibility metrics for a combination of four transportation modes
-and ten destination types yeilds 40 different accessibility variables.
+{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/show-decay-func-1} 
 
-\hypertarget{density-data}{%
-\subsection{Density data}\label{density-data}}
+}
 
-For each site, we calculated the density of four different (dis)amenites in the
-immediates vicinity (defined as the area within a one-kilometer radius): homes,
-pedestrian paths (including sidewalks and all routes open to pedestrians), roads
-that are not open to pedestrians (such as freeways), and land uses identified
-in county assessor data as one of several types that we categorized as
-disamenities. The land use codes we used to identify disamenities are listed in
+\caption{Decay functions for accessibility calculations}\label{fig:show-decay-func}
+\end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  Housing density (use number of homes within 1/2 mile circle)
-\item
-  Ped network density (use mileage of ped network within 1/2 mile circle)
-\item
-  Number of disamenities in a 1/2 mile circle
-\item
-  Mileage of non-ped roads in 1/2 mile circle
-\end{itemize}
+Calculating accessibility metrics for a combination of four transportation
+modes and ten destination types yields 40 different accessibility variables.
+
+\hypertarget{proximity-data}{%
+\subsection{Proximity data}\label{proximity-data}}
+
+For each site, we calculated the proximity to land uses identified in county
+assessor data as one of several land uses that we categorized as
+disamenities. The land use codes we used to identify disamenities are
+listed in \ref{tab:bad-use-list}\footnote{289 properties related to coal mining
+  (with land use descriptions of either ``COAL RIGHTS, WORKING INTERESTS'' or
+  ``COAL LAND, SURFACE RIGHTS'') are co-located and are treated as a single
+  site.}.
 
 \hypertarget{footnotes-and-citations}{%
 \chapter{Footnotes and citations}\label{footnotes-and-citations}}

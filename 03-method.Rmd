@@ -5,6 +5,8 @@ library(here)
 library(knitr)
 library(tidyverse)
 library(lubridate)
+library(sf)
+library(arrow)
 
 `%!in%` <- Negate(`%in%`)
 ```
@@ -55,7 +57,7 @@ We also obtained latitude and longitude coordinates for each property from a
 geocoder file provided by @western_pennsylvania_regional_data_center_geocoders_2021. 
 Over 99.5 percent of properties included in the assessment dataset are included
 in the geocoder file. Properties without geocoded locations are excluded from 
-our analysis, leaving a total of 579,473 properties.
+our analysis.
 
 Potential development sites were identified as those 
 
@@ -81,60 +83,13 @@ OR GREENBELT", "CHARITABLE EXEMPTION/HOS/HOMES", "INCOME PRODUCING PARKING LOT",
 "OTHER", "OTHER RESIDENTIAL STRUCTURE", "OWNED BY METRO HOUSING AU", "RESIDENTIAL VACANT
 LAND", "HUD PROJ #221", and "VACANT LAND 0-9 ACRES"].
 
-```{r filter-site-uses, include=FALSE, warning=FALSE}
-uses <- here("02_data",
-             "uses.csv") %>%
+
+
+```{r list-site-uses, echo=FALSE, message=FALSE, tidy=FALSE}
+sites <- here("02_data",
+              "sites.csv") %>%
   read_csv(show_col_types = FALSE)
 
-parcel_locs <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
-                   options = c("X_POSSIBLE_NAMES=x", 
-                               "Y_POSSIBLE_NAMES=y")) %>%
-  rename(PARID = PIN) %>%
-  st_set_crs("WGS84")
-
-parcel_data <- read_csv('https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-643557229491/resource/f2b8d575-e256-4718-94ad-1e12239ddb92/download/assessments.csv',
-                        show_col_types = FALSE) %>%
-  select(PARID, 
-         PROPERTYHOUSENUM,
-         PROPERTYADDRESS,
-         PROPERTYFRACTION,
-         PROPERTYCITY,
-         PROPERTYSTATE,
-         PROPERTYUNIT,
-         PROPERTYZIP,
-         CLASSDESC,
-         USEDESC,
-         LOTAREA,
-         SALEDATE,
-         SALEPRICE,
-         PREVSALEDATE,
-         PREVSALEPRICE,
-         PREVSALEDATE2,
-         PREVSALEPRICE2,
-         FAIRMARKETLAND,
-         FAIRMARKETBUILDING,
-         FAIRMARKETTOTAL,
-         ASOFDATE,
-         YEARBLT,
-         GRADEDESC,
-         CONDITIONDESC) %>%
-  mutate(address = paste(PROPERTYHOUSENUM,
-                         PROPERTYADDRESS,
-                         PROPERTYFRACTION,
-                         PROPERTYZIP)) %>%
-  mutate(USEDESC = ifelse(PARID == "0880H00194000000",
-                          "SINGLE FAMILY",
-                          USEDESC)) %>%
-  inner_join(parcel_locs) %>%
-  left_join(uses) 
-
-sites <- parcel_data %>%
-  filter(Category == "site") %>%
-  filter(CLASSDESC == "RESIDENTIAL" |
-           CLASSDESC == "COMMERCIAL") 
-```
-
-```{r list-site-uses, echo=FALSE, tidy=FALSE}
 site_use_summary <- sites %>%
   group_by(USEDESC) %>%
   summarise(`Number of potential sites` = n()) %>%
@@ -153,24 +108,23 @@ kable(
 )
 ```
 
-The above criteria yield 531,811 potential sites. Potential building sites were 
-further filtered to exclude those with missing data on the most recent sale 
-(6,574 sites, or about one percent of all sites).^[Four sites had sales prices 
-listed that were unreasonably high. 3039 Liberty Avenue in Pittsburgh is listed 
-as having sold for \$511,945,000 on August 30, 2021. Zillow lists this property 
-as having sold on that date for \$511,945 
+Potential building sites were further filtered to exclude those with missing data 
+on the most recent sale (about one percent of all sites).^[Four sites had sales 
+prices listed that were unreasonably high. 3039 Liberty Avenue in Pittsburgh is 
+listed as having sold for \$511,945,000 on August 30, 2021. Zillow lists this 
+property as having sold on that date for \$511,945 
 (https://www.zillow.com/homedetails/3039-W-Liberty-Ave-Pittsburgh-PA-15216/2070262638_zpid/, accessed 5/4/2022),
 so the value was corrected for what appears to have been a typo. 220 Hyeholde Dr 
 in Coraopolis is listed as having sold for \$28,100,000 in 1967. This may also 
 be a typo, and it also does not seem to be the most recent sale. Zillow lists 
 this home as having sold for \$350,000 in 2004
 (https://www.zillow.com/homes/220-hyeholde-dr,-Coraopolis,-PA_rb/11552817_zpid/, 
-accessed 5/4/2022), so the data was corrected to add that as the most recent sale. 
+accessed 5/4/2022), so the data was corrected to add that as the most recent sale.
 Two other sites were identified as having unreasonably high sales values: 1339 
 Arlington Avenue in Pittsburgh is a three-bedroom single-family home that is 
 listed as having sold for \$57,010,813 in 1976 and a 0.06-acre vacant lot with 
 tax ID 0165G00270000000 is listed as having sold for \$24,920,232 in 1936. The 
-sales data for these sites were treated as missing.] for a total of 526,237 
+sales data for these sites were treated as missing.] for a total of  
 potential sites.  
 
 The focus of this analysis is on potential development sites rather than on 
@@ -180,126 +134,76 @@ site level by identifying all properties with an assessed building value
 greater than zero, a land value of zero, and a land use description that did
 not indicate the land was vacant. If multiple such properties share an address,
 we classified all properties at that address as a condominium and aggregated 
-them to the parcel level. This led to a final sample of 518,316 sites.
+them to the parcel level. This led to a final sample of 518,032 sites.
 
-```{r outliers, echo=FALSE}
-sites <- sites %>%
-  filter(!is.na(SALEDATE) & !is.na(SALEPRICE)) %>%
-  filter(PARID != "0014G00199000000" &
-           PARID != "0165G00270000000") %>%
-  mutate(SALEPRICE = 
-           ifelse(PARID == "0098C00044000000", 
-                  (SALEPRICE / 1000), 
-                  SALEPRICE)) %>%
-  mutate(PREVSALEDATE = ifelse(PARID == "0596M00299000000",
-                           SALEDATE,
-                           PREVSALEDATE)) %>%
-  mutate(PREVSALEPRICE = ifelse(PARID == "0596M00299000000",
-                           SALEPRICE,
-                           PREVSALEPRICE)) %>%
-  mutate(SALEDATE = ifelse(PARID == "0596M00299000000",
-                           "10-24-2004",
-                           SALEDATE)) %>%
-  mutate(SALEPRICE = ifelse(PARID == "0596M00299000000",
-                           350000,
-                           SALEPRICE)) 
-```
+### Tax assessment data
 
-### Aspatial data
-
-Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the assessment data for use in our analysis. We calculated two additional variables from the assessment data: the inflation-adjusted sales price and the average number of years between sales, which we calculated as the average of:
-
-1. The number of years between the most recent sale and the publication data of the assessment data (May 1, 2022);
-2. The number of years between the most recent sale and the second-most recent sale^[If no date is listed for the second-most recent sale, we used January 1, 1950. The data user guide notes that, although deeds have been recorded in Allegheny County since 1788 (and the earliest sale listed in the data is from November 24, 1806), early sales may not be included in the electronic system and may default to a 1950 sale date  [@western_pennsylvania_regional_data_center_allegheny_2017]. This effects about one third of parcels in our dataset.]; and
-3. The number of years between the second-most recent sale and the third-most recent sale, if a third-most recent sale is listed.
-
-```{r aspatial-calc, echo=FALSE, message=FALSE}
-inflation <- here("02_data",
-                  "inflation.csv") %>%
-  read_csv(show_col_types = FALSE)
-
-sites <- sites %>%
-  mutate(PREVSALEDATE = ifelse(is.na(PREVSALEDATE), 
-                               "01-01-1950", 
-                               PREVSALEDATE)) %>%
-  mutate(SALEDATE = mdy(SALEDATE),
-         PREVSALEDATE = mdy(PREVSALEDATE),
-         PREVSALEDATE2 = mdy(PREVSALEDATE2),
-         ASOFDATE = dmy(ASOFDATE)) %>%
-  mutate(years_since_sale = as.numeric(ASOFDATE - SALEDATE)/365.25,
-         btw_sales_1 = as.numeric(SALEDATE - PREVSALEDATE)/365.25,
-         btw_sales_2 = as.numeric(PREVSALEDATE - PREVSALEDATE2)/365.25) %>%
-  mutate(btw_sales_1 = case_when(btw_sales_1 > 0 ~ btw_sales_1,
-                                 btw_sales_1 == 0 ~ btw_sales_2,
-                                 btw_sales_1 < 0 ~ -1 * btw_sales_1)) %>%
-  mutate(btw_sales_avg = ifelse(is.na(btw_sales_2), 
-                                btw_sales_1,
-                                (btw_sales_1 + btw_sales_2)/2)) %>%
-  mutate(year = year(SALEDATE)) %>%
-  left_join(inflation) %>%
-  mutate(infl_adj_price = SALEPRICE * adj) 
-```
+Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the county tax assessment data for use in our analysis. We also included the most recent listed sales price, adjusted for inflation.
 
 To aggregate properties identified as condominiums to the site level, we summed 
 the total values for lot area, assessed land value, assessed building value, and
-inflation-adjusted sale price and averaged values for the average number of 
-years between sales.
+inflation-adjusted sale price. Summary statistics for the tax assessor variables are 
+listed in Table \@ref(tab:assessor-summary).
 
-```{r, echo=FALSE}
-zero_land_val <- sites %>%
-  filter(FAIRMARKETLAND == 0 &
-           FAIRMARKETBUILDING > 0 &
-           substr(USEDESC, 1, 6) != "VACANT") 
+```{r assessor-summary, echo=FALSE, message=FALSE, tidy=FALSE}
+assessor_summary <- tibble(Variable = c("Total assessed value",
+                                        "Assessed value of building",
+                                        "Lot area (sf)",
+                                        "Most recent sales price (2021 dollars)"),
+                           `25th percentile` = c(quantile(sites$FAIRMARKETTOTAL,
+                                                         probs = 0.25),
+                                                quantile(sites$FAIRMARKETBUILDING,
+                                                         probs = 0.25),
+                                                quantile(sites$LOTAREA,
+                                                         probs = 0.25),
+                                                quantile(sites$infl_adj_price,
+                                                         probs = 0.25)),
+                           `75th percentile` = c(quantile(sites$FAIRMARKETTOTAL,
+                                                         probs = 0.75),
+                                                quantile(sites$FAIRMARKETBUILDING,
+                                                         probs = 0.75),
+                                                quantile(sites$LOTAREA,
+                                                         probs = 0.75),
+                                                quantile(sites$infl_adj_price,
+                                                         probs = 0.75)),
+                           Median = c(median(sites$FAIRMARKETTOTAL),
+                                      median(sites$FAIRMARKETBUILDING),
+                                      median(sites$LOTAREA),
+                                      median(sites$infl_adj_price)),
+                           Average = c(mean(sites$FAIRMARKETTOTAL),
+                                       mean(sites$FAIRMARKETBUILDING),
+                                       mean(sites$LOTAREA),
+                                       mean(sites$infl_adj_price)),
+                           `Standard deviation` = c(sd(sites$FAIRMARKETTOTAL),
+                                                    sd(sites$FAIRMARKETBUILDING),
+                                                    sd(sites$LOTAREA),
+                                                    sd(sites$infl_adj_price)))
 
-condo_addresses <- zero_land_val %>%
-  group_by(address) %>%
-  summarize(n = n()) %>%
-  arrange(desc(n))
-
-condos <- sites %>%
-  filter(address %in% condo_addresses$address) %>%
-  group_by(address) %>%
-  summarise(n_condos = n(),
-            PARID = first(PARID),
-            FAIRMARKETTOTAL = sum(FAIRMARKETTOTAL),
-            FAIRMARKETBUILDING = sum(FAIRMARKETBUILDING),
-            LOTAREA = sum(LOTAREA),
-            btw_sales_avg = mean(btw_sales_avg, na.rm = TRUE),
-            infl_adj_price = sum(infl_adj_price, na.rm = TRUE)) %>%
-  filter(n_condos > 1)
-
-sites <- sites %>%
-  mutate(n_condos = 1) %>%
-  filter(sites$address %!in% condos$address) %>%
-  select(address,
-         n_condos,
-         PARID,
-         FAIRMARKETTOTAL, 
-         FAIRMARKETBUILDING, 
-         LOTAREA,
-         btw_sales_avg,
-         infl_adj_price) %>%
-  rbind(condos) %>%
-  select(-address, -n_condos)
+kable(
+  assessor_summary, 
+  caption = 'Summary statistics for tax assessor variables',
+  booktabs = TRUE,
+  digits = 0,
+  format.args = (list(big.mark = ','))
+)
 ```
 
-```{r, eval=FALSE, echo=FALSE}
-write_csv(sites,
-          here("data",
-               "sites.csv"))
-```
 
 ### Accessibilty data
 
-Accessibilty was calculated from each of the 518,316 sites in our sample to
+Accessibilty was calculated from each of the 518,032 sites in our sample to
 each of several location types described below.
 
+#### Destination parcels
+
 We used land use codes from the county assessor parcel data to identify 
-*destination parcels* that residents might value access to. The most common 
+_destination parcels_ that residents might value access to. The most common 
 land use codes of identified destination parcels are listed in \@ref(tab:dest-uses).
 
 ```{r dest-uses, echo=FALSE}
-dest_parcels <- parcel_data %>%
+dest_parcels <- here("02_data",
+                     "all-parcels.csv") %>%
+  read_csv(show_col_types = FALSE) %>%
   filter(Category == "destination") %>%
   group_by(USEDESC) %>%
   summarise(`Number of identified destinations` = n()) %>%
@@ -319,6 +223,8 @@ kable(
   )
 ```
 
+#### Job locations
+
 We identified _job locations_ based on data from a Longitudinal 
 Employer-Household Dynamics (LEHD) dataset published by the United States Census
 Bureau [@united_states_census_bureau_lehd_2021]. The LEHD dataset provides the 
@@ -332,7 +238,7 @@ Westmoreland counties).
 In addition to calculating the accessibility to jobs of all categories, we also
 calculated accessibility to several subsets of jobs. We disaggregated jobs by 
 earnings, reasoning that the usefulness of a job might vary depending on how 
-well it matches a workers skills or wage expectations. _High-paying job locations_ 
+well it matches a workers skills or wage expectations. _High-paying job locations_
 are a subset of job locations where the worker earns more than \$3333 per month.
 _Low-paying job locations_ are those where the worker earns \$1250 per month or less. 
 
@@ -367,7 +273,7 @@ function had a mean (inflection) of 40 minutes and a standard deviation of 10
 minutes. For non-motorized modes, the decay function had a mean of 20 minutes 
 and a standard deviation of 5 minutes.
 
-```{r show-decay-func, fig.cap='Decay functions for accessibility calculations', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot illustrating two logistic decay functions.'}
+```{r show-decay-func, echo=FALSE, fig.cap='Decay functions for accessibility calculations', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot illustrating two logistic decay functions.'}
 travel_time <- seq(0, 100, by = 0.1)
 
 weight_motor <- (8.380076 - cumsum(dlogis(travel_time, 
@@ -393,23 +299,160 @@ ggplot(logistic_sample) +
 ```
 
 Calculating accessibility metrics for a combination of four transportation 
-modes and ten destination types yeilds 40 different accessibility variables.
+modes and ten destination types yields 40 different accessibility variables.
 
-### Density data
+```{r}
+accessibility <- here("02_data",
+                      "access.parquet") %>%
+  read_parquet() 
+
+accessibility_long <- accessibility%>%
+  pivot_longer(!PARID, names_to = "type", values_to = "value") %>%
+  mutate(mode  = rep(c(rep("bike", 10), 
+                       rep("walk", 10),
+                       rep("car", 10), 
+                       rep("transit", 10)),
+                   length(accessibility$PARID))) %>%
+  mutate(destination = rep(c("Total\njobs",
+                             "High-\npaying\njobs",
+                             "Low-\npaying\njobs",
+                             "Retail\njobs",
+                             "Entertain-\nment\njobs",
+                             "Hospit-\nality\njobs",
+                             "Amenity\nparcels",
+                             "Grocery\nstores",
+                             "Schools",
+                             "Parks"),
+                           length(accessibility$PARID) * 4)) %>%
+  filter(value > 0)
+```
+
+```{r}
+zero_labels <- tibble(
+  label = c(sum(accessibility$access_bike_dest_parcels == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_entrnmt_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_grocery == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_hi_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_hosplty_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_all_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_lo_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_park == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_school == 0) / length(accessibility$PARID),
+            sum(accessibility$access_bike_retail_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_dest_parcels == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_entrnmt_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_grocery == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_hi_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_hosplty_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_all_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_lo_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_park == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_school == 0) / length(accessibility$PARID),
+            sum(accessibility$access_car_retail_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_dest_parcels == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_entrnmt_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_grocery == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_hi_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_hosplty_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_all_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_lo_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_park == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_school == 0) / length(accessibility$PARID),
+            sum(accessibility$access_walk_retail_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_dest_parcels == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_entrnmt_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_grocery == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_hi_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_hosplty_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_all_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_lo_pay_jobs == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_park == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_school == 0) / length(accessibility$PARID),
+            sum(accessibility$access_transit_retail_jobs == 0) / length(accessibility$PARID)),
+  y = 175000,
+  x = c(max(accessibility$access_bike_dest_parcels)/5,
+        max(accessibility$access_bike_entrnmt_jobs)/5,
+        max(accessibility$access_bike_grocery)/5,
+        max(accessibility$access_bike_hi_pay_jobs)/5,
+        max(accessibility$access_bike_hosplty_jobs)/5,
+        max(accessibility$access_bike_all_jobs)/5,
+        max(accessibility$access_bike_lo_pay_jobs)/5,
+        max(accessibility$access_bike_park)/5,
+        max(accessibility$access_bike_school)/5,
+        max(accessibility$access_bike_retail_jobs)/5,
+        max(accessibility$access_car_dest_parcels)/5,
+        max(accessibility$access_car_entrnmt_jobs)/5,
+        max(accessibility$access_car_grocery)/5,
+        max(accessibility$access_car_hi_pay_jobs)/5,
+        max(accessibility$access_car_hosplty_jobs)/5,
+        max(accessibility$access_car_all_jobs)/5,
+        max(accessibility$access_car_lo_pay_jobs)/5,
+        max(accessibility$access_car_park)/5,
+        max(accessibility$access_car_school)/5,
+        max(accessibility$access_car_retail_jobs)/5,
+        max(accessibility$access_walk_dest_parcels)/5,
+        max(accessibility$access_walk_entrnmt_jobs)/5,
+        max(accessibility$access_walk_grocery)/5,
+        max(accessibility$access_walk_hi_pay_jobs)/5,
+        max(accessibility$access_walk_hosplty_jobs)/5,
+        max(accessibility$access_walk_all_jobs)/5,
+        max(accessibility$access_walk_lo_pay_jobs)/5,
+        max(accessibility$access_walk_park)/5,
+        max(accessibility$access_walk_school)/5,
+        max(accessibility$access_walk_retail_jobs)/5,
+        max(accessibility$access_transit_dest_parcels)/5,
+        max(accessibility$access_transit_entrnmt_jobs)/5,
+        max(accessibility$access_transit_grocery)/5,
+        max(accessibility$access_transit_hi_pay_jobs)/5,
+        max(accessibility$access_transit_hosplty_jobs)/5,
+        max(accessibility$access_transit_all_jobs)/5,
+        max(accessibility$access_transit_lo_pay_jobs)/5,
+        max(accessibility$access_transit_park)/5,
+        max(accessibility$access_transit_school)/5,
+        max(accessibility$access_transit_retail_jobs)/5),
+  mode = "bike",
+  destination = c("Amenity\nparcels",
+                  "Enter-\ntainment\njobs",
+                  "Grocery\nstores",
+                  "High-\npaying\njobs",
+                  "Hospit-\nality\njobs",
+                  ))
+
+ggplot(accessibility_long) +
+  geom_histogram(aes(x = value),
+                 color = "gray",
+                 fill = "gray",
+                 bins = 20) +
+  facet_grid(rows = vars(mode), 
+             cols = vars(destination),
+             scales = "free_x") +
+  scale_x_continuous(trans = "log",
+                     name = "") +
+  scale_y_continuous(name = "",
+                     labels = scales::label_comma()) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank()) +
+  geom_text(aes(x = x, y = y, label = label), data = zero_labels)
+```
+
+
+### Proximity data
 
 ```{r bad-uses, include=FALSE}
-big_coal <- parcel_data %>%
+parcels <- here("02_data",
+                "all-parcels.csv") %>%
+  read_csv(show_col_types = FALSE) 
+
+big_coal <- parcels %>%
   filter(PARID == "0187E00175000000")
 
-bad_parcels <- parcel_locs %>%
-  inner_join(parcel_data) %>%
+bad_parcels <- parcels %>%
   filter(Category == "disamenity") %>%
   filter((x != big_coal$x &
-           y != big_coal$y) |
+            y != big_coal$y) |
            PARID == big_coal$PARID)
 
 bad_parcel_list <- bad_parcels %>%
-  st_drop_geometry() %>%
   group_by(USEDESC) %>%
   summarise(`Number of identified locations` = n()) %>%
   arrange(desc(`Number of identified locations`)) %>%
@@ -420,11 +463,7 @@ bad_parcel_list <- bad_parcels %>%
            cumsum(`Percent of identified locations`))
 ```
 
-For each site, we calculated the density of four different amenities or 
-disamenities in the immediate vicinity (defined as the area within a 
-one-kilometer radius): homes, pedestrian paths (including sidewalks and
-all routes open to pedestrians), roads that are not open to pedestrians
-(such as freeways), railroad tracks, and land uses identified in county
+For each site, we calculated the proximity to land uses identified in county
 assessor data as one of several land uses that we categorized as 
 disamenities. The land use codes we used to identify disamenities are 
 listed in \@ref(tab:bad-use-list)^[289 properties related to coal mining 
@@ -442,37 +481,25 @@ kable(
   )
 ```
 
-Instead of counting them, try average of distance to nearest and 
-nth nearest.
+### Density
 
-```{r, include=FALSE}
-PA_st_plane <- "+proj=lcc +lat_1=39.93333333333333 +lat_2=40.96666666666667 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000.0000000001 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs"
+To represent the residential density around each site, we used the sf [@sf], nngeo
+[@nngeo] and tidycensus [@tidycensus] R packages to determine the smallest circular 
+buffer around each site containing a population of at least two thousand people, 
+based on the 2020 census. In denser places, a buffer with a smaller radius would 
+encompass two thousand residents. In more sparsely-populated places, a buffer 
+containing two thousand residents would be larger. 
 
-Sys.time()
-site_buffers <- inner_join(parcel_locs, sites) %>%
-  st_transform(PA_st_plane) %>%
-  st_buffer(3280.84) %>%
-  st_transform("WGS84") 
+### Population diversity
 
-site_buffers <- site_buffers %>%
-  mutate(num_disamenity = 
-           lengths(st_intersects(site_buffers, bad_parcels)))
-Sys.time()
-```
+The two-thousand-resident buffers described above were also used as a basis to 
+estimate the racial diversity of residents in the immediate vicinity. For each
+buffer, we calculated the percentage of residents that who identified in the 2020
+census as non-Hispanic white, non-Hispanic Black, and Hispanic.
 
-We obtained the locations of homes and disamentity land uses from county 
-assessor data and we obtained locations of railroads and streets from Open Street Map, using geofabrik (cite) and osmextract (cite) R packages.
+### Land use diversity
 
-```{r}
-
-```
-
-
-```{r}
-
-```
-
-
-### Diversity data
+We also calculated the total number of different land uses within each 
+two-thousand-resident buffer and used this as a measure of land-use diversity.
 
 

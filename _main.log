@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.13)  9 MAY 2022 15:14
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.13)  7 JUN 2022 16:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -769,38 +769,37 @@ File: _main_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 ]
 Chapter 4.
 [13]
-Underfull \hbox (badness 1609) in paragraph at lines 412--412
+Underfull \hbox (badness 1609) in paragraph at lines 414--414
 \TU/lmr/m/n/8 are not listed in Table []4.1[], which combine to represent less than one percent of
  []
 
-[14]
-Overfull \hbox (275.23013pt too wide) in paragraph at lines 419--448
+
+Overfull \hbox (275.23013pt too wide) in paragraph at lines 421--450
  [][] 
  []
 
-[15]
-Overfull \hbox (393.0701pt too wide) in paragraph at lines 522--619
+[14] [15] [16]
+Overfull \hbox (393.0701pt too wide) in paragraph at lines 516--613
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 489.20094pt on input line 619.
+LaTeX Warning: Float too large for page by 489.20094pt on input line 613.
 
-[16] [17]
-
-LaTeX Warning: Reference `fig:show-decay-func' on page 18 undefined on input line 663.
-
-[18]
+[17] [18]
 File: _main_files/figure-latex/show-decay-func-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/show-decay-func-1.pdf>
-[19] [20
 
-]
+LaTeX Warning: Reference `tab:bad-use-list' on page 19 undefined on input line 680.
+
+[19] [20]
 Chapter 5.
 
-Package natbib Warning: Citation `xie2015' on page 21 undefined on input line 708.
+Package natbib Warning: Citation `xie2015' on page 21 undefined on input line 698.
 
-[21] [22
+[21
+
+] [22
 
 ]
 Chapter 6.
@@ -882,10 +881,10 @@ Package rerunfilecheck Info: File `_main.out' has not changed.
 (rerunfilecheck)             Checksum: 63AA100994E86345BE2DD5D340E8B75F;2606.
  ) 
 Here is how much of TeX's memory you used:
- 17608 strings out of 478155
- 325017 string characters out of 5852074
- 791168 words of memory out of 5000000
- 38000 multiletter control sequences out of 15000+600000
+ 17611 strings out of 478155
+ 325133 string characters out of 5852074
+ 790243 words of memory out of 5000000
+ 38003 multiletter control sequences out of 15000+600000
  475758 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  86i,8n,121p,629b,504s stack positions out of 10000i,1000n,20000p,200000b,200000s
