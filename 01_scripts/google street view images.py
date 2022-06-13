@@ -343,3 +343,8 @@ image_features.to_csv('google street view_image_features.csv')
 
 print('Feature Extraction Completed Successfully!')
 print('image_features.csv created')
+
+imgvar = pd.read_csv('google street view_image_features.csv').drop('image_id',axis=1)
+allvar = pd.concat([location,imgvar],axis = 1)
+allvar.to_csv('all_image_features.csv')
+print('all_image_features.csv created!')
