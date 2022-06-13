@@ -1,0 +1,56 @@
+Traceback (most recent call last):
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_qt.py", line 455, in _draw_idle
+    self.draw()
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_agg.py", line 436, in draw
+    self.figure.draw(self.renderer)
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backend_bases.py", line 1533, in _draw
+    def _draw(renderer): raise Done(renderer)
+matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x0000015F14DED4C0>
+Traceback (most recent call last):
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_qt.py", line 455, in _draw_idle
+    self.draw()
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_agg.py", line 436, in draw
+    self.figure.draw(self.renderer)
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backend_bases.py", line 1533, in _draw
+    def _draw(renderer): raise Done(renderer)
+matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x0000015F14FCABE0>
+Traceback (most recent call last):
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_qt.py", line 455, in _draw_idle
+    self.draw()
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_agg.py", line 436, in draw
+    self.figure.draw(self.renderer)
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backend_bases.py", line 1533, in _draw
+    def _draw(renderer): raise Done(renderer)
+matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x0000015F14DB3CD0>
+Traceback (most recent call last):
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_qt.py", line 455, in _draw_idle
+    self.draw()
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_agg.py", line 436, in draw
+    self.figure.draw(self.renderer)
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backend_bases.py", line 1533, in _draw
+    def _draw(renderer): raise Done(renderer)
+matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x0000015F14D6A370>
+Traceback (most recent call last):
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_qt.py", line 455, in _draw_idle
+    self.draw()
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_agg.py", line 436, in draw
+    self.figure.draw(self.renderer)
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backend_bases.py", line 1533, in _draw
+    def _draw(renderer): raise Done(renderer)
+matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x0000015F14E21B20>
+Traceback (most recent call last):
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_qt.py", line 455, in _draw_idle
+    self.draw()
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_agg.py", line 436, in draw
+    self.figure.draw(self.renderer)
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backend_bases.py", line 1533, in _draw
+    def _draw(renderer): raise Done(renderer)
+matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x0000015F14DEA310>
+Traceback (most recent call last):
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_qt.py", line 455, in _draw_idle
+    self.draw()
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backends\backend_agg.py", line 436, in draw
+    self.figure.draw(self.renderer)
+  File "C:\Users\wuyix\ANACON~1\envs\shucheng\lib\site-packages\matplotlib\backend_bases.py", line 1533, in _draw
+    def _draw(renderer): raise Done(renderer)
+matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x0000015F1492D880>

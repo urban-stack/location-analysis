@@ -1,6 +1,4 @@
-#please enter your API_key for Street View Static API in line 46
-
-
+#please enter your API_key for Street View Static API in line 44
 import urllib.request
 import pandas as pd
 import os
@@ -21,7 +19,7 @@ from tabulate import tabulate
 import tensorflow as tf
 print(tf.__version__)
 
-def download(url, path, n):   
+def download(url, path, n, error_list):   
   try:
     conn = urllib.request.urlopen(url)
     f = open(path, 'wb') 
@@ -29,10 +27,12 @@ def download(url, path, n):
     f.close()
     print(n,' success!')
   except:
+    error_list.append(n)
     print(n, 'error:', url)
+  return error_list
     
 input_path = "E:/GSD/2022 Summer/RA/location-analysis/"
-csv = input_path + "02_data/streetview-sites.csv"
+csv = input_path + "02_data/sample_sites_tract_data.csv"
 location = pd.read_csv(csv)
 print(location)
 
@@ -44,17 +44,33 @@ else:
   print("dir google street view images exist")
 
 API_key = ""#your key here
+error_list=[]
 for i in range(0,len(location)): 
-  lng = str(location.iloc[i,1])
-  lat = str(location.iloc[i,2]) 
+  lat = str(location.iloc[i,1]) 
+  lng = str(location.iloc[i,2])
   path = img_path +"/"+ str(i) +"_" +lat + "_" + lng + "_-5.JPG"  
-  url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=100&return_error_code=true&key="+API_key  
-  download(url, path, i) 
+  url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=350&return_error_code=true&key="+API_key 
+  error_list = download(url, path, i, error_list) 
+print('error_list = ',error_list)
+
+f = open(img_path+'/far_list.txt','w')
+f.write(str(error_list))
+f.close()
+
+for i in error_list: 
+  lat = str(location.iloc[i,1]) 
+  lng = str(location.iloc[i,2])
+  path = img_path +"/"+ str(i) +"_" +lat + "_" + lng + "_-5.JPG"  
+  url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=1000&return_error_code=true&key="+API_key 
+  error_list = download(url, path, i, error_list)
   
 all_files = [f for f in listdir(img_path)]
 ### Get only jpg files
 jpg_files = list(filter(lambda x: x[-4:] == ('.JPG') or x[-4:] == ('.jpg'), all_files))
-jpg_files.sort()
+def key_list(jpg):
+  return int(jpg.split('_')[0])
+jpg_files.sort(key=key_list)
+
 
 if len(jpg_files) == 0:
   print ('No JPG files found!')
