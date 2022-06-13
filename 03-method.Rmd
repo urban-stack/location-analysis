@@ -215,7 +215,7 @@ dest_parcels <- here("02_data",
            cumsum(`Percent of identified destinations`))
 
 kable(
-  dest_parcels, 
+  head(dest_parcels, 25), 
   caption = 'Land uses identified as potential destinations',
   booktabs = TRUE,
   digits = 2,
@@ -298,10 +298,7 @@ ggplot(logistic_sample) +
   theme_minimal()
 ```
 
-Calculating accessibility metrics for a combination of four transportation 
-modes and ten destination types yields 40 different accessibility variables.
-
-```{r}
+```{r, echo=FALSE}
 accessibility <- here("02_data",
                       "access.parquet") %>%
   read_parquet() 
@@ -317,7 +314,7 @@ accessibility_long <- accessibility%>%
                              "High-\npaying\njobs",
                              "Low-\npaying\njobs",
                              "Retail\njobs",
-                             "Entertain-\nment\njobs",
+                             "Enter-\ntainment\njobs",
                              "Hospit-\nality\njobs",
                              "Amenity\nparcels",
                              "Grocery\nstores",
@@ -327,116 +324,135 @@ accessibility_long <- accessibility%>%
   filter(value > 0)
 ```
 
-```{r}
+Calculating accessibility metrics for a combination of four transportation 
+modes and ten destination types yields 40 different accessibility variables. \@ref(fig:show-decay-func) 
+illustrates the distributions of each of these variables.
+
+```{r access-dist, echo=FALSE, fig.cap='Distributions of accessibility variables', out.width='100%', fig.asp=.75, fig.align='center', fig.alt='Histograms of 40 accessibility variables.'}
 zero_labels <- tibble(
-  label = c(sum(accessibility$access_bike_dest_parcels == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_entrnmt_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_grocery == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_hi_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_hosplty_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_all_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_lo_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_park == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_school == 0) / length(accessibility$PARID),
-            sum(accessibility$access_bike_retail_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_dest_parcels == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_entrnmt_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_grocery == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_hi_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_hosplty_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_all_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_lo_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_park == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_school == 0) / length(accessibility$PARID),
-            sum(accessibility$access_car_retail_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_dest_parcels == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_entrnmt_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_grocery == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_hi_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_hosplty_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_all_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_lo_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_park == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_school == 0) / length(accessibility$PARID),
-            sum(accessibility$access_walk_retail_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_dest_parcels == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_entrnmt_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_grocery == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_hi_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_hosplty_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_all_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_lo_pay_jobs == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_park == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_school == 0) / length(accessibility$PARID),
-            sum(accessibility$access_transit_retail_jobs == 0) / length(accessibility$PARID)),
+  pct_zero = c(prettyNum(100 * sum(accessibility$access_bike_dest_parcels == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_entrnmt_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_grocery == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_hi_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_hosplty_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_all_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_lo_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_park == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_school == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_bike_retail_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_dest_parcels == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_entrnmt_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_grocery == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_hi_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_hosplty_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_all_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_lo_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_park == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_school == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_car_retail_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_dest_parcels == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_entrnmt_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_grocery == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_hi_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_hosplty_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_all_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_lo_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_park == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_school == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_walk_retail_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_dest_parcels == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_entrnmt_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_grocery == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_hi_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_hosplty_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_all_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_lo_pay_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_park == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_school == 0) / 
+                           length(accessibility$PARID), digits = 0),
+               prettyNum(100 * sum(accessibility$access_transit_retail_jobs == 0) / 
+                           length(accessibility$PARID), digits = 0)),
   y = 175000,
-  x = c(max(accessibility$access_bike_dest_parcels)/5,
-        max(accessibility$access_bike_entrnmt_jobs)/5,
-        max(accessibility$access_bike_grocery)/5,
-        max(accessibility$access_bike_hi_pay_jobs)/5,
-        max(accessibility$access_bike_hosplty_jobs)/5,
-        max(accessibility$access_bike_all_jobs)/5,
-        max(accessibility$access_bike_lo_pay_jobs)/5,
-        max(accessibility$access_bike_park)/5,
-        max(accessibility$access_bike_school)/5,
-        max(accessibility$access_bike_retail_jobs)/5,
-        max(accessibility$access_car_dest_parcels)/5,
-        max(accessibility$access_car_entrnmt_jobs)/5,
-        max(accessibility$access_car_grocery)/5,
-        max(accessibility$access_car_hi_pay_jobs)/5,
-        max(accessibility$access_car_hosplty_jobs)/5,
-        max(accessibility$access_car_all_jobs)/5,
-        max(accessibility$access_car_lo_pay_jobs)/5,
-        max(accessibility$access_car_park)/5,
-        max(accessibility$access_car_school)/5,
-        max(accessibility$access_car_retail_jobs)/5,
-        max(accessibility$access_walk_dest_parcels)/5,
-        max(accessibility$access_walk_entrnmt_jobs)/5,
-        max(accessibility$access_walk_grocery)/5,
-        max(accessibility$access_walk_hi_pay_jobs)/5,
-        max(accessibility$access_walk_hosplty_jobs)/5,
-        max(accessibility$access_walk_all_jobs)/5,
-        max(accessibility$access_walk_lo_pay_jobs)/5,
-        max(accessibility$access_walk_park)/5,
-        max(accessibility$access_walk_school)/5,
-        max(accessibility$access_walk_retail_jobs)/5,
-        max(accessibility$access_transit_dest_parcels)/5,
-        max(accessibility$access_transit_entrnmt_jobs)/5,
-        max(accessibility$access_transit_grocery)/5,
-        max(accessibility$access_transit_hi_pay_jobs)/5,
-        max(accessibility$access_transit_hosplty_jobs)/5,
-        max(accessibility$access_transit_all_jobs)/5,
-        max(accessibility$access_transit_lo_pay_jobs)/5,
-        max(accessibility$access_transit_park)/5,
-        max(accessibility$access_transit_school)/5,
-        max(accessibility$access_transit_retail_jobs)/5),
-  mode = "bike",
-  destination = c("Amenity\nparcels",
-                  "Enter-\ntainment\njobs",
-                  "Grocery\nstores",
-                  "High-\npaying\njobs",
-                  "Hospit-\nality\njobs",
-                  ))
+  x = 0,
+  mode = c(rep("bike", 10),
+           rep("car", 10),
+           rep("walk", 10),
+           rep("transit", 10)),
+  destination = rep(c("Amenity\nparcels",
+                      "Enter-\ntainment\njobs",
+                      "Grocery\nstores",
+                      "High-\npaying\njobs",
+                      "Hospit-\nality\njobs",
+                      "Total\njobs",
+                      "Low-\npaying\njobs",
+                      "Parks",
+                      "Schools",
+                      "Retail\njobs"),
+                    4)) %>%
+  mutate(label = paste0(pct_zero,
+                        "% zero")) %>%
+  filter(pct_zero > 0)
 
 ggplot(accessibility_long) +
-  geom_histogram(aes(x = value),
+  geom_histogram(aes(x = log(value)),
                  color = "gray",
                  fill = "gray",
                  bins = 20) +
   facet_grid(rows = vars(mode), 
              cols = vars(destination),
              scales = "free_x") +
-  scale_x_continuous(trans = "log",
-                     name = "") +
-  scale_y_continuous(name = "",
+  scale_x_continuous(name = "Accessibility (log-transformed) (values of zero are excluded)") +
+  scale_y_continuous(name = "Number of sites",
                      labels = scales::label_comma()) +
   theme_minimal() +
   theme(axis.text.x = element_blank()) +
-  geom_text(aes(x = x, y = y, label = label), data = zero_labels)
+  geom_text(aes(x = x, y = y, 
+                label = label), 
+            data = zero_labels, 
+            size = 2.5,
+            hjust = 0)
 ```
 
 
-### Proximity data
+### Disamenity proximity
 
 ```{r bad-uses, include=FALSE}
 parcels <- here("02_data",
@@ -463,8 +479,7 @@ bad_parcel_list <- bad_parcels %>%
            cumsum(`Percent of identified locations`))
 ```
 
-For each site, we calculated the proximity to land uses identified in county
-assessor data as one of several land uses that we categorized as 
+We categorized several land uses in the county assessor data as 
 disamenities. The land use codes we used to identify disamenities are 
 listed in \@ref(tab:bad-use-list)^[289 properties related to coal mining 
 (with land use descriptions of either "COAL RIGHTS, WORKING INTERESTS" or 
@@ -481,6 +496,30 @@ kable(
   )
 ```
 
+We included a disamenity proximity index in our analysis that we calculated
+as the logarithm of the average distance from each site to the ten closest 
+disamenity sites. The distribution of this index is shown in \@ref(fig:bad-prox).
+
+```{r bad-prox, echo=FALSE, fig.cap='Distribution of average distance to nearest ten disamenity sites', out.width='80%', fig.asp=.75, fig.align='center'}
+
+#r badprox, echo=FALSE, fig.cap='Histogram of the average distance to the ten closest disamenities', out.width='80%', fig.asp=.75, fig.align='center'
+
+bad_proximity <- here("02_data",
+                      "bad_proximity.csv") %>%
+  read_csv(show_col_types = FALSE)
+
+ggplot(bad_proximity) +
+  geom_histogram(aes(x = log_avg_disamentiy_dist),
+                 fill = "gray",
+                 color = "gray",
+                 bins = 50) +
+  scale_x_continuous(name = "Disamenity proximity index") +
+  scale_y_continuous(name = "Number of sites",
+                     labels = scales::label_comma()) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank()) 
+```
+
 ### Density
 
 To represent the residential density around each site, we used the sf [@sf], nngeo
@@ -488,18 +527,77 @@ To represent the residential density around each site, we used the sf [@sf], nng
 buffer around each site containing a population of at least two thousand people, 
 based on the 2020 census. In denser places, a buffer with a smaller radius would 
 encompass two thousand residents. In more sparsely-populated places, a buffer 
-containing two thousand residents would be larger. 
+containing two thousand residents would be larger. The distribution of radii for 
+two-thousand-person site buffers is shown in \@ref(fig:radii).
+
+```{r radii, echo=FALSE, fig.cap='Histogram of radii of buffer containing 2000 residents', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Buffer radius histogram'}
+
+buffers <- here("02_data",
+                      "diversity.parquet") %>%
+  read_parquet()
+
+ggplot(buffers) +
+  geom_histogram(aes(x = radius / 5280),
+                 fill = "gray",
+                 color = "gray",
+                 bins = 50) +
+  scale_x_continuous(name = "Radius of buffer including two thousand residents (miles)") +
+  scale_y_continuous(name = "Number of sites",
+                     labels = scales::label_comma()) +
+  theme_minimal() 
+```
 
 ### Population diversity
 
 The two-thousand-resident buffers described above were also used as a basis to 
 estimate the racial diversity of residents in the immediate vicinity. For each
 buffer, we calculated the percentage of residents that who identified in the 2020
-census as non-Hispanic white, non-Hispanic Black, and Hispanic.
+census as non-Hispanic white, non-Hispanic Black, and Hispanic. The distributions
+of these variables are shown in \@ref(fig:divers-hist).
+
+```{r divers-hist, echo=FALSE, fig.cap='Histograms of population diversity variables', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Diversity histograms'}
+
+diversity <- buffers %>%
+  select(pct_white, pct_black, pct_hispanic) %>%
+  rename(`Non-Hispanic white` = pct_white,
+         `Non-Hispanic Black` = pct_black,
+         Hispanic = pct_hispanic) %>%
+  pivot_longer(everything(),
+               names_to = "Race/ethnicity",
+               values_to = "Percent of population")
+
+ggplot(diversity) +
+  geom_density(aes(x = `Percent of population`,
+                   color = `Race/ethnicity`,
+                   fill = `Race/ethnicity`),
+                 alpha = 0.5) +
+  scale_y_continuous(name = "Number of sites",
+                     labels = scales::label_comma()) +
+  scale_x_continuous(breaks = breaks <- seq(0, 1, by=0.1),
+                     labels = paste0((breaks * 100), "%")) +
+  theme_minimal()
+  
+```
+
+
 
 ### Land use diversity
 
 We also calculated the total number of different land uses within each 
 two-thousand-resident buffer and used this as a measure of land-use diversity.
+\@ref(fig:land-divers).
 
+```{r land-divers, echo=FALSE, fig.cap='Histogram of land use diversity', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Land-use diversity histogram'}
+
+ggplot(buffers) +
+  geom_histogram(aes(x = n_uses),
+                 bins = 20,
+                 color = "lightgray",
+                 fill = "gray") +
+  scale_y_continuous(name = "Number of sites",
+                     labels = scales::label_comma()) +
+  scale_x_continuous(name = "Number of unique land use types within\na 2,000-person buffer") +
+  theme_minimal()
+  
+```
 
