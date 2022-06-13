@@ -36,8 +36,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={A Minimal Book Example},
-  pdfauthor={John Doe},
+  pdftitle={Parcel-level metrics for evaluating housing sites},
+  pdfauthor={Carole Voulgaris and Elizabeth Christoforetti},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -115,9 +115,9 @@
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
-\title{A Minimal Book Example}
-\author{John Doe}
-\date{2022-06-07}
+\title{Parcel-level metrics for evaluating housing sites}
+\author{Carole Voulgaris and Elizabeth Christoforetti}
+\date{2022-06-13}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -191,111 +191,25 @@ As you work, you may start a local server to live preview this HTML book. This p
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{hello-bookdown}{%
-\chapter{Hello bookdown}\label{hello-bookdown}}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
+Motivation for the project.
 
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
+\hypertarget{related-work}{%
+\chapter{Related work}\label{related-work}}
 
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+Talk about various area-level metrics
 
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
-
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
-
-\hypertarget{cross}{%
-\chapter{Cross-references}\label{cross}}
-
-Cross-references make it easier for your readers to find and link to elements in your book.
-
-\hypertarget{chapters-and-sub-chapters}{%
-\section{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
-
-There are two steps to cross-reference any heading:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\begin{itemize}
 \tightlist
 \item
-  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
-  \item
-    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
-  \end{itemize}
+  Sprawl index
 \item
-  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
+  Neighborhood typology
+\end{itemize}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    If you prefer text as the link instead of a numbered reference use: \protect\hyperlink{cross}{any text you want can go here}.
-  \end{itemize}
-\end{enumerate}
-
-\hypertarget{captioned-figures-and-tables}{%
-\section{Captioned figures and tables}\label{captioned-figures-and-tables}}
-
-Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tab:chunk-label)}, respectively.
-
-See Figure \ref{fig:nice-fig}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Don't miss Table \ref{tab:nice-tab}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}
-
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rr}
-\toprule
-temperature & pressure\\
-\midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
-\addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
-\bottomrule
-\end{tabular}
-\end{table}
+Talk about VMT site work
 
 \hypertarget{methodology}{%
 \chapter{Methodology}\label{methodology}}
@@ -382,7 +296,7 @@ We also obtained latitude and longitude coordinates for each property from a
 geocoder file provided by \citet{western_pennsylvania_regional_data_center_geocoders_2021}.
 Over 99.5 percent of properties included in the assessment dataset are included
 in the geocoder file. Properties without geocoded locations are excluded from
-our analysis, leaving a total of 579,473 properties.
+our analysis.
 
 Potential development sites were identified as those
 
@@ -422,39 +336,38 @@ Potential development sites were identified as those
 \toprule
 USEDESC & Number of potential sites & Percent of potential sites & Cumulative percent of potential sites\\
 \midrule
-SINGLE FAMILY & 370,521 & 70.4 & 70.4\\
-VACANT LAND & 62,857 & 11.9 & 82.4\\
-TWO FAMILY & 17,294 & 3.3 & 85.6\\
-CONDOMINIUM & 16,591 & 3.2 & 88.8\\
-TOWNHOUSE & 14,765 & 2.8 & 91.6\\
+SINGLE FAMILY & 370,519 & 71.5 & 71.5\\
+VACANT LAND & 62,817 & 12.1 & 83.6\\
+TWO FAMILY & 17,293 & 3.3 & 86.9\\
+TOWNHOUSE & 14,672 & 2.8 & 89.8\\
+ROWHOUSE & 11,084 & 2.1 & 91.9\\
 \addlinespace
-ROWHOUSE & 11,084 & 2.1 & 93.7\\
-VACANT COMMERCIAL LAND & 5,847 & 1.1 & 94.8\\
+CONDOMINIUM & 9,579 & 1.8 & 93.8\\
+VACANT COMMERCIAL LAND & 5,839 & 1.1 & 94.9\\
 THREE FAMILY & 3,969 & 0.8 & 95.6\\
-RES AUX BUILDING (NO HOUSE) & 3,605 & 0.7 & 96.3\\
-RETL/APT'S OVER & 3,360 & 0.6 & 96.9\\
+RES AUX BUILDING (NO HOUSE) & 3,604 & 0.7 & 96.3\\
+RETL/APT'S OVER & 3,357 & 0.6 & 97.0\\
 \addlinespace
-COMM AUX BUILDING & 2,838 & 0.5 & 97.4\\
-APART: 5-19 UNITS & 2,778 & 0.5 & 98.0\\
-FOUR FAMILY & 2,058 & 0.4 & 98.4\\
-BUILDERS LOT & 1,249 & 0.2 & 98.6\\
-CONDOMINIUM COMMON PROPERTY & 1,149 & 0.2 & 98.8\\
+COMM AUX BUILDING & 2,831 & 0.5 & 97.5\\
+APART: 5-19 UNITS & 2,778 & 0.5 & 98.1\\
+FOUR FAMILY & 2,058 & 0.4 & 98.5\\
+BUILDERS LOT & 1,249 & 0.2 & 98.7\\
+CONDOMINIUM COMMON PROPERTY & 1,115 & 0.2 & 98.9\\
 \addlinespace
-PARKING GARAGE/LOTS & 900 & 0.2 & 99.0\\
-OFFICE/APARTMENTS OVER & 856 & 0.2 & 99.1\\
-MOBILE HOME & 667 & 0.1 & 99.3\\
-APART:40+ UNITS & 531 & 0.1 & 99.4\\
-CONDOMINIUM UNIT & 454 & 0.1 & 99.5\\
+PARKING GARAGE/LOTS & 895 & 0.2 & 99.1\\
+OFFICE/APARTMENTS OVER & 856 & 0.2 & 99.3\\
+MOBILE HOME & 667 & 0.1 & 99.4\\
+APART:40+ UNITS & 529 & 0.1 & 99.5\\
+DWG USED AS OFFICE & 441 & 0.1 & 99.6\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The above criteria yield 531,811 potential sites. Potential building sites were
-further filtered to exclude those with missing data on the most recent sale
-(6,574 sites, or about one percent of all sites).\footnote{Four sites had sales prices
-  listed that were unreasonably high. 3039 Liberty Avenue in Pittsburgh is listed
-  as having sold for \$511,945,000 on August 30, 2021. Zillow lists this property
-  as having sold on that date for \$511,945
+Potential building sites were further filtered to exclude those with missing data
+on the most recent sale (about one percent of all sites).\footnote{Four sites had sales
+  prices listed that were unreasonably high. 3039 Liberty Avenue in Pittsburgh is
+  listed as having sold for \$511,945,000 on August 30, 2021. Zillow lists this
+  property as having sold on that date for \$511,945
   (\url{https://www.zillow.com/homedetails/3039-W-Liberty-Ave-Pittsburgh-PA-15216/2070262638_zpid/}, accessed 5/4/2022),
   so the value was corrected for what appears to have been a typo. 220 Hyeholde Dr
   in Coraopolis is listed as having sold for \$28,100,000 in 1967. This may also
@@ -466,7 +379,7 @@ further filtered to exclude those with missing data on the most recent sale
   Arlington Avenue in Pittsburgh is a three-bedroom single-family home that is
   listed as having sold for \$57,010,813 in 1976 and a 0.06-acre vacant lot with
   tax ID 0165G00270000000 is listed as having sold for \$24,920,232 in 1936. The
-  sales data for these sites were treated as missing.} for a total of 526,237
+  sales data for these sites were treated as missing.} for a total of\\
 potential sites.
 
 The focus of this analysis is on potential development sites rather than on
@@ -476,37 +389,45 @@ site level by identifying all properties with an assessed building value
 greater than zero, a land value of zero, and a land use description that did
 not indicate the land was vacant. If multiple such properties share an address,
 we classified all properties at that address as a condominium and aggregated
-them to the parcel level. This led to a final sample of 518,316 sites.
+them to the parcel level. This led to a final sample of 518,032 sites.
 
-\hypertarget{aspatial-data}{%
-\subsection{Aspatial data}\label{aspatial-data}}
+\hypertarget{tax-assessment-data}{%
+\subsection{Tax assessment data}\label{tax-assessment-data}}
 
-Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the assessment data for use in our analysis. We calculated two additional variables from the assessment data: the inflation-adjusted sales price and the average number of years between sales, which we calculated as the average of:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  The number of years between the most recent sale and the publication data of the assessment data (May 1, 2022);
-\item
-  The number of years between the most recent sale and the second-most recent sale\footnote{If no date is listed for the second-most recent sale, we used January 1, 1950. The data user guide notes that, although deeds have been recorded in Allegheny County since 1788 (and the earliest sale listed in the data is from November 24, 1806), early sales may not be included in the electronic system and may default to a 1950 sale date \citep{western_pennsylvania_regional_data_center_allegheny_2017}. This effects about one third of parcels in our dataset.}; and
-\item
-  The number of years between the second-most recent sale and the third-most recent sale, if a third-most recent sale is listed.
-\end{enumerate}
+Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the county tax assessment data for use in our analysis. We also included the most recent listed sales price, adjusted for inflation.
 
 To aggregate properties identified as condominiums to the site level, we summed
 the total values for lot area, assessed land value, assessed building value, and
-inflation-adjusted sale price and averaged values for the average number of
-years between sales.
+inflation-adjusted sale price. Summary statistics for the tax assessor variables are
+listed in Table \ref{tab:assessor-summary}.
+
+\begin{table}
+
+\caption{\label{tab:assessor-summary}Summary statistics for tax assessor variables}
+\centering
+\begin{tabular}[t]{lrrrrr}
+\toprule
+Variable & 25th percentile & 75th percentile & Median & Average & Standard deviation\\
+\midrule
+Total assessed value & 43,100 & 156,400 & 92,600 & 132,887 & 447,902\\
+Assessed value of building & 27,700 & 114,900 & 65,700 & 100,114 & 409,105\\
+Lot area (sf) & 3,348 & 12,877 & 6,860 & 19,940 & 126,541\\
+Most recent sales price (2021 dollars) & 2 & 182,786 & 75,490 & 151,411 & 764,820\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \hypertarget{accessibilty-data}{%
 \subsection{Accessibilty data}\label{accessibilty-data}}
 
-Accessibilty was calculated from each of the 518,316 sites in our sample to
+Accessibilty was calculated from each of the 518,032 sites in our sample to
 each of several location types described below.
 
+\hypertarget{destination-parcels}{%
+\subsubsection{Destination parcels}\label{destination-parcels}}
+
 We used land use codes from the county assessor parcel data to identify
-destination parcels that residents might value access to. The most common
+\emph{destination parcels} that residents might value access to. The most common
 land use codes of identified destination parcels are listed in \ref{tab:dest-uses}.
 
 \begin{table}
@@ -546,71 +467,12 @@ RETL/STOR OVER & 344 & 0.99 & 85.49\\
 CEMETERY/MONUMENTS & 340 & 0.98 & 86.47\\
 STATE GOVERNMENT & 331 & 0.95 & 87.42\\
 CONVENIENCE STORE/GAS & 304 & 0.88 & 88.30\\
-\addlinespace
-BANK & 299 & 0.86 & 89.16\\
-NEIGH SHOP CENTER & 297 & 0.86 & 90.02\\
-BARS & 240 & 0.69 & 90.71\\
-FUNERAL HOMES & 194 & 0.56 & 91.27\\
-DAYCARE/PRIVATE SCHOOL & 191 & 0.55 & 91.82\\
-\addlinespace
-MINI WAREHOUSE & 182 & 0.52 & 92.34\\
-MEDIUM MANUFACTURING & 172 & 0.50 & 92.83\\
-NURSING HOME/PRIVATE HOS & 171 & 0.49 & 93.33\\
-DRIVE IN REST OR FOOD SERVICE & 170 & 0.49 & 93.82\\
-OFFICE-WALKUP -3 + STORIES & 164 & 0.47 & 94.29\\
-\addlinespace
-AUTO SERV STATION & 137 & 0.39 & 94.68\\
-COMMUNITY SHOPPING CENTER & 137 & 0.39 & 95.08\\
-OTHER RETAIL STRUCTURES & 135 & 0.39 & 95.47\\
-WAREHOUSE/MULTI-TENANT & 126 & 0.36 & 95.83\\
-BOWLING ALLEYS/REC FACILITY & 120 & 0.35 & 96.18\\
-\addlinespace
-HOTELS & 113 & 0.33 & 96.50\\
-DISCOUNT STORE & 110 & 0.32 & 96.82\\
-CAR WASH & 103 & 0.30 & 97.11\\
-FAST FOOD/DRIVE THRU WINDOW & 85 & 0.24 & 97.36\\
-PHARMACY (CHAIN) & 85 & 0.24 & 97.60\\
-\addlinespace
-SMALL SHOP & 81 & 0.23 & 97.84\\
-SUPERMARKETS & 75 & 0.22 & 98.05\\
-OFFICE/STORAGE OVER & 66 & 0.19 & 98.24\\
-COUNTRY CLUBS & 55 & 0.16 & 98.40\\
-REGIONAL SHOPPING CENTER & 50 & 0.14 & 98.55\\
-\addlinespace
-OFFICE/RETAIL OVER & 45 & 0.13 & 98.68\\
-DRY CLEANING PLANTS/LAUNDRIES & 44 & 0.13 & 98.80\\
-MOTEL \& TOURIST CABINS & 42 & 0.12 & 98.92\\
-BIG BOX RETAIL & 38 & 0.11 & 99.03\\
-CONVENIENCE STORE & 36 & 0.10 & 99.14\\
-\addlinespace
-LIVE STOCK FARM & 34 & 0.10 & 99.23\\
-MARINA & 34 & 0.10 & 99.33\\
-DEPARTMENT STORE & 32 & 0.09 & 99.42\\
-THEATER & 29 & 0.08 & 99.51\\
-GREENHOUSES, VEG \& FLORACULTURE & 28 & 0.08 & 99.59\\
-\addlinespace
-GOLF DRIVING RANGE/MINIATURE & 22 & 0.06 & 99.65\\
-GOLF COURSES (PUBLIC) & 20 & 0.06 & 99.71\\
-BED \& BREAKFAST & 15 & 0.04 & 99.75\\
-OTHER AGRICULTURAL - CAUV & 14 & 0.04 & 99.79\\
-SAVINGS AND LOANS & 12 & 0.03 & 99.83\\
-\addlinespace
-OTHER FOOD SERVICE & 11 & 0.03 & 99.86\\
-NURSERY & 9 & 0.03 & 99.88\\
-CASINO & 7 & 0.02 & 99.90\\
-CONVENIENCE STORE GAS/REPAIRS & 7 & 0.02 & 99.93\\
-MARINE SERV FACILITY & 7 & 0.02 & 99.95\\
-\addlinespace
-FORESTRY WITH BUILDING & 5 & 0.01 & 99.96\\
-HEAVY EQUIPMENT SALES/RENTAL & 5 & 0.01 & 99.97\\
-GAS STATION KIOSK & 3 & 0.01 & 99.98\\
-VEGETABLE FARM & 3 & 0.01 & 99.99\\
-TIMBER OR FOREST LAND & 2 & 0.01 & 100.00\\
-\addlinespace
-FORESTRY W/BUILDINGS & 1 & 0.00 & 100.00\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\hypertarget{job-locations}{%
+\subsubsection{Job locations}\label{job-locations}}
 
 We identified \emph{job locations} based on data from a Longitudinal
 Employer-Household Dynamics (LEHD) dataset published by the United States Census
@@ -669,36 +531,97 @@ and a standard deviation of 5 minutes.
 \end{figure}
 
 Calculating accessibility metrics for a combination of four transportation
-modes and ten destination types yields 40 different accessibility variables.
+modes and ten destination types yields 40 different accessibility variables. \ref{fig:show-decay-func}
+illustrates the distributions of each of these variables.
 
-\hypertarget{proximity-data}{%
-\subsection{Proximity data}\label{proximity-data}}
+\begin{figure}
 
-For each site, we calculated the proximity to land uses identified in county
-assessor data as one of several land uses that we categorized as
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/access-dist-1} 
+
+}
+
+\caption{Distributions of accessibility variables}\label{fig:access-dist}
+\end{figure}
+
+\hypertarget{disamenity-proximity}{%
+\subsection{Disamenity proximity}\label{disamenity-proximity}}
+
+We categorized several land uses in the county assessor data as
 disamenities. The land use codes we used to identify disamenities are
 listed in \ref{tab:bad-use-list}\footnote{289 properties related to coal mining
   (with land use descriptions of either ``COAL RIGHTS, WORKING INTERESTS'' or
   ``COAL LAND, SURFACE RIGHTS'') are co-located and are treated as a single
   site.}.
 
-\hypertarget{footnotes-and-citations}{%
-\chapter{Footnotes and citations}\label{footnotes-and-citations}}
+We included a disamenity proximity index in our analysis that we calculated
+as the logarithm of the average distance from each site to the ten closest
+disamenity sites. The distribution of this index is shown in \ref{fig:bad-prox}.
 
-\hypertarget{footnotes}{%
-\section{Footnotes}\label{footnotes}}
+\begin{figure}
 
-Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
+{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/bad-prox-1} 
 
-\hypertarget{citations}{%
-\section{Citations}\label{citations}}
+}
 
-Reference items in your bibliography file(s) using \texttt{@key}.
+\caption{Distribution of average distance to nearest ten disamenity sites}\label{fig:bad-prox}
+\end{figure}
 
-For example, we are using the \textbf{bookdown} package \citep{R-bookdown} (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015} (this citation was added manually in an external file book.bib).
-Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
+\hypertarget{density}{%
+\subsection{Density}\label{density}}
 
-The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
+To represent the residential density around each site, we used the sf \citep{sf}, nngeo
+\citep{nngeo} and tidycensus \citep{tidycensus} R packages to determine the smallest circular
+buffer around each site containing a population of at least two thousand people,
+based on the 2020 census. In denser places, a buffer with a smaller radius would
+encompass two thousand residents. In more sparsely-populated places, a buffer
+containing two thousand residents would be larger. The distribution of radii for
+two-thousand-person site buffers is shown in \ref{fig:radii}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/radii-1} 
+
+}
+
+\caption{Histogram of radii of buffer containing 2000 residents}\label{fig:radii}
+\end{figure}
+
+\hypertarget{population-diversity}{%
+\subsection{Population diversity}\label{population-diversity}}
+
+The two-thousand-resident buffers described above were also used as a basis to
+estimate the racial diversity of residents in the immediate vicinity. For each
+buffer, we calculated the percentage of residents that who identified in the 2020
+census as non-Hispanic white, non-Hispanic Black, and Hispanic. The distributions
+of these variables are shown in \ref{fig:divers-hist}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/divers-hist-1} 
+
+}
+
+\caption{Histograms of population diversity variables}\label{fig:divers-hist}
+\end{figure}
+
+\hypertarget{land-use-diversity}{%
+\subsection{Land use diversity}\label{land-use-diversity}}
+
+We also calculated the total number of different land uses within each
+two-thousand-resident buffer and used this as a measure of land-use diversity.
+\ref{fig:land-divers}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/land-divers-1} 
+
+}
+
+\caption{Histogram of land use diversity}\label{fig:land-divers}
+\end{figure}
+
+\hypertarget{results}{%
+\chapter{Results}\label{results}}
 
 \hypertarget{blocks}{%
 \chapter{Blocks}\label{blocks}}

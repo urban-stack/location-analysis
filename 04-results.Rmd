@@ -1,28 +1,5 @@
 # Results
 
-```{r}
 
-```
-
-
-
-## Factor analysis
-
-```{r join-data, message=FALSE, results='hide', echo=FALSE}
-
-```
-
-```{r get number of factors}
-
-Sys.time()
-n_factors <- N_FACTORS(factor_data)
-Sys.time()
-
-n_factors
-```
-
-
-
-## Regression analysis
 
 
