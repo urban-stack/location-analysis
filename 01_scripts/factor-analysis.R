@@ -5,7 +5,6 @@ library(arrow)
 library(here)
 library(EFAtools)
 
-
 ### Read in data
 access <- here("02_data",
                "access.parquet") %>%
@@ -58,7 +57,7 @@ loadings <- data.frame(matrix(factors$rot_loadings, ncol = 5)) %>%
   mutate(variable = colnames(factor_data)) %>%
   mutate(f_drivable = X1,
          f_walkable = X2,
-         f_dense = -1 * X3,
+         f_dense = X3,
          f_diverse = X4,
          f_affordable = -1 * X5) %>%
   select(variable, 
@@ -75,7 +74,7 @@ scores <- data.frame(FACTOR_SCORES(factor_data, factors)$scores)
 factor_scores <- cbind(site_data, scores) %>%
   mutate(f_drivable = X1,
          f_walkable = X2,
-         f_dense = -1 * X3,
+         f_dense = X3,
          f_diverse = X4,
          f_affordable = -1 * X5) %>%
   select(PARID, 
