@@ -7,7 +7,8 @@ library(here)
 
 image_data <- here("google street view images",
                    "all_image_features.csv") %>%
-  read_csv()
+  read_csv() %>%
+  filter(!is.na(median_income_E))
 
 ### Come up with a few regression models that predict
  # a census variable using only image variables
@@ -58,8 +59,10 @@ AIC(pred_veg_model)
 ggplot(image_data, 
        aes(x = building_score,
            y = median_income_E)) +
-  geom_point() +
-  stat_smooth() +
+  geom_hex(bins = 50) +
+  scale_fill_viridis_c() +
+  stat_smooth(method = "lm",
+              color = "white") +
   theme_minimal()
 
 ## For more on visualizing regression results:
