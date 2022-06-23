@@ -1,4 +1,4 @@
-# Introduction
+# Motivation
 
 Motivation for the project.
 

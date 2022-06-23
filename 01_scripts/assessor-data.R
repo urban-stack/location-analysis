@@ -26,12 +26,10 @@ parcel_data <- read_csv('https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-
          PROPERTYHOUSENUM,
          PROPERTYADDRESS,
          PROPERTYFRACTION,
-         PROPERTYCITY,
-         PROPERTYSTATE,
-         PROPERTYUNIT,
          PROPERTYZIP,
-         CLASSDESC,
+         PROPERTYCITY,
          USEDESC,
+         CLASSDESC,
          LOTAREA,
          SALEDATE,
          SALEPRICE,
@@ -55,7 +53,7 @@ parcel_data <- read_csv('https://data.wprdc.org/dataset/2b3df818-601e-4f06-b150-
   left_join(uses) 
 
 parcel_data %>%
-  select(PARID, USEDESC, Category, x, y) %>%
+  select(PARID, USEDESC, Category, x, y, PROPERTYCITY) %>%
   write_csv(here("02_data",
                  "all-parcels.csv"))
 
@@ -122,7 +120,8 @@ condos <- sites %>%
             LOTAREA = sum(LOTAREA),
             USEDESC = first(USEDESC),
             btw_sales_avg = mean(btw_sales_avg, na.rm = TRUE),
-            infl_adj_price = sum(infl_adj_price, na.rm = TRUE)) %>%
+            infl_adj_price = sum(infl_adj_price, na.rm = TRUE),
+            PROPERTYCITY = first(PROPERTYCITY)) %>%
   filter(n_condos > 1)
 
 sites_final <- sites %>%
@@ -136,7 +135,8 @@ sites_final <- sites %>%
          LOTAREA,
          USEDESC,
          btw_sales_avg,
-         infl_adj_price) %>%
+         infl_adj_price,
+         PROPERTYCITY) %>%
   rbind(condos) %>%
   select(-address, -n_condos) %>%
   filter(FAIRMARKETTOTAL > 0,
@@ -151,7 +151,8 @@ sites_final <- sites %>%
          land_value_log, 
          lot_area_log,
          USEDESC,
-         price_log)
+         price_log,
+         PROPERTYCITY)
 
 write_csv(sites_final,
           here("02_data",

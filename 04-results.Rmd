@@ -3,6 +3,7 @@
 ```{r}
 library(here)
 library(tidyverse)
+library(readxl)
 ```
 
 ## Factor analysis
@@ -10,13 +11,13 @@ library(tidyverse)
 Both the Hull method (\@ref(fig:hull-figure)) and the Kaiser-Guttman
 criterion (\@ref(fig:kgc-figure)) suggested a five-factor solution.
 
-```{r hull-figure, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Results of Kaiser-Guttman criterion for determining the number of factors'}
+```{r hull-figure, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Results of Kaiser-Guttman criterion for determining the number of factors'}
 here("04_figures",
      "hull-n-factors.png") %>%
 knitr::include_graphics()
 ```
 
-```{r kgc-figure, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Results of Hull method for determining the number of factors'}
+```{r kgc-figure, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Results of Hull method for determining the number of factors'}
 here("04_figures",
      "KGC-n-factors.png") %>%
 knitr::include_graphics()
@@ -37,7 +38,7 @@ values for the radius of the smallest buffer containing two thousand residents
 locations by non-motorized modes. The _amenities_ factor is characterized 
 by non-motorized and transit access to retail and grocery locations. \@ref(fig:loading-fig) illustrates the loadings of each individual variable onto each of the five factors.
 
-```{r loading-fig, echo = FALSE, fig.asp=1.9, fig.width='100%', fig.cap='Factor loadings'}
+```{r loading-fig, echo = FALSE, fig.asp=1.9, out.width='100%', fig.cap='Factor loadings'}
 
 loadings <- here("02_data",
                  "loadings.csv") %>%
@@ -138,31 +139,31 @@ ggplot(long_loadings) +
 \@ref(fig:diverse-map), and \@ref(fig:amenities-map) show the spatial
 variation in the drivability, walkability, density, diversity, and amenity-richness indices, respectively.
 
-```{r drive-map, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Spatial variation in drivability index'}
+```{r drive-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in drivability index'}
 here("04_figures",
      "drivable.png") %>%
 knitr::include_graphics()
 ```
 
-```{r walk-map, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Spatial variation in walkability index'}
+```{r walk-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in walkability index'}
 here("04_figures",
      "walkable.png") %>%
 knitr::include_graphics()
 ```
 
-```{r dense-map, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Spatial variation in density index'}
+```{r dense-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in density index'}
 here("04_figures",
      "dense.png") %>%
 knitr::include_graphics()
 ```
 
-```{r diverse-map, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Spatial variation in diversity index'}
+```{r diverse-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in diversity index'}
 here("04_figures",
      "diverse.png") %>%
 knitr::include_graphics()
 ```
 
-```{r amenities-map, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Spatial variation in amenity-richness index'}
+```{r amenities-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in amenity-richness index'}
 here("04_figures",
      "amenities.png") %>%
 knitr::include_graphics()
@@ -171,8 +172,100 @@ knitr::include_graphics()
 \@ref(fig:factor-cor) illustrates the distribution of each factor and the
 relationships among them.
 
-```{r factor-cor, echo = FALSE, fig.asp=1.0, fig.width='100%', fig.cap='Spatial variation in amenity-richness index'}
+```{r factor-cor, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in amenity-richness index'}
 here("04_figures",
      "factor-cor.png") %>%
 knitr::include_graphics()
 ```
+
+## Factor validation
+
+```{r, include=FALSE}
+months <- c("july-2021",
+            "august-2021",
+            "september-2021",
+            "october-2021",
+            "november-2021",
+            "december-2021",
+            "january-2022",
+            "february-2022",
+            "march-2022",
+            "april-2022",
+            "may-2022")
+
+
+permits <- here("02_data",
+                "pli-permit-summary",
+                     "pli-permit-summary-june-2021.xlsx") %>%
+  read_xlsx(sheet = 1) %>%
+  select(3, 9, 10) %>%
+  rename(parcel_number = 1,
+         work_type = 2, 
+         structure_type = 3)
+  
+
+for (i in 1:11) {
+  next_permits <- here("02_data",
+                       "pli-permit-summary",
+                       paste0("pli-permit-summary-",
+                              months[i],
+                              ".xlsx")) %>%
+    read_xlsx(sheet = 1) %>%
+    select(3, 9, 10) %>%
+    rename(parcel_number = 1,
+         work_type = 2, 
+         structure_type = 3)
+    
+    permits <- rbind(permits, next_permits)
+  
+}
+
+res_permits <- permits %>%
+  mutate(PARID = paste0(substr(parcel_number, 1, 4),
+                        substr(parcel_number, 6, 6),
+                        substr(parcel_number, 8, 12),
+                        substr(parcel_number, 14, 17),
+                        substr(parcel_number, 19, 20))) %>%
+  filter(work_type == "NEW CONSTRUCTION" |
+           work_type == "COMPLETE DEMOLITION" |
+           work_type == "NEW" |
+           work_type == "NEW CONSTRUCTION" |
+           work_type == "REPLACEMENT" |
+           work_type == "PARTIAL DEMOLITION") %>%
+  filter(structure_type == "Residential" |
+           structure_type == "Residential - Two-Family")
+
+permit_sites <- unique(res_permits$PARID)
+
+sites <- here("02_data",
+              "sites.csv") %>%
+  read_csv(show_col_types = FALSE)
+
+data <- here("02_data",
+                "indices.csv") %>%
+  read_csv(show_col_types = FALSE) %>%
+  left_join(sites) %>%
+  mutate(permit = PARID %in% permit_sites) %>%
+  filter(PROPERTYCITY == "PITTSBURGH") %>%
+  select(f_drivable,
+         f_walkable,
+         f_dense,
+         f_diverse,
+         f_amenities,
+         permit)
+```
+
+
+```{r}
+model <- glm(permit ~ 
+               f_drivable +
+               f_walkable +
+               f_dense +
+               f_diverse +
+               f_amenities,
+             family = binomial(link = "logit"),
+             data = data)
+```
+
+
+

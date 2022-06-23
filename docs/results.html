@@ -5,31 +5,24 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Results | Parcel-level metrics for evaluating housing sites</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content="Chapter 5 Results | Parcel-level metrics for evaluating housing sites" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Results | Parcel-level metrics for evaluating housing sites" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="urban-stack/location-analysis" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 5 Results | Parcel-level metrics for evaluating housing sites" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Carole Voulgaris and Elizabeth Christoforetti" />
 
 
-<meta name="date" content="2022-06-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,7 +30,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="methodology.html"/>
-<link rel="next" href="blocks.html"/>
+<link rel="next" href="implications-for-place-quality.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -58,6 +51,8 @@ set in the _output.yml file.</p>" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -164,13 +159,8 @@ div.csl-indent {
 <li><a href="./">Parcel-level Metrics for Evaluating Housing Sites</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>2</b> Motivation</a></li>
 <li class="chapter" data-level="3" data-path="related-work.html"><a href="related-work.html"><i class="fa fa-check"></i><b>3</b> Related work</a></li>
 <li class="chapter" data-level="4" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>4</b> Methodology</a>
 <ul>
@@ -184,14 +174,13 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.5" data-path="methodology.html"><a href="methodology.html#population-diversity"><i class="fa fa-check"></i><b>4.1.5</b> Population diversity</a></li>
 <li class="chapter" data-level="4.1.6" data-path="methodology.html"><a href="methodology.html#land-use-diversity"><i class="fa fa-check"></i><b>4.1.6</b> Land use diversity</a></li>
 </ul></li>
+<li class="chapter" data-level="4.2" data-path="methodology.html"><a href="methodology.html#index-development"><i class="fa fa-check"></i><b>4.2</b> Index development</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
-<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#factor-analysis"><i class="fa fa-check"></i><b>5.1</b> Factor analysis</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="implications-for-place-quality.html"><a href="implications-for-place-quality.html"><i class="fa fa-check"></i><b>6</b> Implications for place quality</a></li>
 <li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
@@ -221,7 +210,87 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="results" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Results<a href="results.html#results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="results.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-2"><a href="results.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div id="factor-analysis" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Factor analysis<a href="results.html#factor-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Both the Hull method (<a href="results.html#fig:hull-figure">5.1</a>) and the Kaiser-Guttman
+criterion (<a href="results.html#fig:kgc-figure">5.2</a>) suggested a five-factor solution.</p>
+<div class="figure"><span style="display:block;" id="fig:hull-figure"></span>
+<img src="04_figures/hull-n-factors.png" alt="Results of Kaiser-Guttman criterion for determining the number of factors" width="100%" />
+<p class="caption">
+Figure 5.1: Results of Kaiser-Guttman criterion for determining the number of factors
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:kgc-figure"></span>
+<img src="04_figures/KGC-n-factors.png" alt="Results of Hull method for determining the number of factors" width="100%" />
+<p class="caption">
+Figure 5.2: Results of Hull method for determining the number of factors
+</p>
+</div>
+<p>The loadings resulting from the factor analysis are illustrated in
+<a href="results.html#fig:loading-fig">5.3</a>. We assigned names to each factor based on a visual
+inspection of the results. The <em>drivable</em> factor had the highest loadings
+for variables representing access by car to most destination types. The
+<em>walkable</em> factor has high loadings for variables representing access
+by walking and transit. The <em>diverse</em> index is characterized by diversity of
+people (high percentages of black residents and low percentages of white
+residents), diversity of land use (a greater number of distinct land
+uses in the immediate vicinity and a shorter average distance to disamenities),
+and lower assessed property values. The <em>dense</em> factor is characterized by lower
+values for the radius of the smallest buffer containing two thousand residents
+(i.e. higher population densities) and higher access to retail and grocery
+locations by non-motorized modes. The <em>amenities</em> factor is characterized
+by non-motorized and transit access to retail and grocery locations. <a href="results.html#fig:loading-fig">5.3</a> illustrates the loadings of each individual variable onto each of the five factors.</p>
+<div class="figure"><span style="display:block;" id="fig:loading-fig"></span>
+<img src="_main_files/figure-html/loading-fig-1.png" alt="Factor loadings" width="100%" />
+<p class="caption">
+Figure 5.3: Factor loadings
+</p>
+</div>
+<p><a href="results.html#fig:drive-map">5.4</a>, <a href="results.html#fig:walk-map">5.5</a>, <a href="results.html#fig:dense-map">5.6</a>,
+<a href="results.html#fig:diverse-map">5.7</a>, and <a href="results.html#fig:amenities-map">5.8</a> show the spatial
+variation in the drivability, walkability, density, diversity, and amenity-richness indices, respectively.</p>
+<div class="figure"><span style="display:block;" id="fig:drive-map"></span>
+<img src="04_figures/drivable.png" alt="Spatial variation in drivability index" width="100%" />
+<p class="caption">
+Figure 5.4: Spatial variation in drivability index
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:walk-map"></span>
+<img src="04_figures/walkable.png" alt="Spatial variation in walkability index" width="100%" />
+<p class="caption">
+Figure 5.5: Spatial variation in walkability index
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:dense-map"></span>
+<img src="04_figures/dense.png" alt="Spatial variation in density index" width="100%" />
+<p class="caption">
+Figure 5.6: Spatial variation in density index
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:diverse-map"></span>
+<img src="04_figures/diverse.png" alt="Spatial variation in diversity index" width="100%" />
+<p class="caption">
+Figure 5.7: Spatial variation in diversity index
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:amenities-map"></span>
+<img src="04_figures/amenities.png" alt="Spatial variation in amenity-richness index" width="100%" />
+<p class="caption">
+Figure 5.8: Spatial variation in amenity-richness index
+</p>
+</div>
+<p><a href="results.html#fig:factor-cor">5.9</a> illustrates the distribution of each factor and the
+relationships among them.</p>
+<div class="figure"><span style="display:block;" id="fig:factor-cor"></span>
+<img src="04_figures/factor-cor.png" alt="Spatial variation in amenity-richness index" width="100%" />
+<p class="caption">
+Figure 5.9: Spatial variation in amenity-richness index
+</p>
+</div>
 
+</div>
 </div>
             </section>
 
@@ -229,7 +298,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="methodology.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="blocks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="implications-for-place-quality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -5,31 +5,24 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Methodology | Parcel-level metrics for evaluating housing sites</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content="Chapter 4 Methodology | Parcel-level metrics for evaluating housing sites" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Methodology | Parcel-level metrics for evaluating housing sites" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="urban-stack/location-analysis" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Methodology | Parcel-level metrics for evaluating housing sites" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Carole Voulgaris and Elizabeth Christoforetti" />
 
 
-<meta name="date" content="2022-06-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -58,6 +51,8 @@ set in the _output.yml file.</p>" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -164,13 +159,8 @@ div.csl-indent {
 <li><a href="./">Parcel-level Metrics for Evaluating Housing Sites</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="motivation.html"><a href="motivation.html"><i class="fa fa-check"></i><b>2</b> Motivation</a></li>
 <li class="chapter" data-level="3" data-path="related-work.html"><a href="related-work.html"><i class="fa fa-check"></i><b>3</b> Related work</a></li>
 <li class="chapter" data-level="4" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>4</b> Methodology</a>
 <ul>
@@ -184,14 +174,13 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.5" data-path="methodology.html"><a href="methodology.html#population-diversity"><i class="fa fa-check"></i><b>4.1.5</b> Population diversity</a></li>
 <li class="chapter" data-level="4.1.6" data-path="methodology.html"><a href="methodology.html#land-use-diversity"><i class="fa fa-check"></i><b>4.1.6</b> Land use diversity</a></li>
 </ul></li>
+<li class="chapter" data-level="4.2" data-path="methodology.html"><a href="methodology.html#index-development"><i class="fa fa-check"></i><b>4.2</b> Index development</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
-<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#factor-analysis"><i class="fa fa-check"></i><b>5.1</b> Factor analysis</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="implications-for-place-quality.html"><a href="implications-for-place-quality.html"><i class="fa fa-check"></i><b>6</b> Implications for place quality</a></li>
 <li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
@@ -280,146 +269,310 @@ our analysis.</p>
 <li>classified as “residential”
 (indicating residential properties with one to four housing units) or “commercial”
 (which includes mixed-use developments and residential properties with more than four
-housing units) and</li>
+housing units), and</li>
 <li>with a land use description in one of 59 possible categories<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The most common of
-these are listed Table <a href="methodology.html#tab:list-site-uses">4.1</a><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</li>
+these are listed Table <a href="methodology.html#tab:list-site-uses">4.1</a>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</li>
 </ol>
-<table>
-<caption><span id="tab:list-site-uses">Table 4.1: </span>Most common land uses categorized as potential sites</caption>
-<colgroup>
-<col width="23%" />
-<col width="21%" />
-<col width="22%" />
-<col width="31%" />
-</colgroup>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:list-site-uses">Table 4.1: </span>Most common land uses categorized as potential sites
+</caption>
 <thead>
-<tr class="header">
-<th align="left">USEDESC</th>
-<th align="right">Number of potential sites</th>
-<th align="right">Percent of potential sites</th>
-<th align="right">Cumulative percent of potential sites</th>
+<tr>
+<th style="text-align:left;">
+USEDESC
+</th>
+<th style="text-align:right;">
+Number of potential sites
+</th>
+<th style="text-align:right;">
+Percent of potential sites
+</th>
+<th style="text-align:right;">
+Cumulative percent of potential sites
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">SINGLE FAMILY</td>
-<td align="right">370,519</td>
-<td align="right">71.5</td>
-<td align="right">71.5</td>
+<tr>
+<td style="text-align:left;">
+SINGLE FAMILY
+</td>
+<td style="text-align:right;">
+370,513
+</td>
+<td style="text-align:right;">
+73.2
+</td>
+<td style="text-align:right;">
+73.2
+</td>
 </tr>
-<tr class="even">
-<td align="left">VACANT LAND</td>
-<td align="right">62,817</td>
-<td align="right">12.1</td>
-<td align="right">83.6</td>
+<tr>
+<td style="text-align:left;">
+VACANT LAND
+</td>
+<td style="text-align:right;">
+62,672
+</td>
+<td style="text-align:right;">
+12.4
+</td>
+<td style="text-align:right;">
+85.5
+</td>
 </tr>
-<tr class="odd">
-<td align="left">TWO FAMILY</td>
-<td align="right">17,293</td>
-<td align="right">3.3</td>
-<td align="right">86.9</td>
+<tr>
+<td style="text-align:left;">
+TWO FAMILY
+</td>
+<td style="text-align:right;">
+17,293
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+89.0
+</td>
 </tr>
-<tr class="even">
-<td align="left">TOWNHOUSE</td>
-<td align="right">14,672</td>
-<td align="right">2.8</td>
-<td align="right">89.8</td>
+<tr>
+<td style="text-align:left;">
+TOWNHOUSE
+</td>
+<td style="text-align:right;">
+14,670
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+91.8
+</td>
 </tr>
-<tr class="odd">
-<td align="left">ROWHOUSE</td>
-<td align="right">11,084</td>
-<td align="right">2.1</td>
-<td align="right">91.9</td>
+<tr>
+<td style="text-align:left;">
+ROWHOUSE
+</td>
+<td style="text-align:right;">
+11,082
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+94.0
+</td>
 </tr>
-<tr class="even">
-<td align="left">CONDOMINIUM</td>
-<td align="right">9,579</td>
-<td align="right">1.8</td>
-<td align="right">93.8</td>
+<tr>
+<td style="text-align:left;">
+VACANT COMMERCIAL LAND
+</td>
+<td style="text-align:right;">
+5,817
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+95.2
+</td>
 </tr>
-<tr class="odd">
-<td align="left">VACANT COMMERCIAL LAND</td>
-<td align="right">5,839</td>
-<td align="right">1.1</td>
-<td align="right">94.9</td>
+<tr>
+<td style="text-align:left;">
+THREE FAMILY
+</td>
+<td style="text-align:right;">
+3,968
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+96.0
+</td>
 </tr>
-<tr class="even">
-<td align="left">THREE FAMILY</td>
-<td align="right">3,969</td>
-<td align="right">0.8</td>
-<td align="right">95.6</td>
+<tr>
+<td style="text-align:left;">
+RES AUX BUILDING (NO HOUSE)
+</td>
+<td style="text-align:right;">
+3,601
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+96.7
+</td>
 </tr>
-<tr class="odd">
-<td align="left">RES AUX BUILDING (NO HOUSE)</td>
-<td align="right">3,604</td>
-<td align="right">0.7</td>
-<td align="right">96.3</td>
+<tr>
+<td style="text-align:left;">
+RETL/APT’S OVER
+</td>
+<td style="text-align:right;">
+3,354
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+97.3
+</td>
 </tr>
-<tr class="even">
-<td align="left">RETL/APT’S OVER</td>
-<td align="right">3,357</td>
-<td align="right">0.6</td>
-<td align="right">97.0</td>
+<tr>
+<td style="text-align:left;">
+COMM AUX BUILDING
+</td>
+<td style="text-align:right;">
+2,825
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+97.9
+</td>
 </tr>
-<tr class="odd">
-<td align="left">COMM AUX BUILDING</td>
-<td align="right">2,831</td>
-<td align="right">0.5</td>
-<td align="right">97.5</td>
+<tr>
+<td style="text-align:left;">
+APART: 5-19 UNITS
+</td>
+<td style="text-align:right;">
+2,771
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+98.4
+</td>
 </tr>
-<tr class="even">
-<td align="left">APART: 5-19 UNITS</td>
-<td align="right">2,778</td>
-<td align="right">0.5</td>
-<td align="right">98.1</td>
+<tr>
+<td style="text-align:left;">
+FOUR FAMILY
+</td>
+<td style="text-align:right;">
+2,058
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+98.9
+</td>
 </tr>
-<tr class="odd">
-<td align="left">FOUR FAMILY</td>
-<td align="right">2,058</td>
-<td align="right">0.4</td>
-<td align="right">98.5</td>
+<tr>
+<td style="text-align:left;">
+BUILDERS LOT
+</td>
+<td style="text-align:right;">
+1,230
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+99.1
+</td>
 </tr>
-<tr class="even">
-<td align="left">BUILDERS LOT</td>
-<td align="right">1,249</td>
-<td align="right">0.2</td>
-<td align="right">98.7</td>
+<tr>
+<td style="text-align:left;">
+PARKING GARAGE/LOTS
+</td>
+<td style="text-align:right;">
+891
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+99.3
+</td>
 </tr>
-<tr class="odd">
-<td align="left">CONDOMINIUM COMMON PROPERTY</td>
-<td align="right">1,115</td>
-<td align="right">0.2</td>
-<td align="right">98.9</td>
+<tr>
+<td style="text-align:left;">
+OFFICE/APARTMENTS OVER
+</td>
+<td style="text-align:right;">
+854
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+99.4
+</td>
 </tr>
-<tr class="even">
-<td align="left">PARKING GARAGE/LOTS</td>
-<td align="right">895</td>
-<td align="right">0.2</td>
-<td align="right">99.1</td>
+<tr>
+<td style="text-align:left;">
+MOBILE HOME
+</td>
+<td style="text-align:right;">
+666
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.6
+</td>
 </tr>
-<tr class="odd">
-<td align="left">OFFICE/APARTMENTS OVER</td>
-<td align="right">856</td>
-<td align="right">0.2</td>
-<td align="right">99.3</td>
+<tr>
+<td style="text-align:left;">
+APART:40+ UNITS
+</td>
+<td style="text-align:right;">
+529
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.7
+</td>
 </tr>
-<tr class="even">
-<td align="left">MOBILE HOME</td>
-<td align="right">667</td>
-<td align="right">0.1</td>
-<td align="right">99.4</td>
+<tr>
+<td style="text-align:left;">
+DWG USED AS OFFICE
+</td>
+<td style="text-align:right;">
+440
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.8
+</td>
 </tr>
-<tr class="odd">
-<td align="left">APART:40+ UNITS</td>
-<td align="right">529</td>
-<td align="right">0.1</td>
-<td align="right">99.5</td>
+<tr>
+<td style="text-align:left;">
+APART:20-39 UNITS
+</td>
+<td style="text-align:right;">
+400
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+99.8
+</td>
 </tr>
-<tr class="even">
-<td align="left">DWG USED AS OFFICE</td>
-<td align="right">441</td>
-<td align="right">0.1</td>
-<td align="right">99.6</td>
+<tr>
+<td style="text-align:left;">
+CONDEMNED/BOARDED-UP
+</td>
+<td style="text-align:right;">
+132
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+99.9
+</td>
 </tr>
 </tbody>
 </table>
@@ -439,63 +592,15 @@ them to the parcel level. This led to a final sample of 518,032 sites.</p>
 <p>Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the county tax assessment data for use in our analysis. We also included the most recent listed sales price, adjusted for inflation.</p>
 <p>To aggregate properties identified as condominiums to the site level, we summed
 the total values for lot area, assessed land value, assessed building value, and
-inflation-adjusted sale price. Summary statistics for the tax assessor variables are
-listed in Table <a href="methodology.html#tab:assessor-summary">4.2</a>.</p>
-<table>
-<caption><span id="tab:assessor-summary">Table 4.2: </span>Summary statistics for tax assessor variables</caption>
-<colgroup>
-<col width="37%" />
-<col width="15%" />
-<col width="15%" />
-<col width="6%" />
-<col width="7%" />
-<col width="18%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Variable</th>
-<th align="right">25th percentile</th>
-<th align="right">75th percentile</th>
-<th align="right">Median</th>
-<th align="right">Average</th>
-<th align="right">Standard deviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Total assessed value</td>
-<td align="right">43,100</td>
-<td align="right">156,400</td>
-<td align="right">92,600</td>
-<td align="right">132,887</td>
-<td align="right">447,902</td>
-</tr>
-<tr class="even">
-<td align="left">Assessed value of building</td>
-<td align="right">27,700</td>
-<td align="right">114,900</td>
-<td align="right">65,700</td>
-<td align="right">100,114</td>
-<td align="right">409,105</td>
-</tr>
-<tr class="odd">
-<td align="left">Lot area (sf)</td>
-<td align="right">3,348</td>
-<td align="right">12,877</td>
-<td align="right">6,860</td>
-<td align="right">19,940</td>
-<td align="right">126,541</td>
-</tr>
-<tr class="even">
-<td align="left">Most recent sales price (2021 dollars)</td>
-<td align="right">2</td>
-<td align="right">182,786</td>
-<td align="right">75,490</td>
-<td align="right">151,411</td>
-<td align="right">764,820</td>
-</tr>
-</tbody>
-</table>
+inflation-adjusted sale price. We log-transformed these four variables prior to
+including them in our analysis. Their distributions are shown in
+Figure <a href="methodology.html#fig:assessor-hist">4.1</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:assessor-hist"></span>
+<img src="_main_files/figure-html/assessor-hist-1.png" alt="Distribution of variables from tax assessor database" width="100%" />
+<p class="caption">
+Figure 4.1: Distribution of variables from tax assessor database
+</p>
+</div>
 </div>
 <div id="accessibilty-data" class="section level3 hasAnchor" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Accessibilty data<a href="methodology.html#accessibilty-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -505,173 +610,377 @@ each of several location types described below.</p>
 <h4><span class="header-section-number">4.1.2.1</span> Destination parcels<a href="methodology.html#destination-parcels" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We used land use codes from the county assessor parcel data to identify
 <em>destination parcels</em> that residents might value access to. The most common
-land use codes of identified destination parcels are listed in <a href="methodology.html#tab:dest-uses">4.3</a>.</p>
-<table>
-<caption><span id="tab:dest-uses">Table 4.3: </span>Land uses identified as potential destinations</caption>
-<colgroup>
-<col width="21%" />
-<col width="23%" />
-<col width="23%" />
-<col width="31%" />
-</colgroup>
+land use codes of identified destination parcels are listed in Table <a href="methodology.html#tab:dest-uses">4.2</a>.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:dest-uses">Table 4.2: </span>Land uses identified as potential destinations
+</caption>
 <thead>
-<tr class="header">
-<th align="left">USEDESC</th>
-<th align="right">Number of identified destinations</th>
-<th align="right">Percent of identified destinations</th>
-<th align="right">Cumulative percent of identified destinations</th>
+<tr>
+<th style="text-align:left;">
+USEDESC
+</th>
+<th style="text-align:right;">
+Number of identified destinations
+</th>
+<th style="text-align:right;">
+Percent of identified destinations
+</th>
+<th style="text-align:right;">
+Cumulative percent of identified destinations
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">MUNICIPAL GOVERNMENT</td>
-<td align="right">10,376</td>
-<td align="right">29.88</td>
-<td align="right">29.88</td>
+<tr>
+<td style="text-align:left;">
+MUNICIPAL GOVERNMENT
+</td>
+<td style="text-align:right;">
+10,376
+</td>
+<td style="text-align:right;">
+29.88
+</td>
+<td style="text-align:right;">
+29.88
+</td>
 </tr>
-<tr class="even">
-<td align="left">CHURCHES, PUBLIC WORSHIP</td>
-<td align="right">1,946</td>
-<td align="right">5.60</td>
-<td align="right">35.49</td>
+<tr>
+<td style="text-align:left;">
+CHURCHES, PUBLIC WORSHIP
+</td>
+<td style="text-align:right;">
+1,946
+</td>
+<td style="text-align:right;">
+5.60
+</td>
+<td style="text-align:right;">
+35.49
+</td>
 </tr>
-<tr class="odd">
-<td align="left">COMMERCIAL GARAGE</td>
-<td align="right">1,735</td>
-<td align="right">5.00</td>
-<td align="right">40.48</td>
+<tr>
+<td style="text-align:left;">
+COMMERCIAL GARAGE
+</td>
+<td style="text-align:right;">
+1,735
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+40.48
+</td>
 </tr>
-<tr class="even">
-<td align="left">OFFICE - 1-2 STORIES</td>
-<td align="right">1,649</td>
-<td align="right">4.75</td>
-<td align="right">45.23</td>
+<tr>
+<td style="text-align:left;">
+OFFICE - 1-2 STORIES
+</td>
+<td style="text-align:right;">
+1,649
+</td>
+<td style="text-align:right;">
+4.75
+</td>
+<td style="text-align:right;">
+45.23
+</td>
 </tr>
-<tr class="odd">
-<td align="left">SMALL DETACHED RET(UNDER 10000)</td>
-<td align="right">1,646</td>
-<td align="right">4.74</td>
-<td align="right">49.97</td>
+<tr>
+<td style="text-align:left;">
+SMALL DETACHED RET(UNDER 10000)
+</td>
+<td style="text-align:right;">
+1,646
+</td>
+<td style="text-align:right;">
+4.74
+</td>
+<td style="text-align:right;">
+49.97
+</td>
 </tr>
-<tr class="even">
-<td align="left">OFFICE/WAREHOUSE</td>
-<td align="right">1,386</td>
-<td align="right">3.99</td>
-<td align="right">53.96</td>
+<tr>
+<td style="text-align:left;">
+OFFICE/WAREHOUSE
+</td>
+<td style="text-align:right;">
+1,386
+</td>
+<td style="text-align:right;">
+3.99
+</td>
+<td style="text-align:right;">
+53.96
+</td>
 </tr>
-<tr class="odd">
-<td align="left">COUNTY GOVERNMENT</td>
-<td align="right">1,287</td>
-<td align="right">3.71</td>
-<td align="right">57.67</td>
+<tr>
+<td style="text-align:left;">
+COUNTY GOVERNMENT
+</td>
+<td style="text-align:right;">
+1,287
+</td>
+<td style="text-align:right;">
+3.71
+</td>
+<td style="text-align:right;">
+57.67
+</td>
 </tr>
-<tr class="even">
-<td align="left">WAREHOUSE</td>
-<td align="right">1,252</td>
-<td align="right">3.61</td>
-<td align="right">61.27</td>
+<tr>
+<td style="text-align:left;">
+WAREHOUSE
+</td>
+<td style="text-align:right;">
+1,252
+</td>
+<td style="text-align:right;">
+3.61
+</td>
+<td style="text-align:right;">
+61.27
+</td>
 </tr>
-<tr class="odd">
-<td align="left">OWNED BY BOARD OF EDUCATION</td>
-<td align="right">1,086</td>
-<td align="right">3.13</td>
-<td align="right">64.40</td>
+<tr>
+<td style="text-align:left;">
+OWNED BY BOARD OF EDUCATION
+</td>
+<td style="text-align:right;">
+1,086
+</td>
+<td style="text-align:right;">
+3.13
+</td>
+<td style="text-align:right;">
+64.40
+</td>
 </tr>
-<tr class="even">
-<td align="left">TOWNSHIP GOVERNMENT</td>
-<td align="right">855</td>
-<td align="right">2.46</td>
-<td align="right">66.86</td>
+<tr>
+<td style="text-align:left;">
+TOWNSHIP GOVERNMENT
+</td>
+<td style="text-align:right;">
+855
+</td>
+<td style="text-align:right;">
+2.46
+</td>
+<td style="text-align:right;">
+66.86
+</td>
 </tr>
-<tr class="odd">
-<td align="left">LIVESTOCK O/T D &amp; P-CAUV</td>
-<td align="right">805</td>
-<td align="right">2.32</td>
-<td align="right">69.18</td>
+<tr>
+<td style="text-align:left;">
+LIVESTOCK O/T D &amp; P-CAUV
+</td>
+<td style="text-align:right;">
+805
+</td>
+<td style="text-align:right;">
+2.32
+</td>
+<td style="text-align:right;">
+69.18
+</td>
 </tr>
-<tr class="even">
-<td align="left">LIGHT MANUFACTURING</td>
-<td align="right">799</td>
-<td align="right">2.30</td>
-<td align="right">71.48</td>
+<tr>
+<td style="text-align:left;">
+LIGHT MANUFACTURING
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+2.30
+</td>
+<td style="text-align:right;">
+71.48
+</td>
 </tr>
-<tr class="odd">
-<td align="left">PUBLIC PARK</td>
-<td align="right">710</td>
-<td align="right">2.04</td>
-<td align="right">73.53</td>
+<tr>
+<td style="text-align:left;">
+PUBLIC PARK
+</td>
+<td style="text-align:right;">
+710
+</td>
+<td style="text-align:right;">
+2.04
+</td>
+<td style="text-align:right;">
+73.53
+</td>
 </tr>
-<tr class="even">
-<td align="left">RESTAURANT, CAFET AND/OR BAR</td>
-<td align="right">697</td>
-<td align="right">2.01</td>
-<td align="right">75.54</td>
+<tr>
+<td style="text-align:left;">
+RESTAURANT, CAFET AND/OR BAR
+</td>
+<td style="text-align:right;">
+697
+</td>
+<td style="text-align:right;">
+2.01
+</td>
+<td style="text-align:right;">
+75.54
+</td>
 </tr>
-<tr class="odd">
-<td align="left">GENERAL FARM</td>
-<td align="right">607</td>
-<td align="right">1.75</td>
-<td align="right">77.28</td>
+<tr>
+<td style="text-align:left;">
+GENERAL FARM
+</td>
+<td style="text-align:right;">
+607
+</td>
+<td style="text-align:right;">
+1.75
+</td>
+<td style="text-align:right;">
+77.28
+</td>
 </tr>
-<tr class="even">
-<td align="left">OWNED BY COLLEGE/UNIV/ACADEMY</td>
-<td align="right">458</td>
-<td align="right">1.32</td>
-<td align="right">78.60</td>
+<tr>
+<td style="text-align:left;">
+OWNED BY COLLEGE/UNIV/ACADEMY
+</td>
+<td style="text-align:right;">
+458
+</td>
+<td style="text-align:right;">
+1.32
+</td>
+<td style="text-align:right;">
+78.60
+</td>
 </tr>
-<tr class="odd">
-<td align="left">MEDICAL CLINICS/OFFICES</td>
-<td align="right">445</td>
-<td align="right">1.28</td>
-<td align="right">79.88</td>
+<tr>
+<td style="text-align:left;">
+MEDICAL CLINICS/OFFICES
+</td>
+<td style="text-align:right;">
+445
+</td>
+<td style="text-align:right;">
+1.28
+</td>
+<td style="text-align:right;">
+79.88
+</td>
 </tr>
-<tr class="even">
-<td align="left">RETL/OFF OVER</td>
-<td align="right">442</td>
-<td align="right">1.27</td>
-<td align="right">81.16</td>
+<tr>
+<td style="text-align:left;">
+RETL/OFF OVER
+</td>
+<td style="text-align:right;">
+442
+</td>
+<td style="text-align:right;">
+1.27
+</td>
+<td style="text-align:right;">
+81.16
+</td>
 </tr>
-<tr class="odd">
-<td align="left">OFFICE-ELEVATOR -3 + STORIES</td>
-<td align="right">412</td>
-<td align="right">1.19</td>
-<td align="right">82.34</td>
+<tr>
+<td style="text-align:left;">
+OFFICE-ELEVATOR -3 + STORIES
+</td>
+<td style="text-align:right;">
+412
+</td>
+<td style="text-align:right;">
+1.19
+</td>
+<td style="text-align:right;">
+82.34
+</td>
 </tr>
-<tr class="even">
-<td align="left">LODGE HALL/AMUSEMENT PARK</td>
-<td align="right">386</td>
-<td align="right">1.11</td>
-<td align="right">83.46</td>
+<tr>
+<td style="text-align:left;">
+LODGE HALL/AMUSEMENT PARK
+</td>
+<td style="text-align:right;">
+386
+</td>
+<td style="text-align:right;">
+1.11
+</td>
+<td style="text-align:right;">
+83.46
+</td>
 </tr>
-<tr class="odd">
-<td align="left">AUTO SALES &amp; SERVICE</td>
-<td align="right">363</td>
-<td align="right">1.05</td>
-<td align="right">84.50</td>
+<tr>
+<td style="text-align:left;">
+AUTO SALES &amp; SERVICE
+</td>
+<td style="text-align:right;">
+363
+</td>
+<td style="text-align:right;">
+1.05
+</td>
+<td style="text-align:right;">
+84.50
+</td>
 </tr>
-<tr class="even">
-<td align="left">RETL/STOR OVER</td>
-<td align="right">344</td>
-<td align="right">0.99</td>
-<td align="right">85.49</td>
+<tr>
+<td style="text-align:left;">
+RETL/STOR OVER
+</td>
+<td style="text-align:right;">
+344
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+85.49
+</td>
 </tr>
-<tr class="odd">
-<td align="left">CEMETERY/MONUMENTS</td>
-<td align="right">340</td>
-<td align="right">0.98</td>
-<td align="right">86.47</td>
+<tr>
+<td style="text-align:left;">
+CEMETERY/MONUMENTS
+</td>
+<td style="text-align:right;">
+340
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+86.47
+</td>
 </tr>
-<tr class="even">
-<td align="left">STATE GOVERNMENT</td>
-<td align="right">331</td>
-<td align="right">0.95</td>
-<td align="right">87.42</td>
+<tr>
+<td style="text-align:left;">
+STATE GOVERNMENT
+</td>
+<td style="text-align:right;">
+331
+</td>
+<td style="text-align:right;">
+0.95
+</td>
+<td style="text-align:right;">
+87.42
+</td>
 </tr>
-<tr class="odd">
-<td align="left">CONVENIENCE STORE/GAS</td>
-<td align="right">304</td>
-<td align="right">0.88</td>
-<td align="right">88.30</td>
+<tr>
+<td style="text-align:left;">
+CONVENIENCE STORE/GAS
+</td>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+<td style="text-align:right;">
+88.30
+</td>
 </tr>
 </tbody>
 </table>
@@ -716,23 +1025,23 @@ The r5r package calculates accessibility as the weighted total number of
 destinations reachable by a given mode, where destinations are weighted
 according to a decay function, such that destinations that can be reached within
 less time are assigned greater weight. We used a logistic decay function, as
-illustrated in <a href="methodology.html#fig:show-decay-func">4.1</a>. For motorized modes, the decay
+illustrated in <a href="methodology.html#fig:show-decay-func">4.2</a>. For motorized modes, the decay
 function had a mean (inflection) of 40 minutes and a standard deviation of 10
 minutes. For non-motorized modes, the decay function had a mean of 20 minutes
 and a standard deviation of 5 minutes.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:show-decay-func"></span>
 <img src="_main_files/figure-html/show-decay-func-1.png" alt="Plot illustrating two logistic decay functions." width="80%" />
 <p class="caption">
-Figure 4.1: Decay functions for accessibility calculations
+Figure 4.2: Decay functions for accessibility calculations
 </p>
 </div>
 <p>Calculating accessibility metrics for a combination of four transportation
-modes and ten destination types yields 40 different accessibility variables. <a href="methodology.html#fig:show-decay-func">4.1</a>
+modes and ten destination types yields 40 different accessibility variables. <a href="methodology.html#fig:show-decay-func">4.2</a>
 illustrates the distributions of each of these variables.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:access-dist"></span>
 <img src="_main_files/figure-html/access-dist-1.png" alt="Histograms of 40 accessibility variables." width="100%" />
 <p class="caption">
-Figure 4.2: Distributions of accessibility variables
+Figure 4.3: Distributions of accessibility variables
 </p>
 </div>
 </div>
@@ -744,11 +1053,11 @@ disamenities. The land use codes we used to identify disamenities are
 listed in <a href="#tab:bad-use-list"><strong>??</strong></a><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
 <p>We included a disamenity proximity index in our analysis that we calculated
 as the logarithm of the average distance from each site to the ten closest
-disamenity sites. The distribution of this index is shown in <a href="methodology.html#fig:bad-prox">4.3</a>.</p>
+disamenity sites. The distribution of this index is shown in <a href="methodology.html#fig:bad-prox">4.4</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bad-prox"></span>
 <img src="_main_files/figure-html/bad-prox-1.png" alt="Distribution of average distance to nearest ten disamenity sites" width="80%" />
 <p class="caption">
-Figure 4.3: Distribution of average distance to nearest ten disamenity sites
+Figure 4.4: Distribution of average distance to nearest ten disamenity sites
 </p>
 </div>
 </div>
@@ -760,11 +1069,11 @@ buffer around each site containing a population of at least two thousand people,
 based on the 2020 census. In denser places, a buffer with a smaller radius would
 encompass two thousand residents. In more sparsely-populated places, a buffer
 containing two thousand residents would be larger. The distribution of radii for
-two-thousand-person site buffers is shown in <a href="methodology.html#fig:radii">4.4</a>.</p>
+two-thousand-person site buffers is shown in <a href="methodology.html#fig:radii">4.5</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:radii"></span>
 <img src="_main_files/figure-html/radii-1.png" alt="Buffer radius histogram" width="80%" />
 <p class="caption">
-Figure 4.4: Histogram of radii of buffer containing 2000 residents
+Figure 4.5: Histogram of radii of buffer containing 2000 residents
 </p>
 </div>
 </div>
@@ -774,11 +1083,11 @@ Figure 4.4: Histogram of radii of buffer containing 2000 residents
 estimate the racial diversity of residents in the immediate vicinity. For each
 buffer, we calculated the percentage of residents that who identified in the 2020
 census as non-Hispanic white, non-Hispanic Black, and Hispanic. The distributions
-of these variables are shown in <a href="methodology.html#fig:divers-hist">4.5</a>.</p>
+of these variables are shown in <a href="methodology.html#fig:divers-hist">4.6</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:divers-hist"></span>
 <img src="_main_files/figure-html/divers-hist-1.png" alt="Diversity histograms" width="80%" />
 <p class="caption">
-Figure 4.5: Histograms of population diversity variables
+Figure 4.6: Histograms of population diversity variables
 </p>
 </div>
 </div>
@@ -786,15 +1095,25 @@ Figure 4.5: Histograms of population diversity variables
 <h3><span class="header-section-number">4.1.6</span> Land use diversity<a href="methodology.html#land-use-diversity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We also calculated the total number of different land uses within each
 two-thousand-resident buffer and used this as a measure of land-use diversity.
-<a href="methodology.html#fig:land-divers">4.6</a>.</p>
+<a href="methodology.html#fig:land-divers">4.7</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:land-divers"></span>
 <img src="_main_files/figure-html/land-divers-1.png" alt="Land-use diversity histogram" width="80%" />
 <p class="caption">
-Figure 4.6: Histogram of land use diversity
+Figure 4.7: Histogram of land use diversity
 </p>
 </div>
-
 </div>
+</div>
+<div id="index-development" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Index development<a href="methodology.html#index-development" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The methods described above yielded a set of fifty parcel-level variables,
+forty of which are accessibility metrics, for each of 506,405 parcels. We used
+the EFAtools R package <span class="citation">(<a href="#ref-EFAtools" role="doc-biblioref">Steiner and Grieder 2020</a>)</span> to develop a set of parcel level indices from
+these variables using factor analysis. The Kaiser-Meyer-Olkin criterion for the
+dataset is 0.9, suggesting a “marvellous” case for factor analysis <span class="citation">(<a href="#ref-kaiser1974index" role="doc-biblioref">Kaiser 1974</a>)</span>.</p>
+<p>We determined the appropriate number of factors based on the Kaiser-Guttman criterion
+<span class="citation">(<a href="#ref-guttman1954some" role="doc-biblioref">Guttman 1954</a>)</span> and the Hull method <span class="citation">(<a href="#ref-lorenzo2011hull" role="doc-biblioref">Lorenzo-Seva, Timmerman, and Kiers 2011</a>)</span> and computed factor loadings using an oblimin rotation.</p>
+
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -811,6 +1130,15 @@ Allegheny County Office of Property Assessments. 2022. <span>“Allegheny <span>
 <div id="ref-nngeo" class="csl-entry">
 Dorman, Michael. 2022. <em>Nngeo: K-Nearest Neighbor Join for Spatial Data</em>. <a href="https://CRAN.R-project.org/package=nngeo">https://CRAN.R-project.org/package=nngeo</a>.
 </div>
+<div id="ref-guttman1954some" class="csl-entry">
+Guttman, Louis. 1954. <span>“Some Necessary Conditions for Common-Factor Analysis.”</span> <em>Psychometrika</em> 19 (2): 149–61.
+</div>
+<div id="ref-kaiser1974index" class="csl-entry">
+Kaiser, Henry F. 1974. <span>“An Index of Factorial Simplicity.”</span> <em>Psychometrika</em> 39 (1): 31–36.
+</div>
+<div id="ref-lorenzo2011hull" class="csl-entry">
+Lorenzo-Seva, Urbano, Marieke E Timmerman, and Henk AL Kiers. 2011. <span>“The Hull Method for Selecting the Number of Common Factors.”</span> <em>Multivariate Behavioral Research</em> 46 (2): 340–64.
+</div>
 <div id="ref-sf" class="csl-entry">
 Pebesma, Edzer. 2018. <span>“<span class="nocase">Simple Features for R: Standardized Support for Spatial Vector Data</span>.”</span> <em><span>The R Journal</span></em> 10 (1): 439–46. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>.
 </div>
@@ -819,6 +1147,9 @@ Pennsylvania Department of Conservation and Natural Resources. 2015. <span>“Pe
 </div>
 <div id="ref-pereira_r5r_2021" class="csl-entry">
 Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid</span> <span>Realistic</span> <span>Routing</span> on <span>Multimodal</span> <span>Transport</span> <span>Networks</span> with <span>R</span><span class="math inline">\(^{\textrm{5}}\)</span> in <span>R</span>.”</span> <em>Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
+</div>
+<div id="ref-EFAtools" class="csl-entry">
+Steiner, Markus D., and Silvia Grieder. 2020. <span>“EFAtools: An r Package with Fast and Flexible Implementations of Exploratory Factor Analysis Tools.”</span> <em>Journal of Open Source Software</em> 5 (53): 2521. <a href="https://doi.org/10.21105/joss.02521">https://doi.org/10.21105/joss.02521</a>.
 </div>
 <div id="ref-united_states_census_bureau_lehd_2021" class="csl-entry">
 United States Census Bureau. 2021. <span>“<span>LEHD</span> <span>Origin</span>-<span>Destination</span> <span>Employment</span> <span>Statistics</span> (<span>LODES</span>).”</span> United States Census Bureau. <a href="https://lehd.ces.census.gov/data/#lodes">https://lehd.ces.census.gov/data/#lodes</a>.
