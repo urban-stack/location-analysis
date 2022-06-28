@@ -64,7 +64,7 @@ Potential development sites were identified as those
 1. classified as "residential"
 (indicating residential properties with one to four housing units) or "commercial"
 (which includes mixed-use developments and residential properties with more than four 
-housing units) and 
+housing units),  
 2. with a land use description in one of 59 possible categories^[One site (3008 Phillip Dr in Clairton) is missing a land use description in the assessment data. We checked this address on Zillow to determine that this is a single-family home and classified it as such in our data.]. The most common of 
 these are listed Table \@ref(tab:list-site-uses)^[The land use descriptions that were 
 classified as potential development sites but are not listed in Table 
@@ -82,7 +82,8 @@ OR GREENBELT", "CHARITABLE EXEMPTION/HOS/HOMES", "INCOME PRODUCING PARKING LOT",
 "H.O.A RECREATIONS AREA", "COMM APRTM CONDOS 40+ UNITS", "MINOR FIRE DAMAGE - COMM", 
 "OTHER", "OTHER RESIDENTIAL STRUCTURE", "OWNED BY METRO HOUSING AU", "RESIDENTIAL VACANT
 LAND", "HUD PROJ #221", and "VACANT LAND 0-9 ACRES"].
-
+3. With a lot area of less than 50 acres (since the emphasis of this analysis is on 
+small and medium-sized developments).
 
 
 ```{r list-site-uses, echo=FALSE, message=FALSE, tidy=FALSE}
@@ -600,4 +601,16 @@ ggplot(buffers) +
   theme_minimal()
   
 ```
+
+## Index development
+
+The methods described above yielded a set of fifty parcel-level variables, 
+forty of which are accessibility metrics, for each of 506,405 parcels. We used
+the EFAtools R package [@EFAtools] to develop a set of parcel level indices from 
+these variables using factor analysis. The Kaiser-Meyer-Olkin criterion for the 
+dataset is 0.9, suggesting a "marvellous" case for factor analysis [@kaiser1974index].
+
+We determined the appropriate number of factors based on the Kaiser-Guttman criterion 
+[@guttman1954some] and the Hull method [@lorenzo2011hull] and computed factor loadings using an oblimin rotation.
+
 

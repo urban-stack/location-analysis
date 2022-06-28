@@ -118,28 +118,41 @@ condos <- sites %>%
   summarise(n_condos = n(),
             PARID = first(PARID),
             FAIRMARKETTOTAL = sum(FAIRMARKETTOTAL),
-            FAIRMARKETBUILDING = sum(FAIRMARKETBUILDING),
+            FAIRMARKETLAND = sum(FAIRMARKETLAND),
             LOTAREA = sum(LOTAREA),
             USEDESC = first(USEDESC),
             btw_sales_avg = mean(btw_sales_avg, na.rm = TRUE),
             infl_adj_price = sum(infl_adj_price, na.rm = TRUE)) %>%
   filter(n_condos > 1)
 
-sites <- sites %>%
+sites_final <- sites %>%
   mutate(n_condos = 1) %>%
   filter(sites$address %!in% condos$address) %>%
   select(address,
          n_condos,
          PARID,
          FAIRMARKETTOTAL, 
-         FAIRMARKETBUILDING, 
+         FAIRMARKETLAND, 
          LOTAREA,
          USEDESC,
          btw_sales_avg,
          infl_adj_price) %>%
   rbind(condos) %>%
-  select(-address, -n_condos)
+  select(-address, -n_condos) %>%
+  filter(FAIRMARKETTOTAL > 0,
+         FAIRMARKETLAND > 0,
+         LOTAREA > 0) %>%
+  mutate(total_value_log = log(FAIRMARKETTOTAL),
+         land_value_log = log(FAIRMARKETLAND),
+         lot_area_log = log(LOTAREA),
+         price_log = log(infl_adj_price + 1)) %>%
+  select(PARID,
+         total_value_log, 
+         land_value_log, 
+         lot_area_log,
+         USEDESC,
+         price_log)
 
-write_csv(sites,
+write_csv(sites_final,
           here("02_data",
                "sites.csv"))

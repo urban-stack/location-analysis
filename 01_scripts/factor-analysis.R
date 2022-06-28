@@ -13,7 +13,7 @@ access <- here("02_data",
 assessor <- here("02_data",
                  "sites.csv") %>%
   read_csv(show_col_types = FALSE) %>%
-  select(-USEDESC)
+  select(-USEDESC) 
 
 diversity <- here("02_data",
                   "diversity.parquet") %>%
@@ -34,7 +34,7 @@ site_data <- inner_join(access, assessor) %>%
   inner_join(proximity)
 
 factor_data <- site_data %>%
-  select(-PARID, -btw_sales_avg)
+  select(-PARID)
 
 #### Check data to see if factor analysis is okay
 
@@ -43,10 +43,15 @@ KMO(factor_data)
 ### Get the number of factors - 5 based on CD & Kaiser Guttman with EFA
 
 Sys.time()
-n_factors <- N_FACTORS(factor_data)
+n_factors_hull <- HULL(factor_data, 
+                 eigen_type = "EFA")
 Sys.time()
 
-n_factors
+n_factors_KGC <- KGC(factor_data, 
+                       eigen_type = "EFA")
+
+n_factors_hull
+n_factors_KGC
 
 ############ Do the factor analysis
 factors <- EFA(factor_data, n_factors = 5, rotation = 'oblimin')
@@ -59,13 +64,13 @@ loadings <- data.frame(matrix(factors$rot_loadings, ncol = 5)) %>%
          f_walkable = X2,
          f_dense = X3,
          f_diverse = X4,
-         f_affordable = -1 * X5) %>%
+         f_amenities = X5) %>%
   select(variable, 
          f_drivable,
          f_walkable,
          f_dense,
          f_diverse,
-         f_affordable)
+         f_amenities)
 
 ######### Generate indices
 
@@ -76,13 +81,13 @@ factor_scores <- cbind(site_data, scores) %>%
          f_walkable = X2,
          f_dense = X3,
          f_diverse = X4,
-         f_affordable = -1 * X5) %>%
+         f_amenities = X5) %>%
   select(PARID, 
          f_drivable,
          f_walkable,
          f_dense,
          f_diverse,
-         f_affordable)
+         f_amenities)
 
 write_csv(factor_scores,
           here("02_data",
