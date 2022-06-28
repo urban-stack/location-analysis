@@ -8,6 +8,7 @@ library(ggthemes)
 library(cowplot)
 library(hexbin)
 library(RColorBrewer)
+library(tigris)
 
 
 PA_st_plane <- "+proj=lcc +lat_1=39.93333333333333 +lat_2=40.96666666666667 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000.0000000001 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs"
@@ -29,6 +30,12 @@ indices <- here("02_data",
                 "indices.csv") %>%
   read_csv()
 
+weights <- here("02_data",
+                "model_coefs.csv") %>%
+  read_csv() %>%
+  filter(variable != "(Intercept)") %>%
+  mutate(weight = value / max(value))
+
 sites <- here("02_data",
              "all-parcels.csv") %>%
   st_read(options = c("X_POSSIBLE_NAMES=x", 
@@ -41,6 +48,11 @@ sites <- here("02_data",
          f_diverse,
          f_amenities) %>%
   st_set_crs("WGS84") %>%
+  mutate(combined_index = 
+           f_drivable * weights$weight[weights$variable == "f_drivable"] +
+           f_walkable * weights$weight[weights$variable == "f_walkable"] +
+           f_dense * weights$weight[weights$variable == "f_dense"] +
+           f_diverse * weights$weight[weights$variable == "f_diverse"]) %>%
   mutate(f_drivable = case_when(f_drivable > 3 ~ 3,
                                 f_drivable < -3 ~ -3,
                                 TRUE ~ f_drivable)) %>%
@@ -68,13 +80,19 @@ rm(indices)
 
 inset_sites <- sites[small_bounding_box,]
 
+map_palette <- brewer.pal(9, "Spectral")
+
 # drivable map
 drivable_big <- ggplot(sites) +
   geom_sf(aes(color = f_drivable),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau(
+  scale_color_gradient2(
     name = "",
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0,
     breaks = c(-3, 0, 3),
     labels = c("> 3 standard deviations\nbelow average",
                "Average drivability",
@@ -96,7 +114,12 @@ drivable_small <- ggplot(inset_sites) +
   geom_sf(aes(color = f_drivable),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau() +
+  scale_color_gradient2(
+    name = "",
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0) +
   theme_map() +
   theme(legend.position = "none",
         panel.background = element_rect(fill = "white")) 
@@ -125,8 +148,12 @@ walkable_big <- ggplot(sites) +
   geom_sf(aes(color = f_walkable),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau(
+  scale_color_gradient2(
     name = "",
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0,
     breaks = c(-3, 0, 3),
     labels = c("> 3 standard deviations\nbelow average",
                "Average walkability",
@@ -148,7 +175,11 @@ walkable_small <- ggplot(inset_sites) +
   geom_sf(aes(color = f_walkable),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau() +
+  scale_color_gradient2(
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0) +
   theme_map() +
   theme(legend.position = "none",
         panel.background = element_rect(fill = "white")) 
@@ -177,12 +208,16 @@ dense_big <- ggplot(sites) +
   geom_sf(aes(color = f_dense),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau(
+  scale_color_gradient2(
     name = "",
     breaks = c(-3, 0, 3),
     labels = c("> 3 standard deviations\nbelow average",
                "Average density",
-               "> 3 standard deviations\nabove average")) +
+               "> 3 standard deviations\nabove average"),
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0) +
   ggthemes::theme_map() +
   theme(legend.background = element_blank(),
         panel.background = element_rect(fill = "white",
@@ -200,7 +235,10 @@ dense_small <- ggplot(inset_sites) +
   geom_sf(aes(color = f_dense),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau() +
+  scale_color_gradient2(low = map_palette[1],
+                        mid = map_palette[5],
+                        high = map_palette[9],
+                        midpoint = 0) +
   theme_map() +
   theme(legend.position = "none",
         panel.background = element_rect(fill = "white"))
@@ -229,12 +267,16 @@ diverse_big <- ggplot(sites) +
   geom_sf(aes(color = f_diverse),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau(
+  scale_color_gradient2(
     name = "",
     breaks = c(-3, 0, 3),
     labels = c("> 3 standard deviations\nbelow average",
                "Average diversity",
-               "> 3 standard deviations\nabove average")) +
+               "> 3 standard deviations\nabove average"),
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0) +
   ggthemes::theme_map() +
   theme(legend.background = element_blank(),
         panel.background = element_rect(fill = "white",
@@ -252,7 +294,10 @@ diverse_small <- ggplot(inset_sites) +
   geom_sf(aes(color = f_diverse),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau() +
+  scale_color_gradient2(low = map_palette[1],
+                        mid = map_palette[5],
+                        high = map_palette[9],
+                        midpoint = 0) +
   theme_map() +
   theme(legend.position = "none",
         panel.background = element_rect(fill = "white")) 
@@ -281,12 +326,16 @@ amenities_big <- ggplot(sites) +
   geom_sf(aes(color = f_amenities),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau(
+  scale_color_gradient2(
     name = "",
     breaks = c(-3, 0, 3),
     labels = c("> 3 standard deviations\nbelow average",
                "Average amenity richness",
-               "> 3 standard deviations\nabove average")) +
+               "> 3 standard deviations\nabove average"),
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0) +
   ggthemes::theme_map() +
   theme(legend.background = element_blank(),
         panel.background = element_rect(fill = "white",
@@ -304,7 +353,10 @@ amenities_small <- ggplot(inset_sites) +
   geom_sf(aes(color = f_amenities),
           size = 1,
           pch = ".") +
-  scale_color_gradient2_tableau() +
+  scale_color_gradient2(low = map_palette[1],
+                        mid = map_palette[5],
+                        high = map_palette[9],
+                        midpoint = 0) +
   ggthemes::theme_map() +
   theme(legend.position = "none",
         panel.background = element_rect(fill = "white")) 
@@ -326,6 +378,188 @@ here("04_figures",
   ggsave(plot = amenities_inset, 
          width = 4,
          height = 4,
+         units = "in")
+
+# Combined map
+combined_big <- ggplot(sites) +
+  geom_sf(aes(color = combined_index),
+          size = 1,
+          pch = ".") +
+  scale_color_gradient2(
+    name = "",
+    breaks = c(-1.5446, 0, 3.91),
+    labels = c("Minimum development likelihood",
+               "Average development likelihood",
+               "Maximum development likelihood"),
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 0) +
+  ggthemes::theme_map() +
+  theme(legend.background = element_blank(),
+        panel.background = element_rect(fill = "white",
+                                        color = "white"),
+        plot.background = element_rect(fill = 'white', 
+                                       colour = 'white')) +
+  geom_sf(data = small_bounding_box, 
+          fill = NA, 
+          color = "black", 
+          size = 0.5) 
+
+combined_big
+
+combined_small <- ggplot(inset_sites) +
+  geom_sf(aes(color = combined_index),
+          size = 1,
+          pch = ".") +
+  scale_color_gradient2(low = map_palette[1],
+                        mid = map_palette[5],
+                        high = map_palette[9],
+                        midpoint = 0) +
+  ggthemes::theme_map() +
+  theme(legend.position = "none",
+        panel.background = element_rect(fill = "white")) 
+
+combined_small
+
+combined_inset = ggdraw() +
+  draw_plot(combined_big) +
+  draw_plot(combined_small, 
+            x = 0.02, 
+            y = 0.65, 
+            width = 0.35, 
+            height = 0.35)
+
+combined_inset
+
+here("04_figures",
+     "combined.png") %>%
+  ggsave(plot = combined_inset, 
+         width = 4,
+         height = 4,
+         units = "in")
+
+
+###############
+# Show Pittsburgh permit locations
+
+months <- c("july-2021",
+            "august-2021",
+            "september-2021",
+            "october-2021",
+            "november-2021",
+            "december-2021",
+            "january-2022",
+            "february-2022",
+            "march-2022",
+            "april-2022",
+            "may-2022")
+
+
+permits <- here("02_data",
+                "pli-permit-summary",
+                "pli-permit-summary-june-2021.xlsx") %>%
+  read_xlsx(sheet = 1) %>%
+  select(3, 9, 10) %>%
+  rename(parcel_number = 1,
+         work_type = 2, 
+         structure_type = 3)
+
+
+for (i in 1:11) {
+  next_permits <- here("02_data",
+                       "pli-permit-summary",
+                       paste0("pli-permit-summary-",
+                              months[i],
+                              ".xlsx")) %>%
+    read_xlsx(sheet = 1) %>%
+    select(3, 9, 10) %>%
+    rename(parcel_number = 1,
+           work_type = 2, 
+           structure_type = 3)
+  
+  permits <- rbind(permits, next_permits)
+  
+}
+
+res_permits <- permits %>%
+  mutate(PARID = paste0(substr(parcel_number, 1, 4),
+                        substr(parcel_number, 6, 6),
+                        substr(parcel_number, 8, 12),
+                        substr(parcel_number, 14, 17),
+                        substr(parcel_number, 19, 20))) %>%
+  filter(work_type == "NEW CONSTRUCTION" |
+           work_type == "COMPLETE DEMOLITION" |
+           work_type == "NEW" |
+           work_type == "NEW CONSTRUCTION" |
+           work_type == "REPLACEMENT" |
+           work_type == "PARTIAL DEMOLITION") %>%
+  filter(structure_type == "Residential" |
+           structure_type == "Residential - Two-Family")
+
+permit_sites <- unique(res_permits$PARID)
+
+permit_site_locs <- sites %>%
+  filter(PARID %in% permit_sites) %>%
+  mutate(constant = "constant")
+
+pitt_boundary <- places(state = "PA") %>% 
+  filter(NAME == "Pittsburgh") %>%
+  st_transform(PA_st_plane)
+
+pitt_sites <- sites[pitt_boundary,] 
+
+# Combined map (just Pittsburgh)
+combined_pitt <- ggplot(pitt_sites) +
+  geom_sf(aes(color = combined_index),
+          size = 1,
+          pch = ".") +
+  geom_sf(data = permit_site_locs,
+          aes(shape = constant),
+          size = 0.5) +
+  scale_shape(name = "",
+              label = "Building permit for\nnew construction or demolition") +
+  scale_color_gradient2(
+    name = "",
+    breaks = c(-1.15, 1.09, 3.91),
+    labels = c("Minimum development likelihood\n(for Pittsburgh)",
+               "Average development likelihood\n(for Pittsburgh)",
+               "Maximum development likelihood\n(for Pittsburgh)"),
+    low = map_palette[1],
+    mid = map_palette[5],
+    high = map_palette[9],
+    midpoint = 1.09) +
+  theme_void() +
+  theme(legend.background = element_blank(),
+        panel.background = element_rect(fill = "white",
+                                        color = "white"),
+        plot.background = element_rect(fill = 'white', 
+                                       colour = 'white'))
+
+combined_pitt
+
+here("04_figures",
+     "combined-pitt.png") %>%
+  ggsave(plot = combined_pitt, 
+         width = 6,
+         height = 4,
+         units = "in")
+
+combined_hist <- ggplot(sites,
+                        aes(x = combined_index)) +
+  geom_histogram(bins = 30,
+                 color = "gray") +
+  scale_y_continuous(name = "Number of sites") +
+  scale_x_continuous(name = "Development likelihood index") +
+  theme_minimal()
+
+combined_hist
+
+here("04_figures",
+     "combined-hist.png") %>%
+  ggsave(plot = combined_hist, 
+         width = 4,
+         height = 3,
          units = "in")
 
 ### Hexbin plots
