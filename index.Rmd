@@ -1,13 +1,30 @@
 --- 
-title: "Parcel-level metrics for evaluating housing sites"
+title: "Urban Quality at the Parcel Level"
 author: "Carole Voulgaris and Elizabeth Christoforetti"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 url: https://urban-stack.github.io/location-analysis/
-# cover-image: path to the social sharing image like images/cover.jpg
+cover-image: 04_figures/combined.png
 link-citations: yes
 github-repo: urban-stack/location-analysis
 ---
 
 # Introduction
+
+Elizabeth will write 2,000 words or so about the motivations and vision for
+this project.
+
+## Report organization
+
+The remainder of this report proceeds as follows. Chapter 2 discusses related 
+work that we and others have done on the topic of evaluating urban quality 
+and the challenges of highly-disaggregated spatial data. In Chapter 3, we 
+describe a set of workshops we conducted with a diverse set of experts on 
+urban development to identify values associated with urban quality. We go on
+to propose a method for evaluating urban quality at the parcel level using 
+readily available data for Allegheny County, Pennsylvania in Chapter 4, and 
+summarize the results of that analysis in Chapter 5. In Chapter 6, we discuss 
+the alignment of the values suggested in our workshops with the outcomes 
+of our quantitative analysis. Chapter 7 concludes the report with our key 
+takeaways and potential directions for future work.

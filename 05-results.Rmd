@@ -4,6 +4,8 @@
 library(here)
 library(tidyverse)
 library(readxl)
+library(jtools)
+library(cowplot)
 ```
 
 ## Factor analysis
@@ -36,7 +38,9 @@ and lower assessed property values. The _dense_ factor is characterized by lower
 values for the radius of the smallest buffer containing two thousand residents 
 (i.e. higher population densities) and higher access to retail and grocery 
 locations by non-motorized modes. The _amenities_ factor is characterized 
-by non-motorized and transit access to retail and grocery locations. \@ref(fig:loading-fig) illustrates the loadings of each individual variable onto each of the five factors.
+by non-motorized and transit access to retail and grocery locations. Figure
+\@ref(fig:loading-fig) illustrates the loadings of each individual variable 
+onto each of the five factors.
 
 ```{r loading-fig, echo = FALSE, fig.asp=1.9, out.width='100%', fig.cap='Factor loadings'}
 
@@ -135,8 +139,7 @@ ggplot(long_loadings) +
   
 ```
 
-\@ref(fig:drive-map), \@ref(fig:walk-map), \@ref(fig:dense-map),
-\@ref(fig:diverse-map), and \@ref(fig:amenities-map) show the spatial
+Figures \@ref(fig:drive-map) through \@ref(fig:amenities-map) show the spatial
 variation in the drivability, walkability, density, diversity, and amenity-richness indices, respectively.
 
 ```{r drive-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in drivability index'}
@@ -169,7 +172,7 @@ here("04_figures",
 knitr::include_graphics()
 ```
 
-\@ref(fig:factor-cor) illustrates the distribution of each factor and the
+Figure \@ref(fig:factor-cor) illustrates the distribution of each factor and the
 relationships among them.
 
 ```{r factor-cor, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in amenity-richness index'}
@@ -179,6 +182,8 @@ knitr::include_graphics()
 ```
 
 ## Factor validation
+
+
 
 ```{r, include=FALSE}
 months <- c("july-2021",
@@ -256,8 +261,21 @@ data <- here("02_data",
 ```
 
 
-```{r}
-model <- glm(permit ~ 
+
+```{r, echo=FALSE}
+model_null <- glm(permit ~ 1,
+             family = binomial(link = "logit"),
+             data = data)
+
+model_four <- glm(permit ~ 
+               f_drivable +
+               f_walkable +
+               f_dense +
+               f_diverse, 
+             family = binomial(link = "logit"),
+             data = data)
+
+model_all <- glm(permit ~ 
                f_drivable +
                f_walkable +
                f_dense +
@@ -265,7 +283,107 @@ model <- glm(permit ~
                f_amenities,
              family = binomial(link = "logit"),
              data = data)
+
+model_four <- glm(permit ~ 
+               f_drivable +
+               f_walkable +
+               f_dense +
+               f_diverse, 
+             family = binomial(link = "logit"),
+             data = data)
+
+export_summs(model_null, 
+             model_all, 
+             model_four, 
+             model.names = c("Null model", "Full model", "Reduced model"),
+             error_pos = "right",
+             error_format = "(SE = {std.error}, p = {p.value})",
+             coefs = c("(Intercept)" = "(Intercept)",
+                       "Drivable" = "f_drivable",
+                       "Walkable" = "f_walkable",
+                       "Dense" = "f_dense",
+                       "Diverse" = "f_diverse",
+                       "Amenities" = "f_amenities"))
+
+write_csv(tibble(variable = names(model_four$coefficients), 
+                 value = model_four$coefficients),
+          file = here("02_data", "model_coefs.csv"))
+```
+
+```{r, echo=FALSE, warning=FALSE}
+
+blank_graph <- ggplot(loadings) +
+  geom_point(aes(x = f_drivable,
+                 y = f_walkable),
+             color = NA,
+             fill = NA) +
+  scale_y_continuous(name = "Probability of a building permit for new construction or\ndemolition between June 2021 and May 2022") +
+  theme_void() +
+  theme(axis.title.y = element_text(angle = 90,
+                                    face = "bold"))
+
+effect_drive <- effect_plot(model_four, pred = f_drivable, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Drivable index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+effect_walk <- effect_plot(model_four, pred = f_walkable, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Walkable index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+effect_dense <- effect_plot(model_four, pred = f_dense, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Dense index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+effect_diverse <- effect_plot(model_four, pred = f_diverse, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Diverse index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+ggdraw() +
+  draw_plot(blank_graph, x = 0, y = 0, height = 1, width = 1) +
+  draw_plot(effect_drive,
+            x = 0.05, y = 0.5, height = 0.5, width = 0.5) +
+  draw_plot(effect_walk,
+            x = 0.5, y = 0.5, height = 0.5, width = 0.5) +
+  draw_plot(effect_dense,
+            x = 0.05, y = 0, height = 0.5, width = 0.5) +
+  draw_plot(effect_diverse,
+            x = 0.5, y = 0, height = 0.5, width = 0.5) 
+
 ```
 
 
+```{r combined-hist, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Distribution of combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition'}
+here("04_figures",
+     "combined-hist.png") %>%
+knitr::include_graphics()
+```
 
+
+```{r combined-pitt, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Locations of building permits for new construction and demolition and their estimated likelihood'}
+here("04_figures",
+     "combined-pitt.png") %>%
+knitr::include_graphics()
+```
+
+
+```{r combined-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition'}
+here("04_figures",
+     "combined.png") %>%
+knitr::include_graphics()
+```

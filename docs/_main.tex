@@ -36,7 +36,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Parcel-level metrics for evaluating housing sites},
+  pdftitle={Urban Quality at the Parcel Level},
   pdfauthor={Carole Voulgaris and Elizabeth Christoforetti},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
@@ -123,13 +123,21 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{hyperref}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
-\title{Parcel-level metrics for evaluating housing sites}
+\title{Urban Quality at the Parcel Level}
 \author{Carole Voulgaris and Elizabeth Christoforetti}
 \date{}
 
@@ -143,13 +151,28 @@
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-\hypertarget{motivation}{%
-\chapter{Motivation}\label{motivation}}
+Elizabeth will write 2,000 words or so about the motivations and vision for
+this project.
 
-Motivation for the project.
+\hypertarget{report-organization}{%
+\section{Report organization}\label{report-organization}}
+
+The remainder of this report proceeds as follows. Chapter 2 discusses related
+work that we and others have done on the topic of evaluating urban quality
+and the challenges of highly-disaggregated spatial data. In Chapter 3, we
+describe a set of workshops we conducted with a diverse set of experts on
+urban development to identify values associated with urban quality. We go on
+to propose a method for evaluating urban quality at the parcel level using
+readily available data for Allegheny County, Pennsylvania in Chapter 4, and
+summarize the results of that analysis in Chapter 5. In Chapter 6, we discuss
+the alignment of the values suggested in our workshops with the outcomes
+of our quantitative analysis. Chapter 7 concludes the report with our key
+takeaways and potential directions for future work.
 
 \hypertarget{related-work}{%
 \chapter{Related work}\label{related-work}}
+
+Carole to write - Elizabeth to edit and expand upon as needed.
 
 Talk about various area-level metrics
 
@@ -163,77 +186,13 @@ Talk about various area-level metrics
 
 Talk about VMT site work
 
-\hypertarget{methodology}{%
-\chapter{Methodology}\label{methodology}}
+\hypertarget{quantitative-evaluation}{%
+\chapter{Quantitative evaluation}\label{quantitative-evaluation}}
 
-\hypertarget{variables}{%
-\subsection{Variables}\label{variables}}
-
-\hypertarget{categories-that-would-be-useful-things-to-predict}{%
-\subsubsection{Categories that would be useful (things to predict?)}\label{categories-that-would-be-useful-things-to-predict}}
-
-Owner-occupied?
-Investor-owned?
-Vacant?
-Demolition in the past year (no construction since)
-Construction in the past year
-
-\hypertarget{factor-analysis-variables}{%
-\subsubsection{factor analysis Variables}\label{factor-analysis-variables}}
-
-The variables made it into the initial factor analysis were:
-
-\begin{itemize}
-\item
-  Accessibility
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Distance to transit (use number of transit stops within 1/2 mile walkshed)
-  \item
-    Share of old/new homes (use average age of homes within 1/2 mile walkshed)
-  \item
-    Transit frequency (use transit stops per hour within 1/2 mile walkshed)
-  \end{itemize}
-\item
-  Affordability
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Average Condition of homes in half-mile walkshed
-  \item
-    Median rent of block-groups with centroids within 1/2 mile walkshed.
-  \item
-    Median income of block groups with centroids within 1/2 mile walkshed.
-  \item
-    Median ownership cost of block groups with centroids within 1/2 mile walkshed.
-  \end{itemize}
-\item
-  Close
-
-  \begin{itemize}
-  \tightlist
-  \item
-  \end{itemize}
-\item
-  Diverse buildings
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Entropy of housing types (apartment, townhomes, etc) within 1/2 mile walkshed
-  \end{itemize}
-\item
-  Other
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Standard deviation of building age within 1/2 mile walkshed
-  \end{itemize}
-\end{itemize}
+How might a quantitative approach to evaluating urban quality at the parcel
+align with the values identified in the workshops described in Chapter 3? In
+this chapter, we define one such approach, using readily-available parcel-level
+data for Allegheny County, Pennsylvania.
 
 \hypertarget{data}{%
 \section{Data}\label{data}}
@@ -571,7 +530,17 @@ these variables using factor analysis. The Kaiser-Meyer-Olkin criterion for the
 dataset is 0.9, suggesting a ``marvellous'' case for factor analysis \citep{kaiser1974index}.
 
 We determined the appropriate number of factors based on the Kaiser-Guttman criterion
-\citep{guttman1954some} and the Hull method \citep{lorenzo2011hull} and computed factor loadings using an oblimin rotation.
+\citep{guttman1954some} and the Hull method \citep{lorenzo2011hull} and computed factor loadings
+using an oblimin rotation.
+
+\hypertarget{index-validation}{%
+\section{Index validation}\label{index-validation}}
+
+To assess whether the resulting indices were predictive of recent development, we
+estimated a logistic regression model predicting the likelihood that a site in the
+city of Pittsburgh was issued a a building permit for either construction or demolition
+over a one-year period (June 2021 - May 2022). Building permit data were obtained
+from \citet{western_pennsylvania_regional_data_center_permits_2022}.
 
 \hypertarget{results}{%
 \chapter{Results}\label{results}}
@@ -580,8 +549,22 @@ We determined the appropriate number of factors based on the Kaiser-Guttman crit
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(here)}
 \FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(jtools)}
+\FunctionTok{library}\NormalTok{(cowplot)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'cowplot'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:lubridate':
+## 
+##     stamp
+\end{verbatim}
 
 \hypertarget{factor-analysis}{%
 \section{Factor analysis}\label{factor-analysis}}
@@ -610,14 +593,15 @@ and lower assessed property values. The \emph{dense} factor is characterized by 
 values for the radius of the smallest buffer containing two thousand residents
 (i.e.~higher population densities) and higher access to retail and grocery
 locations by non-motorized modes. The \emph{amenities} factor is characterized
-by non-motorized and transit access to retail and grocery locations. \ref{fig:loading-fig} illustrates the loadings of each individual variable onto each of the five factors.
+by non-motorized and transit access to retail and grocery locations. Figure
+\ref{fig:loading-fig} illustrates the loadings of each individual variable
+onto each of the five factors.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{_main_files/figure-latex/loading-fig-1} \caption{Factor loadings}\label{fig:loading-fig}
 \end{figure}
 
-\ref{fig:drive-map}, \ref{fig:walk-map}, \ref{fig:dense-map},
-\ref{fig:diverse-map}, and \ref{fig:amenities-map} show the spatial
+Figures \ref{fig:drive-map} through \ref{fig:amenities-map} show the spatial
 variation in the drivability, walkability, density, diversity, and amenity-richness indices, respectively.
 
 \begin{figure}
@@ -640,53 +624,198 @@ variation in the drivability, walkability, density, diversity, and amenity-richn
 \includegraphics[width=1\linewidth]{04_figures/amenities} \caption{Spatial variation in amenity-richness index}\label{fig:amenities-map}
 \end{figure}
 
-\ref{fig:factor-cor} illustrates the distribution of each factor and the
+Figure \ref{fig:factor-cor} illustrates the distribution of each factor and the
 relationships among them.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/factor-cor} \caption{Spatial variation in amenity-richness index}\label{fig:factor-cor}
 \end{figure}
 
-\hypertarget{implications-for-place-quality}{%
-\chapter{Implications for place quality}\label{implications-for-place-quality}}
+\hypertarget{factor-validation}{%
+\section{Factor validation}\label{factor-validation}}
 
-This would be a good place to discuss the work
-with the focus groups.
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
 
-\hypertarget{sharing-your-book}{%
-\chapter{Sharing your book}\label{sharing-your-book}}
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+\captionsetup{justification=centering,singlelinecheck=off}
+\caption{\label{tab:unnamed-chunk-4} }
+ \setlength{\tabcolsep}{0pt}
+\begin{tabular}{l l l l l l l}
 
-\hypertarget{publishing}{%
-\section{Publishing}\label{publishing}}
 
-HTML books can be published online, see: \url{https://bookdown.org/yihui/bookdown/publishing.html}
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\arrayrulecolor{black}
 
-\hypertarget{pages}{%
-\section{404 pages}\label{pages}}
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Null model \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Full model \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Reduced model \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
-By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a \texttt{\_404.Rmd} or \texttt{\_404.md} file to your project root and use code and/or Markdown syntax.
 
-\hypertarget{metadata-for-sharing}{%
-\section{Metadata for sharing}\label{metadata-for-sharing}}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
 
-Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the \texttt{index.Rmd} YAML. To setup, set the \texttt{url} for your book and the path to your \texttt{cover-image} file. Your book's \texttt{title} and \texttt{description} are also used.
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} (Intercept) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -8.04 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -9.57 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.25, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -9.57 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.24, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
-This \texttt{gitbook} uses the same social sharing data across all chapters in your book- all links shared will look the same.
 
-Specify your book's source repository on GitHub using the \texttt{edit} key under the configuration options in the \texttt{\_output.yml} file, which allows users to suggest an edit by linking to a chapter's source file.
+\hhline{}
+\arrayrulecolor{black}
 
-Read more about the features of this output format here:
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Drivable \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.35 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.16, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.35 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.14, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
-\url{https://pkgs.rstudio.com/bookdown/reference/gitbook.html}
 
-Or use:
+\hhline{}
+\arrayrulecolor{black}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{?bookdown}\SpecialCharTok{::}\NormalTok{gitbook}
-\end{Highlighting}
-\end{Shaded}
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Walkable \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.38 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.15, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.38 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Dense \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.90 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.90 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Diverse \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.98 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.98 *** \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Amenities \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.00\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.07, p = 0.98) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} N \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 269151\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 269151\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 269151\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} AIC \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1574.43\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1414.33\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1412.33\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} BIC \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1584.93\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1477.35\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1464.84\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Pseudo R2 \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.00\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.11\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.11\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\arrayrulecolor{black}
+
+\multicolumn{7}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  *** p $<$ 0.001;  ** p $<$ 0.01;  * p $<$ 0.05. \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+\end{tabular}
+\end{threeparttable}\par\end{centerbox}
+
+\end{table}
+ 
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{04_figures/combined-hist} \caption{Distribution of combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition}\label{fig:combined-hist}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{04_figures/combined-pitt} \caption{Locations of building permits for new construction and demolition and their estimated likelihood}\label{fig:combined-pitt}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{04_figures/combined} \caption{Spatial variation in combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition}\label{fig:combined-map}
+\end{figure}
+
+\hypertarget{connecting-the-qualitative-to-the-quantitative}{%
+\chapter{Connecting the qualitative to the quantitative}\label{connecting-the-qualitative-to-the-quantitative}}
+
+This chapter will draw connections between the workshop
+results and the quantitative analysis results. Elizabeth will write this.
+
+\hypertarget{conclusions-and-future-directions}{%
+\chapter{Conclusions and Future Directions}\label{conclusions-and-future-directions}}
+
+Elizabeth to write this chapter.
 
   \bibliography{book.bib,packages.bib}
 

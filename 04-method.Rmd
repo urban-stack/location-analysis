@@ -1,4 +1,4 @@
-# Methodology
+# Quantitative evaluation
 
 ```{r method-libs, echo=FALSE, message=FALSE}
 library(here)
@@ -12,39 +12,10 @@ library(kableExtra)
 `%!in%` <- Negate(`%in%`)
 ```
 
-
-### Variables
-
-#### Categories that would be useful (things to predict?)
-
- Owner-occupied?
- Investor-owned?
- Vacant?
- Demolition in the past year (no construction since)
- Construction in the past year
-
-#### factor analysis Variables
-
-The variables made it into the initial factor analysis were:
-
-* Accessibility
-
-  * Distance to transit  (use number of transit stops within 1/2 mile walkshed)
-  * Share of old/new homes (use average age of homes within 1/2 mile walkshed)
-  * Transit frequency (use transit stops per hour within 1/2 mile walkshed)
-* Affordability
-  * Average Condition of homes in half-mile walkshed
-  * Median rent of block-groups with centroids within 1/2 mile walkshed.
-  * Median income of block groups with centroids within 1/2 mile walkshed.
-  * Median ownership cost of block groups with centroids within 1/2 mile walkshed.
-
-* Close
-  * 
-* Diverse buildings
-  * Entropy of housing types (apartment, townhomes, etc) within 1/2 mile walkshed
-* Other
-  
-  * Standard deviation of building age within 1/2 mile walkshed
+How might a quantitative approach to evaluating urban quality at the parcel 
+align with the values identified in the workshops described in Chapter 3? In
+this chapter, we define one such approach, using readily-available parcel-level
+data for Allegheny County, Pennsylvania.
 
 ## Data
 
@@ -600,4 +571,8 @@ using an oblimin rotation.
 
 ## Index validation
 
-
+To assess whether the resulting indices were predictive of recent development, we 
+estimated a logistic regression model predicting the likelihood that a site in the 
+city of Pittsburgh was issued a a building permit for either construction or demolition
+over a one-year period (June 2021 - May 2022). Building permit data were obtained 
+from @western_pennsylvania_regional_data_center_permits_2022.
