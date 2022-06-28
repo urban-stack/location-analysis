@@ -1,0 +1,389 @@
+# Results
+
+```{r}
+library(here)
+library(tidyverse)
+library(readxl)
+library(jtools)
+library(cowplot)
+```
+
+## Factor analysis
+
+Both the Hull method (\@ref(fig:hull-figure)) and the Kaiser-Guttman
+criterion (\@ref(fig:kgc-figure)) suggested a five-factor solution.
+
+```{r hull-figure, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Results of Kaiser-Guttman criterion for determining the number of factors'}
+here("04_figures",
+     "hull-n-factors.png") %>%
+knitr::include_graphics()
+```
+
+```{r kgc-figure, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Results of Hull method for determining the number of factors'}
+here("04_figures",
+     "KGC-n-factors.png") %>%
+knitr::include_graphics()
+```
+
+The loadings resulting from the factor analysis are illustrated in 
+\@ref(fig:loading-fig). We assigned names to each factor based on a visual 
+inspection of the results. The _drivable_ factor had the highest loadings
+for variables representing access by car to most destination types. The
+_walkable_ factor has high loadings for variables representing access
+by walking and transit. The _diverse_ index is characterized by diversity of 
+people (high percentages of black residents and low percentages of white
+residents), diversity of land use (a greater number of distinct land
+uses in the immediate vicinity and a shorter average distance to disamenities), 
+and lower assessed property values. The _dense_ factor is characterized by lower
+values for the radius of the smallest buffer containing two thousand residents 
+(i.e. higher population densities) and higher access to retail and grocery 
+locations by non-motorized modes. The _amenities_ factor is characterized 
+by non-motorized and transit access to retail and grocery locations. Figure
+\@ref(fig:loading-fig) illustrates the loadings of each individual variable 
+onto each of the five factors.
+
+```{r loading-fig, echo = FALSE, fig.asp=1.9, out.width='100%', fig.cap='Factor loadings'}
+
+loadings <- here("02_data",
+                 "loadings.csv") %>%
+  read_csv(show_col_types = FALSE) %>%
+  mutate(order = case_when(abs(f_drivable) > 0.2 ~ abs(f_drivable) * 10^5,
+                           abs(f_walkable) > 0.2 ~ abs(f_walkable) * 10^4,
+                           abs(f_diverse) > 0.2 ~ abs(f_diverse) * 10^3,
+                           abs(f_dense) > 0.2 ~ abs(f_dense) * 10^2,
+                           abs(f_amenities) > 0.2 ~ abs(f_amenities) * 10,
+                           TRUE ~ f_amenities)) 
+
+long_loadings <- loadings  %>%
+  pivot_longer(c(-variable, -order), 
+               names_to = "Factor", 
+               values_to = "Loading") %>%
+  mutate(primary = abs(Loading) > 0.4) %>%
+  mutate(Factor = factor(Factor, 
+                         levels = c("f_drivable",
+                                    "f_walkable",
+                                    "f_diverse",
+                                    "f_dense",
+                                    "f_amenities"),
+                         labels = c("Drivable",
+                                    "Walkable",
+                                    "Diverse",
+                                    "Dense",
+                                    "Amenities"))) 
+
+figure_labels <- rev(c("Car access to hospitality jobs",
+                              "Car acces to high-paying jobs",
+                              "Car access to all jobs",
+                              "Car access to low-paying jobs",
+                              "Car access to entertainment jobs",
+                              "Car access to destination parcels",
+                              "Car access to schools",
+                              "Car access to parks",
+                              "Car access to retail jobs",
+                              "Bike access to high-paying jobs",
+                              "Car access to grocery stores",
+                              "Bike access to all jobs",
+                              "Bike access to hospitality jobs",
+                              "Bike access to low-paying jobs",
+                              "Bike access to destination parcels",
+                              "Walking access to destination\nparcels",
+                              "Hispanic percentage of nearest\n2,000 neighbors",
+                              "Bike access to entertainment jobs",
+                              "Transit access to destination\nparcels",
+                              "Walking access to high-paying jobs",
+                              "Walking access to all jobs",
+                              "Transit access to all jobs",
+                              "Transit access to high-paying jobs",
+                              "Transit access to low-paying jobs",
+                              "Walking access to low-paying jobs",
+                              "Walking access to hospitality jobs",
+                              "Transit access to hospitality jobs",
+                              "Walking access to entertainment\njobs",
+                              "Transit access to entertainment\njobs",
+                              "Transit access to retail jobs",
+                              "Walking access to retail jobs",
+                              "Land value (log-transformed)",
+                              "Property value (log-transformed)",
+                              "Black percentage of nearest\n2,000 neighbors",
+                              "Non-Hispanic white percentage of\nnearest 2,000 neighbors",
+                              "Number of land uses in 20,000-\nneighbor buffer",
+                              "Average distance to ten disamenities\n(log-transformed)",
+                              "Lot area (log-transformed)",
+                              "Walking access to parks",
+                              "Transit access to parks",
+                              "Bike access to retail jobs",
+                              "Recent sale price (inflation-adjusted\nand log-transformed)",
+                              "Bike access to schools",
+                              "Bike access to parks",
+                              "Bike access to grocery stores",
+                              "Walking access to schools",
+                              "Radius of buffer containing 2,000\nneighbors",
+                              "Transit access to schools",
+                              "Walking access to grocery stores",
+                              "Transit access to grocery stores"))
+
+ggplot(long_loadings) +
+  geom_point(aes(x = Loading,
+                 y = reorder(variable, order),
+                 color = Factor,
+                 alpha = abs(Loading))) +
+  facet_wrap(facet = vars(Factor), ncol = 5) +
+  scale_y_discrete(name = "",
+                   labels = figure_labels) +
+  scale_x_continuous(name = "Variable loading") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+  
+```
+
+Figures \@ref(fig:drive-map) through \@ref(fig:amenities-map) show the spatial
+variation in the drivability, walkability, density, diversity, and amenity-richness indices, respectively.
+
+```{r drive-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in drivability index'}
+here("04_figures",
+     "drivable.png") %>%
+knitr::include_graphics()
+```
+
+```{r walk-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in walkability index'}
+here("04_figures",
+     "walkable.png") %>%
+knitr::include_graphics()
+```
+
+```{r dense-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in density index'}
+here("04_figures",
+     "dense.png") %>%
+knitr::include_graphics()
+```
+
+```{r diverse-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in diversity index'}
+here("04_figures",
+     "diverse.png") %>%
+knitr::include_graphics()
+```
+
+```{r amenities-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in amenity-richness index'}
+here("04_figures",
+     "amenities.png") %>%
+knitr::include_graphics()
+```
+
+Figure \@ref(fig:factor-cor) illustrates the distribution of each factor and the
+relationships among them.
+
+```{r factor-cor, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in amenity-richness index'}
+here("04_figures",
+     "factor-cor.png") %>%
+knitr::include_graphics()
+```
+
+## Factor validation
+
+
+
+```{r, include=FALSE}
+months <- c("july-2021",
+            "august-2021",
+            "september-2021",
+            "october-2021",
+            "november-2021",
+            "december-2021",
+            "january-2022",
+            "february-2022",
+            "march-2022",
+            "april-2022",
+            "may-2022")
+
+
+permits <- here("02_data",
+                "pli-permit-summary",
+                     "pli-permit-summary-june-2021.xlsx") %>%
+  read_xlsx(sheet = 1) %>%
+  select(3, 9, 10) %>%
+  rename(parcel_number = 1,
+         work_type = 2, 
+         structure_type = 3)
+  
+
+for (i in 1:11) {
+  next_permits <- here("02_data",
+                       "pli-permit-summary",
+                       paste0("pli-permit-summary-",
+                              months[i],
+                              ".xlsx")) %>%
+    read_xlsx(sheet = 1) %>%
+    select(3, 9, 10) %>%
+    rename(parcel_number = 1,
+         work_type = 2, 
+         structure_type = 3)
+    
+    permits <- rbind(permits, next_permits)
+  
+}
+
+res_permits <- permits %>%
+  mutate(PARID = paste0(substr(parcel_number, 1, 4),
+                        substr(parcel_number, 6, 6),
+                        substr(parcel_number, 8, 12),
+                        substr(parcel_number, 14, 17),
+                        substr(parcel_number, 19, 20))) %>%
+  filter(work_type == "NEW CONSTRUCTION" |
+           work_type == "COMPLETE DEMOLITION" |
+           work_type == "NEW" |
+           work_type == "NEW CONSTRUCTION" |
+           work_type == "REPLACEMENT" |
+           work_type == "PARTIAL DEMOLITION") %>%
+  filter(structure_type == "Residential" |
+           structure_type == "Residential - Two-Family")
+
+permit_sites <- unique(res_permits$PARID)
+
+sites <- here("02_data",
+              "sites.csv") %>%
+  read_csv(show_col_types = FALSE)
+
+data <- here("02_data",
+                "indices.csv") %>%
+  read_csv(show_col_types = FALSE) %>%
+  left_join(sites) %>%
+  mutate(permit = PARID %in% permit_sites) %>%
+  filter(PROPERTYCITY == "PITTSBURGH") %>%
+  select(f_drivable,
+         f_walkable,
+         f_dense,
+         f_diverse,
+         f_amenities,
+         permit)
+```
+
+
+
+```{r, echo=FALSE}
+model_null <- glm(permit ~ 1,
+             family = binomial(link = "logit"),
+             data = data)
+
+model_four <- glm(permit ~ 
+               f_drivable +
+               f_walkable +
+               f_dense +
+               f_diverse, 
+             family = binomial(link = "logit"),
+             data = data)
+
+model_all <- glm(permit ~ 
+               f_drivable +
+               f_walkable +
+               f_dense +
+               f_diverse +
+               f_amenities,
+             family = binomial(link = "logit"),
+             data = data)
+
+model_four <- glm(permit ~ 
+               f_drivable +
+               f_walkable +
+               f_dense +
+               f_diverse, 
+             family = binomial(link = "logit"),
+             data = data)
+
+export_summs(model_null, 
+             model_all, 
+             model_four, 
+             model.names = c("Null model", "Full model", "Reduced model"),
+             error_pos = "right",
+             error_format = "(SE = {std.error}, p = {p.value})",
+             coefs = c("(Intercept)" = "(Intercept)",
+                       "Drivable" = "f_drivable",
+                       "Walkable" = "f_walkable",
+                       "Dense" = "f_dense",
+                       "Diverse" = "f_diverse",
+                       "Amenities" = "f_amenities"))
+
+write_csv(tibble(variable = names(model_four$coefficients), 
+                 value = model_four$coefficients),
+          file = here("02_data", "model_coefs.csv"))
+```
+
+```{r, echo=FALSE, warning=FALSE}
+
+blank_graph <- ggplot(loadings) +
+  geom_point(aes(x = f_drivable,
+                 y = f_walkable),
+             color = NA,
+             fill = NA) +
+  scale_y_continuous(name = "Probability of a building permit for new construction or\ndemolition between June 2021 and May 2022") +
+  theme_void() +
+  theme(axis.title.y = element_text(angle = 90,
+                                    face = "bold"))
+
+effect_drive <- effect_plot(model_four, pred = f_drivable, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Drivable index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+effect_walk <- effect_plot(model_four, pred = f_walkable, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Walkable index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+effect_dense <- effect_plot(model_four, pred = f_dense, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Dense index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+effect_diverse <- effect_plot(model_four, pred = f_diverse, interval = TRUE, plot.points = FALSE) +
+  scale_x_continuous(limits = c(-5, 5),
+                     name = "Diverse index") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 0.1),
+                     breaks = c(0, 0.02, 0.04, 0.06, 0.08, 0.1),
+                     labels = c("0", "2%", "4%", "6%", "8%", "10%"))
+
+ggdraw() +
+  draw_plot(blank_graph, x = 0, y = 0, height = 1, width = 1) +
+  draw_plot(effect_drive,
+            x = 0.05, y = 0.5, height = 0.5, width = 0.5) +
+  draw_plot(effect_walk,
+            x = 0.5, y = 0.5, height = 0.5, width = 0.5) +
+  draw_plot(effect_dense,
+            x = 0.05, y = 0, height = 0.5, width = 0.5) +
+  draw_plot(effect_diverse,
+            x = 0.5, y = 0, height = 0.5, width = 0.5) 
+
+```
+
+
+```{r combined-hist, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Distribution of combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition'}
+here("04_figures",
+     "combined-hist.png") %>%
+knitr::include_graphics()
+```
+
+
+```{r combined-pitt, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Locations of building permits for new construction and demolition and their estimated likelihood'}
+here("04_figures",
+     "combined-pitt.png") %>%
+knitr::include_graphics()
+```
+
+
+```{r combined-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition'}
+here("04_figures",
+     "combined.png") %>%
+knitr::include_graphics()
+```

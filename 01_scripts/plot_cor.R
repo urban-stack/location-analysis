@@ -22,7 +22,7 @@ central_plot <- function(x0,y0){
   imgplot <- ggplot(imgdata, 
                     aes(x = x1,
                         y = y1)) +
-    scale_x_continuous(name = "  ") +
+    scale_x_continuous(name = "  ",limits = c(0,100)) +
     scale_y_continuous(name = "  " ) +
     geom_hex(bins = 30) +
     xlim(0, 100)+
@@ -40,7 +40,7 @@ central_plot <- function(x0,y0){
   imgplot <- ggplot(imgdata, 
                     aes(x = x1,
                         y = y1)) +
-    scale_x_continuous(name = "  ") +
+    scale_x_continuous(name = "  ",limits = c(0,100)) +
     scale_y_continuous(name = "  " ) +
     theme_void()+
     theme(panel.grid = element_line(color = 'white'),
@@ -69,7 +69,7 @@ left_plot <- function(x0,y0){
     imgplot <- ggplot(imgdata, 
                       aes(x = x1,
                           y = y1)) +
-      scale_x_continuous(name = "  ") +
+      scale_x_continuous(name = "  ",limits = c(0,100)) +
       scale_y_continuous(name = "  " ) +
       geom_hex(bins = 30) +
       xlim(0, 100)+
@@ -87,7 +87,7 @@ left_plot <- function(x0,y0){
     imgplot <- ggplot(imgdata, 
                       aes(x = x1,
                           y = y1)) +
-      scale_x_continuous(name = "  ") +
+      scale_x_continuous(name = "  ",limits = c(0,100)) +
       scale_y_continuous(name = "  " ) +
       theme_void()+
       theme(panel.grid = element_line(color = 'white'),
@@ -115,7 +115,7 @@ bottom_plot <- function(x0,y0){
     imgplot <- ggplot(imgdata, 
                       aes(x = x1,
                           y = y1)) +
-      scale_x_continuous(name = "  ") +
+      scale_x_continuous(name = "  ",limits = c(0,100)) +
       scale_y_continuous(name = "  " ) +
       geom_hex(bins = 30) +
       xlim(0, 100)+
@@ -133,7 +133,7 @@ bottom_plot <- function(x0,y0){
     imgplot <- ggplot(imgdata, 
                       aes(x = x1,
                           y = y1)) +
-      scale_x_continuous(name = "  ") +
+      scale_x_continuous(name = "  ",limits = c(0,100)) +
       scale_y_continuous(name = "  " ) +
       theme_void()+
       theme(panel.grid = element_line(color = 'white'),
@@ -161,7 +161,7 @@ bottomleft_plot <- function(x0,y0){
     imgplot <- ggplot(imgdata, 
                       aes(x = x1,
                           y = y1)) +
-      scale_x_continuous(name = "  ") +
+      scale_x_continuous(name = "",limits = c(0,100)) +
       scale_y_continuous(name = "  " ) +
       geom_hex(bins = 30) +
       xlim(0, 100)+
@@ -180,7 +180,7 @@ bottomleft_plot <- function(x0,y0){
     imgplot <- ggplot(imgdata, 
                       aes(x = x1,
                           y = y1)) +
-      scale_x_continuous(name = "  ") +
+      scale_x_continuous(name = "",limits = c(0,100)) +
       scale_y_continuous(name = "  " ) +
       theme_void()+
       theme(panel.grid = element_line(color = 'white'),
@@ -353,8 +353,19 @@ cor_mat1 <- ggdraw() +
 
 cor_w_legend1 <- ggdraw() +
   draw_plot(cor_mat1, x = 0.05, y = 0, width = 0.95, height = 0.95) +
-  draw_figure_label("            built_score                                            paved_score                                        sky_score                                               nature_score                                                 terrain_score                                                  vegetation_score", 
-                    position = "top.left",size = 9.5)
+  draw_label("built_score",x=0.05+0.95/12*1,y=0.96,size = 9.5)+
+  draw_label("paved_score",x=0.05+0.95/12*3,y=0.96,size = 9.5)+
+  draw_label("sky_score",x=0.05+0.95/12*5,y=0.96,size = 9.5)+
+  draw_label("nature_score",x=0.05+0.95/12*7,y=0.96,size = 9.5)+
+  draw_label("terrain_score",x=0.05+0.95/12*9,y=0.96,size = 9.5)+
+  draw_label("vegetation_score",x=0.05+0.95/12*11,y=0.96,size = 9.5)+
+  draw_label("median_  \nincome_E",x=0.025,y=0.95-0.95/12*1,size = 9.5)+
+  draw_label("gini_     \nindex_E",x=0.025,y=0.95-0.95/12*3,size = 9.5)+
+  draw_label("pct_       \nrental_E",x=0.025,y=0.95-0.95/12*5,size = 9.5)+
+  draw_label("pct_sf_     \nhomeds_E",x=0.025,y=0.95-0.95/12*7,size = 9.5)+
+  draw_label("annual_   \nloans_per\nsf_home ",x=0.025,y=0.95-0.95/12*9,size = 9.5)+
+  draw_label("annual_   \nloans_per\nmf_home ",x=0.025,y=0.95-0.95/12*11,size = 9.5)
+
 cor_w_legend1
 
 
@@ -434,6 +445,18 @@ cor_mat2 <- ggdraw() +
 
 cor_w_legend2 <- ggdraw() +
   draw_plot(cor_mat2, x = 0.05, y = 0, width = 0.95, height = 0.95) +
-  draw_figure_label("            built_score                                            paved_score                                        sky_score                                               nature_score                                                 terrain_score                                                  vegetation_score", 
-                             position = "top.left",size = 9.5)
+  draw_label("built_score",x=0.05+0.95/12*1,y=0.96,size = 9.5)+
+  draw_label("paved_score",x=0.05+0.95/12*3,y=0.96,size = 9.5)+
+  draw_label("sky_score",x=0.05+0.95/12*5,y=0.96,size = 9.5)+
+  draw_label("nature_score",x=0.05+0.95/12*7,y=0.96,size = 9.5)+
+  draw_label("terrain_score",x=0.05+0.95/12*9,y=0.96,size = 9.5)+
+  draw_label("vegetation_score",x=0.05+0.95/12*11,y=0.96,size = 9.5)+
+  draw_label("income_\nratio_sf  ",x=0.025,y=0.95-0.95/12*1,size = 9.5)+
+  draw_label("pct_sf_   \npurchase",x=0.025,y=0.95-0.95/12*3,size = 9.5)+
+  draw_label("pct_sf_\nrefi       ",x=0.025,y=0.95-0.95/12*5,size = 9.5)+
+  draw_label("pct_sf_ \nrehab    ",x=0.025,y=0.95-0.95/12*7,size = 9.5)+
+  draw_label("pct_sf_ \ncashout",x=0.025,y=0.95-0.95/12*9,size = 9.5)+
+  draw_label("mean_\nrate     ",x=0.025,y=0.95-0.95/12*11,size = 9.5)
+
+
 cor_w_legend2

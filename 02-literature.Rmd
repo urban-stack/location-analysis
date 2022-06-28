@@ -1,5 +1,7 @@
 # Related work
 
+Carole to write - Elizabeth to edit and expand upon as needed.
+
 Talk about various area-level metrics
 
 * Sprawl index
