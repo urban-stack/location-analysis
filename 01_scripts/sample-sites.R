@@ -11,7 +11,10 @@ sites <- here("02_data",
   read_csv(show_col_types = FALSE)
 
 # load parcel locations data
-parcels <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
+# parcels <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
+#                    options = c("X_POSSIBLE_NAMES=x",
+#                                "Y_POSSIBLE_NAMES=y")) %>%
+parcels <- st_read('E:/GSD/2022 Summer/RA/location-analysis/02_data/parcelcoords.csv',
                    options = c("X_POSSIBLE_NAMES=x", 
                                "Y_POSSIBLE_NAMES=y")) %>%
   rename(id = PIN) %>%
@@ -26,6 +29,8 @@ sample_locs <- parcels %>%
 ## Yixin: Feel free to select additional census variables (if you want).
 ## You can see a list of available variables by typing:
 # View(load_variables(2020, "acs5")) in to your RStudio console
+variables <- data.frame(load_variables(2020, "acs5"))
+write.csv(variables2,"E:/GSD/2022 Summer/RA/siting tool/R/variables for census.csv", row.names = FALSE)
 
 # See tidycensus documentation here: 
 #             https://walker-data.com/tidycensus/articles/basic-usage.html
