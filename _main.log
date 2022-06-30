@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.6.24)  30 JUN 2022 10:38
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.6.24)  30 JUN 2022 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -897,31 +897,31 @@ Chapter 1.
 
 ]
 Chapter 2.
-[7] [8
-
-]
+[7] [8]
 Chapter 3.
-[9] [10
+[9
+
+] [10
 
 ]
 Chapter 4.
 
-Underfull \hbox (badness 1609) in paragraph at lines 203--203
+Underfull \hbox (badness 1609) in paragraph at lines 230--230
 \TU/lmr/m/n/8 are not listed in Table []4.1[], which combine to represent less than one percent of
  []
 
 
-Overfull \hbox (2.15001pt too wide) in paragraph at lines 238--238
+Overfull \hbox (2.15001pt too wide) in paragraph at lines 265--265
 \TU/lmr/m/n/10 GARAGE/LOTS|  
  []
 
 
-Overfull \hbox (40.22pt too wide) in paragraph at lines 238--238
+Overfull \hbox (40.22pt too wide) in paragraph at lines 265--265
 []\TU/lmr/m/n/10 OFFICE/APARTMENTS 
  []
 
 
-Overfull \hbox (53.68001pt too wide) in paragraph at lines 238--238
+Overfull \hbox (53.68001pt too wide) in paragraph at lines 265--265
 []\TU/lmr/m/n/10 CONDEMNED/BOARDED- 
  []
 
@@ -932,22 +932,22 @@ File: _main_files/figure-latex/assessor-hist-1.pdf Graphic file (type pdf)
 Underfull \vbox (badness 8189) has occurred while \output is active []
 
 [14]
-Overfull \hbox (35.22pt too wide) in paragraph at lines 331--331
+Overfull \hbox (35.22pt too wide) in paragraph at lines 358--358
 []\TU/lmr/m/n/10 OFFICE/WAREHOUSE|  
  []
 
 
-Overfull \hbox (42.64pt too wide) in paragraph at lines 331--331
+Overfull \hbox (42.64pt too wide) in paragraph at lines 358--358
 \TU/lmr/m/n/10 LEGE/UNIV/ACADEMY|  
  []
 
 
-Overfull \hbox (25.49pt too wide) in paragraph at lines 331--331
+Overfull \hbox (25.49pt too wide) in paragraph at lines 358--358
 \TU/lmr/m/n/10 HALL/AMUSEMENT 
  []
 
 
-LaTeX Warning: Float too large for page by 82.49005pt on input line 332.
+LaTeX Warning: Float too large for page by 82.49005pt on input line 359.
 
 [15] [16]
 File: _main_files/figure-latex/show-decay-func-1.pdf Graphic file (type pdf)
@@ -955,17 +955,17 @@ File: _main_files/figure-latex/show-decay-func-1.pdf Graphic file (type pdf)
 File: _main_files/figure-latex/access-dist-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/access-dist-1.pdf>
 
-Overfull \hbox (37.41pt too wide) in paragraph at lines 446--446
+Overfull \hbox (37.41pt too wide) in paragraph at lines 473--473
 []\TU/lmr/m/n/10 INDUSTRIAL/UTILITY|  
  []
 
 
-Overfull \hbox (26.52pt too wide) in paragraph at lines 446--446
+Overfull \hbox (26.52pt too wide) in paragraph at lines 473--473
 []\TU/lmr/m/n/10 RECYCLING/SCRAP 
  []
 
 
-LaTeX Warning: Float too large for page by 26.26007pt on input line 447.
+LaTeX Warning: Float too large for page by 26.26007pt on input line 474.
 
 File: _main_files/figure-latex/bad-prox-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/bad-prox-1.pdf>
@@ -987,7 +987,7 @@ File: 04_figures/KGC-n-factors.png Graphic file (type bmp)
 File: _main_files/figure-latex/loading-fig-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/loading-fig-1.pdf>
 
-LaTeX Warning: Float too large for page by 22.00063pt on input line 618.
+LaTeX Warning: Float too large for page by 22.00063pt on input line 645.
 
 File: 04_figures/drivable.png Graphic file (type bmp)
 <04_figures/drivable.png>
@@ -1019,12 +1019,7 @@ File: 04_figures/combined.png Graphic file (type bmp)
 Chapter 6.
 [39
 
-]
-Overfull \hbox (21.22452pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 40 \TU/lmr/m/sl/10 CHAPTER 6.  CONNECTING THE QUALITATIVE TO THE QUANTITATIVE
- []
-
-[40
+] [40
 
 ]
 Chapter 7.
@@ -1055,42 +1050,42 @@ Underfull \hbox (badness 3009) in paragraph at lines 18--24
 [][][][][][] [][] [][][][][][] [][] [][][][][][][] [][] [][][][][] [][] [][][][][][][][][] [][] [][][][][][] [][] [][][][] [][] [][][][][][][][][] [] [][][][][]$[]\TU/lmr/m/n/10 .  type:
  []
 
-
-Underfull \hbox (badness 6995) in paragraph at lines 72--81
+[43]
+Underfull \hbox (badness 6995) in paragraph at lines 117--126
 []\TU/lmr/m/n/10 Rafael H. M. Pereira, Marcus Saraiva, Daniel Herszenhut, Carlos
  []
 
 
-Underfull \hbox (badness 1796) in paragraph at lines 72--81
+Underfull \hbox (badness 1796) in paragraph at lines 117--126
 \TU/lmr/m/n/10 Kaue Vieira Braga, and Matthew Wigginton Conway.  r5r: Rapid
  []
 
 
-Underfull \hbox (badness 5403) in paragraph at lines 72--81
+Underfull \hbox (badness 5403) in paragraph at lines 117--126
 \TU/lmr/m/n/10 Realistic Routing on Multimodal Transport Networks with R$[]$ in
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 72--81
+Underfull \hbox (badness 1436) in paragraph at lines 117--126
 \TU/lmr/m/n/10 R.  \TU/lmr/m/it/10 Findings\TU/lmr/m/n/10 , page 21262, March 2021.  doi: $[][] [] [][][][][] [] [][][][] [] [][][][][]$.
  []
 
 
-Underfull \hbox (badness 2828) in paragraph at lines 72--81
+Underfull \hbox (badness 2828) in paragraph at lines 117--126
 \TU/lmr/m/n/10 URL []$[][][][][] [] [] [] [][][][][][][][][][][][][] [] [][][] [] [][][][][][][] [] [][][][][] [][] [][][] [][] [][][][][] [][] [][][][][][][][][] [][] [][][][][][][] [][] [][] [][]
  []
 
-[43]) [44] (./_main.aux)
+[44]) [45] (./_main.aux)
 Package rerunfilecheck Info: File `_main.out' has not changed.
-(rerunfilecheck)             Checksum: BB7D2D7D40D13FA0CC68CED499834BA3;2448.
+(rerunfilecheck)             Checksum: ED88BAEAADC906FEBA00F14F9D22A94D;3024.
  ) 
 Here is how much of TeX's memory you used:
- 23835 strings out of 477881
- 478145 string characters out of 5845758
- 913802 words of memory out of 5000000
- 44392 multiletter control sequences out of 15000+600000
+ 23878 strings out of 477881
+ 479371 string characters out of 5845758
+ 914541 words of memory out of 5000000
+ 44435 multiletter control sequences out of 15000+600000
  475848 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,15n,121p,368b,897s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,15n,121p,368b,917s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on _main.pdf (44 pages).
+Output written on _main.pdf (45 pages).

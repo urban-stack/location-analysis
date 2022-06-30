@@ -1,12 +1,53 @@
 # Related work
 
-Carole to write - Elizabeth to edit and expand upon as needed.
+## Neighborhood classification
 
-Talk about various area-level metrics
+There is a large body of literature that seeks to apply quantitative methods to 
+describe or classify urban environments. In 2011, Urban Geography released a 
+special issue devoted to neighborhood classification approaches, including a 
+review of neighborhood classification work that had been done to date [@reibel2011classification];
+a study identifying five distinct neighborhood types in Cleveland and 
+demonstrating how locations transition among types [@mikelbank2011neighborhood];
+a method for identifying ethnic neighborhoods [@logan2011identifying]; and an
+analysis of New Urban developments that classifies them by how well they meet the 
+ambitions of the New Urbanism movement [@trudeau2011suburbs]. A common approach to 
+classifying neigborhoods has been to employ factor analysis (principal
+component analysis) to reduce a large number
+of variables into a smaller set of factors (or principal components), followed by
+cluster analysis to group neighborhoods sharing similar characteristics [@voulgaris_synergistic_2016; @chow_differentiating_1998; @li_neighborhood_2009; @shay_automobiles_2007; @song_quantitative_2007; @song_how_2008; @vicino_typology_2011]. 
+Although the purpose of neighborhood classification studies is to develop a set 
+of categorical neighborhood types, the initial factor analysis step yields a set 
+of indices that can be used as continuous variables describing various dimensions 
+of neighborhood characteristics.
 
-* Sprawl index
-* Neighborhood typology
+## Quantification of sprawl
 
-Talk about VMT site work
+In general, neighborhood classification studies have differentiated between 
+neighborhoods with a more urban character and those with a more suburban 
+character. Indeed this is often the explicit purpose of such analyses. A 
+related body of work has specifically sought to quanitify sprawl. @hamidi2015measuring
+offers a helpful review of the early work on this topic, noting that early studies
+emphasized density as a measure of sprawl and that some used satellite imagery 
+to incorporate parameters like fragmentation and fractal dimension. @ewing_measuring_2002
+have developed a widely-cited measure of sprawl using principal component analysis
+to develop indices for four separate dimensions of sprawl (density, land-use diversity, 
+centering, and street accessibility) and averaging them (with equal weights) to generate
+a single overall sprawl index. @hamidi2015measuring later repeated this method with 
+updated data and have published a dataset of county-level and tract-level values
+for the resulting sprawl index. 
 
+## Conceptualizing urban quality at the site level
+
+At what scale should urban quality be measured? City? Neighborhood? Site?
+
+The case for sites: Decisions that shape urban quality are often made at the
+site level, and a parcel-level metric for differentiating among adjactent sites 
+within the same neighborhood would be useful.
+
+## Barriers to site-level urban quality evaluation
+
+Some variables have no meaning at the site level (buffers around a site might
+address this - but it requires the existance of other site-level data).
+
+Some variables aren't available at the site level (data privacy is a big part of this.)
 

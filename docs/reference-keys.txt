@@ -24,6 +24,9 @@ fig:combined-map
 introduction
 report-organization
 related-work
+neighborhood-classification
+quantification-of-sprawl
+conceptualizing-urban-quality-at-the-site-level
 expert-perspectives
 quantitative-methods
 data
@@ -43,5 +46,5 @@ factor-analysis
 indices-from-factors
 factor-validation-through-regression
 combined-index-1
-connecting-the-qualitative-to-the-quantitative
+relating-indices-to-values
 conclusions-and-future-directions
