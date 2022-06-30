@@ -1,4 +1,4 @@
-# Quantitative evaluation
+# Quantitative Methods
 
 ```{r method-libs, echo=FALSE, message=FALSE}
 library(here)
@@ -12,17 +12,16 @@ library(kableExtra)
 `%!in%` <- Negate(`%in%`)
 ```
 
-How might a quantitative approach to evaluating urban quality at the parcel 
-align with the values identified in the workshops described in Chapter 3? In
-this chapter, we define one such approach, using readily-available parcel-level
-data for Allegheny County, Pennsylvania.
+How might results of quantitative approach to evaluating urban quality at the 
+parcel level align with the values identified in the workshops described in 
+Chapter 3? In this chapter, we propose one such approach, using 
+readily-available parcel-level data for Allegheny County, Pennsylvania.
 
 ## Data
 
 We obtained data on property addresses, land uses, assessed values (for both 
-land and buildings), and the dates and prices of as many as the three 
-most-recent sales from  
-@allegheny_county_office_of_property_assessments_allegheny_2022, which 
+land and buildings), and sale prices 
+from @allegheny_county_office_of_property_assessments_allegheny_2022, which 
 includes information on 582,116 properties in Allegheny County.
 
 We also obtained latitude and longitude coordinates for each property from a 
@@ -33,12 +32,14 @@ our analysis.
 
 Potential development sites were identified as those 
 
-1. classified as "residential"
-(indicating residential properties with one to four housing units) or "commercial"
-(which includes mixed-use developments and residential properties with more than four 
-housing units), and
-2. with a land use description in one of 59 possible categories^[One site (3008 Phillip Dr in Clairton) is missing a land use description in the assessment data. We checked this address on Zillow to determine that this is a single-family home and classified it as such in our data.]. The most common of 
-these are listed Table \@ref(tab:list-site-uses).^[The land use descriptions that were 
+1. classified as "residential" (residential properties with one to 
+four housing units) or "commercial" (which includes mixed-use developments
+and residential properties with more than four housing units), and
+
+2. with a land use description in one of 59 possible categories^[One site (3008 
+Phillip Dr in Clairton) is missing a land use description in the assessment data. 
+We checked this address on Zillow to determine that this is a single-family home 
+and classified it as such in our data.]. The most common of these are listed Table \@ref(tab:list-site-uses).^[The land use descriptions that were 
 classified as potential development sites but are not listed in Table 
 \@ref(tab:list-site-uses), which combine to represent less than one percent of all sites
 are  "RIGHTOF WAY - RESIDENTIAL", "CONDOMINIUM UNIT", "DWG USED AS OFFICE", 
@@ -95,8 +96,7 @@ Two other sites were identified as having unreasonably high sales values: 1339
 Arlington Avenue in Pittsburgh is a three-bedroom single-family home that is 
 listed as having sold for \$57,010,813 in 1976 and a 0.06-acre vacant lot with 
 tax ID 0165G00270000000 is listed as having sold for \$24,920,232 in 1936. The 
-sales data for these sites were treated as missing.] for a total of  
-potential sites.  
+sales data for these sites were treated as missing.]
 
 The focus of this analysis is on potential development sites rather than on 
 properties. Some properties in the assessor dataset are condominums where 
@@ -105,11 +105,14 @@ site level by identifying all properties with an assessed building value
 greater than zero, a land value of zero, and a land use description that did
 not indicate the land was vacant. If multiple such properties share an address,
 we classified all properties at that address as a condominium and aggregated 
-them to the parcel level. This led to a final sample of 518,032 sites.
+them to the parcel level. This led to a final sample of 506,405 sites.
 
 ### Tax assessment data
 
-Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the county tax assessment data for use in our analysis. We also included the most recent listed sales price, adjusted for inflation.
+Three variables (total assessed fair market value, assessed fair market 
+value of the building, and lot area) were taken directly from the county 
+tax assessment data for use in our analysis. We also included the most 
+recent listed sales price, adjusted for inflation.
 
 To aggregate properties identified as condominiums to the site level, we summed 
 the total values for lot area, assessed land value, assessed building value, and
@@ -170,7 +173,7 @@ dest_parcels <- here("02_data",
            cumsum(`Percent of identified destinations`))
 
 kable(
-  head(dest_parcels, 25), 
+  head(dest_parcels, 20), 
   caption = 'Land uses identified as potential destinations',
   booktabs = TRUE,
   digits = 2,
@@ -281,7 +284,7 @@ accessibility_long <- accessibility%>%
 ```
 
 Calculating accessibility metrics for a combination of four transportation 
-modes and ten destination types yields 40 different accessibility variables. \@ref(fig:show-decay-func) 
+modes and ten destination types yields 40 different accessibility variables. Figure \@ref(fig:show-decay-func) 
 illustrates the distributions of each of these variables.
 
 ```{r access-dist, echo=FALSE, fig.cap='Distributions of accessibility variables', out.width='100%', fig.asp=.75, fig.align='center', fig.alt='Histograms of 40 accessibility variables.'}
@@ -442,14 +445,15 @@ listed in \@ref(tab:bad-use-list)^[289 properties related to coal mining
 "COAL LAND, SURFACE RIGHTS") are co-located and are treated as a single 
 site.].
 
-```{r bad-use-list, echo=FALSE, message=FALSE, results='hide'}
+```{r bad-use-list, echo=FALSE, message=FALSE}
 kable(
   bad_parcel_list, 
   caption = 'Land uses identified as disamenities',
   booktabs = TRUE,
   digits = 2,
   format.args = (list(big.mark = ','))
-  )
+  ) %>%
+  kable_styling(full_width = TRUE)
 ```
 
 We included a disamenity proximity index in our analysis that we calculated
@@ -457,8 +461,6 @@ as the logarithm of the average distance from each site to the ten closest
 disamenity sites. The distribution of this index is shown in \@ref(fig:bad-prox).
 
 ```{r bad-prox, echo=FALSE, fig.cap='Distribution of average distance to nearest ten disamenity sites', out.width='80%', fig.asp=.75, fig.align='center'}
-
-#r badprox, echo=FALSE, fig.cap='Histogram of the average distance to the ten closest disamenities', out.width='80%', fig.asp=.75, fig.align='center'
 
 bad_proximity <- here("02_data",
                       "bad_proximity.csv") %>%
@@ -511,7 +513,7 @@ buffer, we calculated the percentage of residents that who identified in the 202
 census as non-Hispanic white, non-Hispanic Black, and Hispanic. The distributions
 of these variables are shown in \@ref(fig:divers-hist).
 
-```{r divers-hist, echo=FALSE, fig.cap='Histograms of population diversity variables', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Diversity histograms'}
+```{r divers-hist, echo=FALSE, fig.cap='Distributions of population diversity variables', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Diversity histograms'}
 
 diversity <- buffers %>%
   select(pct_white, pct_black, pct_hispanic) %>%
@@ -523,10 +525,11 @@ diversity <- buffers %>%
                values_to = "Percent of population")
 
 ggplot(diversity) +
-  geom_density(aes(x = `Percent of population`,
-                   color = `Race/ethnicity`,
-                   fill = `Race/ethnicity`),
-                 alpha = 0.5) +
+  geom_histogram(aes(x = `Percent of population`,
+                   color = `Race/ethnicity`),
+                 fill = NA,
+                 alpha = 0.5,
+                 bins = 50) +
   scale_y_continuous(name = "Number of sites",
                      labels = scales::label_comma()) +
   scale_x_continuous(breaks = breaks <- seq(0, 1, by=0.1),
@@ -565,14 +568,48 @@ the EFAtools R package [@EFAtools] to develop a set of parcel level indices from
 these variables using factor analysis. The Kaiser-Meyer-Olkin criterion for the 
 dataset is 0.9, suggesting a "marvellous" case for factor analysis [@kaiser1974index].
 
-We determined the appropriate number of factors based on the Kaiser-Guttman criterion 
-[@guttman1954some] and the Hull method [@lorenzo2011hull] and computed factor loadings 
-using an oblimin rotation.
+We determined the appropriate number of factors based on the Kaiser-Guttman criterion and the Hull method.The Hull method suggests an 
+optimal number of factors that balances model fit and number of parameters, with a goal
+or keeping only major factors. Potential solutions with various number of factors are
+plotted on a graph of goodness-of-fit versus degrees of freedom, where the optimal 
+solution will be on the boundary of a convex hull [@lorenzo2011hull]. The Kaiser-Guttmat criterion is a 
+recommendation to retain as many factors as there are
+sample eigenvalues greater than one [@guttman1954some].
+
+We computed factor loadings 
+using an oblimin rotation. We applied these loadings to calculate a set of index 
+scores (one for each factor) for each potential development site.
 
 ## Index validation
 
-To assess whether the resulting indices were predictive of recent development, we 
-estimated a logistic regression model predicting the likelihood that a site in the 
-city of Pittsburgh was issued a a building permit for either construction or demolition
-over a one-year period (June 2021 - May 2022). Building permit data were obtained 
-from @western_pennsylvania_regional_data_center_permits_2022.
+The indices we developed through factor analysis might represent dimensions of 
+urban quality. If they are valid quality metrics, one might expect them to 
+be predictive of an activity associated with desirable locations for development.
+
+We hypothesize that more desirable locations for development might be those where 
+plans have been made for new development activity and that building permits for
+new construction or demolition are indicative of such plans. 
+
+We estimated a logistic regression model using the indices developed through
+factor analysis as independent variables and predicting the likelihood that 
+a site in the city of Pittsburgh was issued a a building permit for either 
+construction or demolition over a one-year period (June 2021 - May 2022). Building 
+permit data were obtained from @western_pennsylvania_regional_data_center_permits_2022.
+Out of 269,151 potential residential development sites in Pittsburgh, 139 (one 
+twentieth of one percent) had building permits issued for new construction or 
+demolition of a residential structure during the study period. 
+
+## Combined index
+
+If the indices we developed represent distinct dimensions of urban quality, 
+the relative importance of each dimension (and its associated index) might vary
+depending on the values of the individual or institution seeking to assess urban 
+quality. However, the results of the regression analysis might offer insight into 
+the typical or average values of active housing developers and property owners in 
+Pittsburgh. 
+
+We used the regression coefficients estimated to predict the likelihood 
+of a recent building permit (as described above) to generate weights for 
+each index, scaled such that the highest coefficient represented a weight 
+of one hundred percent. We used these weights to calculate a combined index 
+value for each site.

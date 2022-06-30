@@ -36,51 +36,11 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Urban Quality at the Parcel Level},
+  pdftitle={Assessing Urban Quality at the Parcel Level},
   pdfauthor={Carole Voulgaris and Elizabeth Christoforetti},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -137,7 +97,7 @@
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
-\title{Urban Quality at the Parcel Level}
+\title{Assessing Urban Quality at the Parcel Level}
 \author{Carole Voulgaris and Elizabeth Christoforetti}
 \date{}
 
@@ -186,26 +146,25 @@ Talk about various area-level metrics
 
 Talk about VMT site work
 
-\hypertarget{expert-perspectives-on-urban-quality}{%
-\chapter{Expert Perspectives on Urban Quality}\label{expert-perspectives-on-urban-quality}}
+\hypertarget{expert-perspectives}{%
+\chapter{Expert Perspectives}\label{expert-perspectives}}
 
 Summarize the workshops.
 
-\hypertarget{quantitative-evaluation}{%
-\chapter{Quantitative evaluation}\label{quantitative-evaluation}}
+\hypertarget{quantitative-methods}{%
+\chapter{Quantitative Methods}\label{quantitative-methods}}
 
-How might a quantitative approach to evaluating urban quality at the parcel
-align with the values identified in the workshops described in Chapter 3? In
-this chapter, we define one such approach, using readily-available parcel-level
-data for Allegheny County, Pennsylvania.
+How might results of quantitative approach to evaluating urban quality at the
+parcel level align with the values identified in the workshops described in
+Chapter 3? In this chapter, we propose one such approach, using
+readily-available parcel-level data for Allegheny County, Pennsylvania.
 
 \hypertarget{data}{%
 \section{Data}\label{data}}
 
 We obtained data on property addresses, land uses, assessed values (for both
-land and buildings), and the dates and prices of as many as the three
-most-recent sales from\\
-\citet{allegheny_county_office_of_property_assessments_allegheny_2022}, which
+land and buildings), and sale prices
+from \citet{allegheny_county_office_of_property_assessments_allegheny_2022}, which
 includes information on 582,116 properties in Allegheny County.
 
 We also obtained latitude and longitude coordinates for each property from a
@@ -218,15 +177,15 @@ Potential development sites were identified as those
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
-  classified as ``residential''
-  (indicating residential properties with one to four housing units) or ``commercial''
-  (which includes mixed-use developments and residential properties with more than four
-  housing units), and
+  classified as ``residential'' (residential properties with one to
+  four housing units) or ``commercial'' (which includes mixed-use developments
+  and residential properties with more than four housing units), and
 \item
-  with a land use description in one of 59 possible categories\footnote{One site (3008 Phillip Dr in Clairton) is missing a land use description in the assessment data. We checked this address on Zillow to determine that this is a single-family home and classified it as such in our data.}. The most common of
-  these are listed Table \ref{tab:list-site-uses}.\footnote{The land use descriptions that were
+  with a land use description in one of 59 possible categories\footnote{One site (3008
+    Phillip Dr in Clairton) is missing a land use description in the assessment data.
+    We checked this address on Zillow to determine that this is a single-family home
+    and classified it as such in our data.}. The most common of these are listed Table \ref{tab:list-site-uses}.\footnote{The land use descriptions that were
     classified as potential development sites but are not listed in Table
     \ref{tab:list-site-uses}, which combine to represent less than one percent of all sites
     are ``RIGHTOF WAY - RESIDENTIAL'', ``CONDOMINIUM UNIT'', ``DWG USED AS OFFICE'',
@@ -295,8 +254,7 @@ on the most recent sale (about one percent of all sites).\footnote{Four sites ha
   Arlington Avenue in Pittsburgh is a three-bedroom single-family home that is
   listed as having sold for \$57,010,813 in 1976 and a 0.06-acre vacant lot with
   tax ID 0165G00270000000 is listed as having sold for \$24,920,232 in 1936. The
-  sales data for these sites were treated as missing.} for a total of\\
-potential sites.
+  sales data for these sites were treated as missing.}
 
 The focus of this analysis is on potential development sites rather than on
 properties. Some properties in the assessor dataset are condominums where
@@ -305,12 +263,15 @@ site level by identifying all properties with an assessed building value
 greater than zero, a land value of zero, and a land use description that did
 not indicate the land was vacant. If multiple such properties share an address,
 we classified all properties at that address as a condominium and aggregated
-them to the parcel level. This led to a final sample of 518,032 sites.
+them to the parcel level. This led to a final sample of 506,405 sites.
 
 \hypertarget{tax-assessment-data}{%
 \subsection{Tax assessment data}\label{tax-assessment-data}}
 
-Three variables (total assessed fair market value, assessed fair market value of the building, and lot area) were taken directly from the county tax assessment data for use in our analysis. We also included the most recent listed sales price, adjusted for inflation.
+Three variables (total assessed fair market value, assessed fair market
+value of the building, and lot area) were taken directly from the county
+tax assessment data for use in our analysis. We also included the most
+recent listed sales price, adjusted for inflation.
 
 To aggregate properties identified as condominiums to the site level, we summed
 the total values for lot area, assessed land value, assessed building value, and
@@ -366,12 +327,6 @@ MEDICAL CLINICS/OFFICES & 445 & 1.28 & 79.88\\
 RETL/OFF OVER & 442 & 1.27 & 81.16\\
 OFFICE-ELEVATOR -3 + STORIES & 412 & 1.19 & 82.34\\
 LODGE HALL/AMUSEMENT PARK & 386 & 1.11 & 83.46\\
-\addlinespace
-AUTO SALES \& SERVICE & 363 & 1.05 & 84.50\\
-RETL/STOR OVER & 344 & 0.99 & 85.49\\
-CEMETERY/MONUMENTS & 340 & 0.98 & 86.47\\
-STATE GOVERNMENT & 331 & 0.95 & 87.42\\
-CONVENIENCE STORE/GAS & 304 & 0.88 & 88.30\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -436,7 +391,7 @@ and a standard deviation of 5 minutes.
 \end{figure}
 
 Calculating accessibility metrics for a combination of four transportation
-modes and ten destination types yields 40 different accessibility variables. \ref{fig:show-decay-func}
+modes and ten destination types yields 40 different accessibility variables. Figure \ref{fig:show-decay-func}
 illustrates the distributions of each of these variables.
 
 \begin{figure}
@@ -457,6 +412,39 @@ listed in \ref{tab:bad-use-list}\footnote{289 properties related to coal mining
   (with land use descriptions of either ``COAL RIGHTS, WORKING INTERESTS'' or
   ``COAL LAND, SURFACE RIGHTS'') are co-located and are treated as a single
   site.}.
+
+\begin{table}
+
+\caption{\label{tab:bad-use-list}Land uses identified as disamenities}
+\centering
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\toprule
+USEDESC & Number of identified locations & Percent of identified locations & Cumulative percent of identified locations\\
+\midrule
+VACANT INDUSTRIAL LAND & 614 & 68.68 & 68.68\\
+HEAVY MANUFACTURING & 89 & 9.96 & 78.64\\
+FOOD \& DRINK PROCESSING & 40 & 4.47 & 83.11\\
+INDUSTRIAL/UTILITY & 39 & 4.36 & 87.47\\
+COMMERCIAL TRUCK TERMINAL & 26 & 2.91 & 90.38\\
+\addlinespace
+RECYCLING/SCRAP YARDS & 23 & 2.57 & 92.95\\
+MINES AND QUARRIES & 17 & 1.90 & 94.85\\
+P.P. - P.U. - OTHER THAN R.R. & 14 & 1.57 & 96.42\\
+INDUSTRIAL TRUCK TERM & 9 & 1.01 & 97.43\\
+BULK TRANSFER TERMINAL & 8 & 0.89 & 98.32\\
+\addlinespace
+INDUSTRIAL LAND & 3 & 0.34 & 98.66\\
+POULTRY FARM & 3 & 0.34 & 98.99\\
+COAL LAND, SURFACE RIGHTS & 2 & 0.22 & 99.22\\
+COAL RIGHTS, WORKING INTERESTS & 2 & 0.22 & 99.44\\
+OIL \& GAS RIGHTS WORKING INTEREST & 2 & 0.22 & 99.66\\
+\addlinespace
+COAL RIGHTS SEP. ROYALTY INTEREST & 1 & 0.11 & 99.78\\
+MINERAL LAND & 1 & 0.11 & 99.89\\
+OTHER MINERALS & 1 & 0.11 & 100.00\\
+\bottomrule
+\end{tabu}
+\end{table}
 
 We included a disamenity proximity index in our analysis that we calculated
 as the logarithm of the average distance from each site to the ten closest
@@ -506,7 +494,7 @@ of these variables are shown in \ref{fig:divers-hist}.
 
 }
 
-\caption{Histograms of population diversity variables}\label{fig:divers-hist}
+\caption{Distributions of population diversity variables}\label{fig:divers-hist}
 \end{figure}
 
 \hypertarget{land-use-diversity}{%
@@ -534,48 +522,72 @@ the EFAtools R package \citep{EFAtools} to develop a set of parcel level indices
 these variables using factor analysis. The Kaiser-Meyer-Olkin criterion for the
 dataset is 0.9, suggesting a ``marvellous'' case for factor analysis \citep{kaiser1974index}.
 
-We determined the appropriate number of factors based on the Kaiser-Guttman criterion
-\citep{guttman1954some} and the Hull method \citep{lorenzo2011hull} and computed factor loadings
-using an oblimin rotation.
+We determined the appropriate number of factors based on the Kaiser-Guttman criterion and the Hull method.The Hull method suggests an
+optimal number of factors that balances model fit and number of parameters, with a goal
+or keeping only major factors. Potential solutions with various number of factors are
+plotted on a graph of goodness-of-fit versus degrees of freedom, where the optimal
+solution will be on the boundary of a convex hull \citep{lorenzo2011hull}. The Kaiser-Guttmat criterion is a
+recommendation to retain as many factors as there are
+sample eigenvalues greater than one \citep{guttman1954some}.
+
+We computed factor loadings
+using an oblimin rotation. We applied these loadings to calculate a set of index
+scores (one for each factor) for each potential development site.
 
 \hypertarget{index-validation}{%
 \section{Index validation}\label{index-validation}}
 
-To assess whether the resulting indices were predictive of recent development, we
-estimated a logistic regression model predicting the likelihood that a site in the
-city of Pittsburgh was issued a a building permit for either construction or demolition
-over a one-year period (June 2021 - May 2022). Building permit data were obtained
-from \citet{western_pennsylvania_regional_data_center_permits_2022}.
+The indices we developed through factor analysis might represent dimensions of
+urban quality. If they are valid quality metrics, one might expect them to
+be predictive of an activity associated with desirable locations for development.
 
-\hypertarget{results}{%
-\chapter{Results}\label{results}}
+We hypothesize that more desirable locations for development might be those where
+plans have been made for new development activity and that building permits for
+new construction or demolition are indicative of such plans.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(here)}
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\FunctionTok{library}\NormalTok{(readxl)}
-\FunctionTok{library}\NormalTok{(jtools)}
-\FunctionTok{library}\NormalTok{(cowplot)}
-\end{Highlighting}
-\end{Shaded}
+We estimated a logistic regression model using the indices developed through
+factor analysis as independent variables and predicting the likelihood that
+a site in the city of Pittsburgh was issued a a building permit for either
+construction or demolition over a one-year period (June 2021 - May 2022). Building
+permit data were obtained from \citet{western_pennsylvania_regional_data_center_permits_2022}.
+Out of 269,151 potential residential development sites in Pittsburgh, 139 (one
+twentieth of one percent) had building permits issued for new construction or
+demolition of a residential structure during the study period.
 
-\begin{verbatim}
-## 
-## Attaching package: 'cowplot'
-\end{verbatim}
+\hypertarget{combined-index}{%
+\section{Combined index}\label{combined-index}}
 
-\begin{verbatim}
-## The following object is masked from 'package:lubridate':
-## 
-##     stamp
-\end{verbatim}
+If the indices we developed represent distinct dimensions of urban quality,
+the relative importance of each dimension (and its associated index) might vary
+depending on the values of the individual or institution seeking to assess urban
+quality. However, the results of the regression analysis might offer insight into
+the typical or average values of active housing developers and property owners in
+Pittsburgh.
+
+We used the regression coefficients estimated to predict the likelihood
+of a recent building permit (as described above) to generate weights for
+each index, scaled such that the highest coefficient represented a weight
+of one hundred percent. We used these weights to calculate a combined index
+value for each site.
+
+\hypertarget{quantitative-results}{%
+\chapter{Quantitative Results}\label{quantitative-results}}
+
+This chapter summarizes the results of the factor analysis, index development,
+index validation, and the development of a combined index to describe site-level
+variation in urban quality.
 
 \hypertarget{factor-analysis}{%
 \section{Factor analysis}\label{factor-analysis}}
 
-Both the Hull method (\ref{fig:hull-figure}) and the Kaiser-Guttman
-criterion (\ref{fig:kgc-figure}) suggested a five-factor solution.
+Both the Hull method and the Kaiser-Guttman
+criterion suggested a five-factor solution would
+be appropriate for out data set. Figure \ref{fig:hull-figure} illustrates
+the results of the Hull method with a plot of
+goodness-of-fit versus degrees of freedom for potential solutions with numbers
+of factors ranging from zero to fourteen. Figure \ref{fig:kgc-figure} illustrates that there are
+five eigenvalues greater than one, suggesting a
+five-factor solution according to the Kaiser-Guttman Criterion.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/hull-n-factors} \caption{Results of Kaiser-Guttman criterion for determining the number of factors}\label{fig:hull-figure}
@@ -585,8 +597,7 @@ criterion (\ref{fig:kgc-figure}) suggested a five-factor solution.
 \includegraphics[width=1\linewidth]{04_figures/KGC-n-factors} \caption{Results of Hull method for determining the number of factors}\label{fig:kgc-figure}
 \end{figure}
 
-The loadings resulting from the factor analysis are illustrated in
-\ref{fig:loading-fig}. We assigned names to each factor based on a visual
+We assigned names to each factor based on a visual
 inspection of the results. The \emph{drivable} factor had the highest loadings
 for variables representing access by car to most destination types. The
 \emph{walkable} factor has high loadings for variables representing access
@@ -606,20 +617,47 @@ onto each of the five factors.
 \includegraphics[width=1\linewidth]{_main_files/figure-latex/loading-fig-1} \caption{Factor loadings}\label{fig:loading-fig}
 \end{figure}
 
+\hypertarget{indices-from-factors}{%
+\section{Indices from factors}\label{indices-from-factors}}
+
 Figures \ref{fig:drive-map} through \ref{fig:amenities-map} show the spatial
-variation in the drivability, walkability, density, diversity, and amenity-richness indices, respectively.
+variation in the drivability, walkability, density, diversity, and
+amenity-richness indices, respectively.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/drivable} \caption{Spatial variation in drivability index}\label{fig:drive-map}
 \end{figure}
 
+As illistrated in Figure
+\ref{fig:drive-map}, there is an area in the center of the
+region (downtown Pittsburgh) with particularly low
+drivablity (likely due to traffic congestion), surrounded
+by a ring around the center with particularly high
+drivability.
+
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/walkable} \caption{Spatial variation in walkability index}\label{fig:walk-map}
 \end{figure}
 
+Figure
+\ref{fig:walk-map} shows the opposite pattern for walkabilty,
+with particularly high walkability in the center of the
+region and a ring of surrounding the center with particularly low walkability.
+
+Figure \ref{fig:dense-map} shows pockets of low density in the
+center of the region, possibly because the density index is
+driven by residental density and these are commercial centers
+with relatively few residents. With the exception of those
+pockets, the density is generally highest in the center of the
+county and lowest closer to the boundaries.
+
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/dense} \caption{Spatial variation in density index}\label{fig:dense-map}
 \end{figure}
+
+Figure \ref{fig:diverse-map} suggests that the greatest diversity
+(with an index representing both sociodemographic and land-use
+diversity) is found in areas adjacent to the center of the region.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/diverse} \caption{Spatial variation in diversity index}\label{fig:diverse-map}
@@ -629,15 +667,41 @@ variation in the drivability, walkability, density, diversity, and amenity-richn
 \includegraphics[width=1\linewidth]{04_figures/amenities} \caption{Spatial variation in amenity-richness index}\label{fig:amenities-map}
 \end{figure}
 
+Finally, Figure \ref{fig:amenities-map} suggests an amenity-poor
+area at the center of the region surrounded by and amenity-rich ring,
+with remainder of the county having an amenity richness closer to the
+county average.
+
 Figure \ref{fig:factor-cor} illustrates the distribution of each factor and the
-relationships among them.
+relationships among them. In general, there appears to be a
+trade-off between drivability and walkability and between drivability and diversity.
+There also appears to be a negative association
+between density and diversity. This may be because land-use diversity was measured
+as the number of unique land uses
+within the smallest buffer containing at least 2,000 residents. In very dense places,
+this buffer might be too small to include a large number of unique land uses.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/factor-cor} \caption{Spatial variation in amenity-richness index}\label{fig:factor-cor}
 \end{figure}
 
-\hypertarget{factor-validation}{%
-\section{Factor validation}\label{factor-validation}}
+\hypertarget{factor-validation-through-regression}{%
+\section{Factor validation through regression}\label{factor-validation-through-regression}}
+
+Table \ref{tab:regress} shows the results of three alternative regression models. The first of these is a
+null model, which assumes that likelihood of the modeled outcome (in this case, a building permit for construction
+or demolition) is constant across all sites. The second model
+(labeled as the ``full model'') predicts that likelihood based
+on the variation in the three indices generated by the
+factor analysis. As shown, four of the five factors are
+statistically significant predictors of the likelihood of
+a building permit at a 99.9 percent confidence level, and this model fits the data better than the null model
+based on three measures of model fit: The Akaike Information
+Criterion (AIC), the Bayesian Information Criterion (BIC), and the pseudo R\^{}2. Based on the results of the full model, the amenity-richness index is not a significant predictor
+of the likelihood of a building permit, so a reduced model
+was estimated without that variable. In this reduced model,
+the remaining model coefficients were unchanged and the
+model fit was essentially unchanged.
 
  
   \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
@@ -649,30 +713,36 @@ relationships among them.
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{\label{tab:unnamed-chunk-4} }
+\caption{\label{tab:regress} Results of logistic regression predicting likelihood of a demolition or construction permit over a one-year period.}
  \setlength{\tabcolsep}{0pt}
-\begin{tabular}{l l l l l l l}
+\begin{tabular}{l l l l}
 
 
-\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Null model \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Full model \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Reduced model \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Null model \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Full model \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\centering \hspace{6pt} Reduced model \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} (Intercept) \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -8.04 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -9.57 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.25, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -9.57 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.24, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -9.57 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.25)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.24)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -680,11 +750,17 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Drivable \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.35 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.16, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.35 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.14, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.35 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.16)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.14)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -692,11 +768,17 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Walkable \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.38 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.15, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.38 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1.38 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.15)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -704,11 +786,17 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Dense \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.90 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.90 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.90 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -716,11 +804,17 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Diverse \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.98 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12, p = 0.00) \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.98 *** \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11, p = 0.00) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.98 *** \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.12)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.11)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -728,23 +822,26 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Amenities \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.00\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.07, p = 0.98) \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (SE = 0.07)\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} N \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 269151\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 269151\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 269151\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 269151\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -752,11 +849,8 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} AIC \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1574.43\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1414.33\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1412.33\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1412.33\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -764,11 +858,8 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} BIC \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1584.93\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1477.35\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1464.84\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 1464.84\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -776,17 +867,14 @@ relationships among them.
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} Pseudo R2 \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.00\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.11\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.11\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 0.11\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
+\hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
 \arrayrulecolor{black}
 
-\multicolumn{7}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  *** p $<$ 0.001;  ** p $<$ 0.01;  * p $<$ 0.05. \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{4}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  *** p $<$ 0.001;  ** p $<$ 0.01;  * p $<$ 0.05. \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -797,7 +885,27 @@ relationships among them.
 \end{table}
  
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-5-1.pdf}
+Figure \ref{fig:effect-plot} shows how the predicted probability
+of development changes as each index varies from -5 to 5
+(i.e.~from five standard deviations below the average to
+five standard deviations above the average).
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{_main_files/figure-latex/effect-plot-1} \caption{Effect of drivability, walkabilty, diversity, and density on development probability}\label{fig:effect-plot}
+\end{figure}
+
+\hypertarget{combined-index-1}{%
+\section{Combined index}\label{combined-index-1}}
+
+Recent development activity has been consistent with a hypothesis that four of the
+five indices developed from the factor analysis results represent dimensions of
+urban quality that matter to developers and property owners. We can combine these
+four indices into a combined index by calculated a weighted average, where weights
+are derived from the coefficients of the regression model described above. The
+distribution of the resulting index is shown in Figure \ref{fig:combined-hist}.
+Figure \ref{fig:combined-pitt} shows the spatial distribution of this index
+across Pittsburgh, with the locations of the building permits used to estimate
+the model shown for reference.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/combined-hist} \caption{Distribution of combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition}\label{fig:combined-hist}
@@ -806,6 +914,11 @@ relationships among them.
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/combined-pitt} \caption{Locations of building permits for new construction and demolition and their estimated likelihood}\label{fig:combined-pitt}
 \end{figure}
+
+Figure \ref{fig:combined-map} shows the spatial distribution of the combined index
+across the entire study area. It is noteworthy that there is less variation within
+the inset area than there is for any of the four indices it comprises. This is because
+low scores on one index generally compensate for high scores on another.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{04_figures/combined} \caption{Spatial variation in combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition}\label{fig:combined-map}

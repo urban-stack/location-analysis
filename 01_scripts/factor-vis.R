@@ -548,7 +548,8 @@ here("04_figures",
 combined_hist <- ggplot(sites,
                         aes(x = combined_index)) +
   geom_histogram(bins = 30,
-                 color = "gray") +
+                 color = "lightgray",
+                 fill = "gray") +
   scale_y_continuous(name = "Number of sites") +
   scale_x_continuous(name = "Development likelihood index") +
   theme_minimal()

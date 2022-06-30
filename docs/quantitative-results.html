@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Quantitative Results | Assessing Urban Quality at the Parcel Level</title>
+  <meta name="description" content="Chapter 5 Quantitative Results | Assessing Urban Quality at the Parcel Level" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Quantitative Results | Assessing Urban Quality at the Parcel Level" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://urban-stack.github.io/location-analysis/04_figures/combined.png" />
+  
+  <meta name="github-repo" content="urban-stack/location-analysis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Quantitative Results | Assessing Urban Quality at the Parcel Level" />
+  
+  
+  <meta name="twitter:image" content="https://urban-stack.github.io/location-analysis/04_figures/combined.png" />
+
+<meta name="author" content="Carole Voulgaris and Elizabeth Christoforetti" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="quantitative-methods.html"/>
+<link rel="next" href="connecting-the-qualitative-to-the-quantitative.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Urban Quality at the Parcel Level</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#report-organization"><i class="fa fa-check"></i><b>1.1</b> Report organization</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="related-work.html"><a href="related-work.html"><i class="fa fa-check"></i><b>2</b> Related work</a></li>
+<li class="chapter" data-level="3" data-path="expert-perspectives.html"><a href="expert-perspectives.html"><i class="fa fa-check"></i><b>3</b> Expert Perspectives</a></li>
+<li class="chapter" data-level="4" data-path="quantitative-methods.html"><a href="quantitative-methods.html"><i class="fa fa-check"></i><b>4</b> Quantitative Methods</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="quantitative-methods.html"><a href="quantitative-methods.html#data"><i class="fa fa-check"></i><b>4.1</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="quantitative-methods.html"><a href="quantitative-methods.html#tax-assessment-data"><i class="fa fa-check"></i><b>4.1.1</b> Tax assessment data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="quantitative-methods.html"><a href="quantitative-methods.html#accessibilty-data"><i class="fa fa-check"></i><b>4.1.2</b> Accessibilty data</a></li>
+<li class="chapter" data-level="4.1.3" data-path="quantitative-methods.html"><a href="quantitative-methods.html#disamenity-proximity"><i class="fa fa-check"></i><b>4.1.3</b> Disamenity proximity</a></li>
+<li class="chapter" data-level="4.1.4" data-path="quantitative-methods.html"><a href="quantitative-methods.html#density"><i class="fa fa-check"></i><b>4.1.4</b> Density</a></li>
+<li class="chapter" data-level="4.1.5" data-path="quantitative-methods.html"><a href="quantitative-methods.html#population-diversity"><i class="fa fa-check"></i><b>4.1.5</b> Population diversity</a></li>
+<li class="chapter" data-level="4.1.6" data-path="quantitative-methods.html"><a href="quantitative-methods.html#land-use-diversity"><i class="fa fa-check"></i><b>4.1.6</b> Land use diversity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="quantitative-methods.html"><a href="quantitative-methods.html#index-development"><i class="fa fa-check"></i><b>4.2</b> Index development</a></li>
+<li class="chapter" data-level="4.3" data-path="quantitative-methods.html"><a href="quantitative-methods.html#index-validation"><i class="fa fa-check"></i><b>4.3</b> Index validation</a></li>
+<li class="chapter" data-level="4.4" data-path="quantitative-methods.html"><a href="quantitative-methods.html#combined-index"><i class="fa fa-check"></i><b>4.4</b> Combined index</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="quantitative-results.html"><a href="quantitative-results.html"><i class="fa fa-check"></i><b>5</b> Quantitative Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="quantitative-results.html"><a href="quantitative-results.html#factor-analysis"><i class="fa fa-check"></i><b>5.1</b> Factor analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="quantitative-results.html"><a href="quantitative-results.html#indices-from-factors"><i class="fa fa-check"></i><b>5.2</b> Indices from factors</a></li>
+<li class="chapter" data-level="5.3" data-path="quantitative-results.html"><a href="quantitative-results.html#factor-validation-through-regression"><i class="fa fa-check"></i><b>5.3</b> Factor validation through regression</a></li>
+<li class="chapter" data-level="5.4" data-path="quantitative-results.html"><a href="quantitative-results.html#combined-index-1"><i class="fa fa-check"></i><b>5.4</b> Combined index</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="connecting-the-qualitative-to-the-quantitative.html"><a href="connecting-the-qualitative-to-the-quantitative.html"><i class="fa fa-check"></i><b>6</b> Connecting the qualitative to the quantitative</a></li>
+<li class="chapter" data-level="7" data-path="conclusions-and-future-directions.html"><a href="conclusions-and-future-directions.html"><i class="fa fa-check"></i><b>7</b> Conclusions and Future Directions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Assessing Urban Quality at the Parcel Level</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="quantitative-results" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Quantitative Results<a href="quantitative-results.html#quantitative-results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter summarizes the results of the factor analysis, index development,
+index validation, and the development of a combined index to describe site-level
+variation in urban quality.</p>
+<div id="factor-analysis" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Factor analysis<a href="quantitative-results.html#factor-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Both the Hull method and the Kaiser-Guttman
+criterion suggested a five-factor solution would
+be appropriate for out data set. Figure <a href="quantitative-results.html#fig:hull-figure">5.1</a> illustrates
+the results of the Hull method with a plot of
+goodness-of-fit versus degrees of freedom for potential solutions with numbers
+of factors ranging from zero to fourteen. Figure <a href="quantitative-results.html#fig:kgc-figure">5.2</a> illustrates that there are
+five eigenvalues greater than one, suggesting a
+five-factor solution according to the Kaiser-Guttman Criterion.</p>
+<div class="figure"><span style="display:block;" id="fig:hull-figure"></span>
+<img src="04_figures/hull-n-factors.png" alt="Results of Kaiser-Guttman criterion for determining the number of factors" width="100%" />
+<p class="caption">
+Figure 5.1: Results of Kaiser-Guttman criterion for determining the number of factors
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:kgc-figure"></span>
+<img src="04_figures/KGC-n-factors.png" alt="Results of Hull method for determining the number of factors" width="100%" />
+<p class="caption">
+Figure 5.2: Results of Hull method for determining the number of factors
+</p>
+</div>
+<p>We assigned names to each factor based on a visual
+inspection of the results. The <em>drivable</em> factor had the highest loadings
+for variables representing access by car to most destination types. The
+<em>walkable</em> factor has high loadings for variables representing access
+by walking and transit. The <em>diverse</em> index is characterized by diversity of
+people (high percentages of black residents and low percentages of white
+residents), diversity of land use (a greater number of distinct land
+uses in the immediate vicinity and a shorter average distance to disamenities),
+and lower assessed property values. The <em>dense</em> factor is characterized by lower
+values for the radius of the smallest buffer containing two thousand residents
+(i.e. higher population densities) and higher access to retail and grocery
+locations by non-motorized modes. The <em>amenities</em> factor is characterized
+by non-motorized and transit access to retail and grocery locations. Figure
+<a href="quantitative-results.html#fig:loading-fig">5.3</a> illustrates the loadings of each individual variable
+onto each of the five factors.</p>
+<div class="figure"><span style="display:block;" id="fig:loading-fig"></span>
+<img src="_main_files/figure-html/loading-fig-1.png" alt="Factor loadings" width="100%" />
+<p class="caption">
+Figure 5.3: Factor loadings
+</p>
+</div>
+</div>
+<div id="indices-from-factors" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Indices from factors<a href="quantitative-results.html#indices-from-factors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Figures <a href="quantitative-results.html#fig:drive-map">5.4</a> through <a href="quantitative-results.html#fig:amenities-map">5.8</a> show the spatial
+variation in the drivability, walkability, density, diversity, and
+amenity-richness indices, respectively.</p>
+<div class="figure"><span style="display:block;" id="fig:drive-map"></span>
+<img src="04_figures/drivable.png" alt="Spatial variation in drivability index" width="100%" />
+<p class="caption">
+Figure 5.4: Spatial variation in drivability index
+</p>
+</div>
+<p>As illistrated in Figure
+<a href="quantitative-results.html#fig:drive-map">5.4</a>, there is an area in the center of the
+region (downtown Pittsburgh) with particularly low
+drivablity (likely due to traffic congestion), surrounded
+by a ring around the center with particularly high
+drivability.</p>
+<div class="figure"><span style="display:block;" id="fig:walk-map"></span>
+<img src="04_figures/walkable.png" alt="Spatial variation in walkability index" width="100%" />
+<p class="caption">
+Figure 5.5: Spatial variation in walkability index
+</p>
+</div>
+<p>Figure
+<a href="quantitative-results.html#fig:walk-map">5.5</a> shows the opposite pattern for walkabilty,
+with particularly high walkability in the center of the
+region and a ring of surrounding the center with particularly low walkability.</p>
+<p>Figure <a href="quantitative-results.html#fig:dense-map">5.6</a> shows pockets of low density in the
+center of the region, possibly because the density index is
+driven by residental density and these are commercial centers
+with relatively few residents. With the exception of those
+pockets, the density is generally highest in the center of the
+county and lowest closer to the boundaries.</p>
+<div class="figure"><span style="display:block;" id="fig:dense-map"></span>
+<img src="04_figures/dense.png" alt="Spatial variation in density index" width="100%" />
+<p class="caption">
+Figure 5.6: Spatial variation in density index
+</p>
+</div>
+<p>Figure <a href="quantitative-results.html#fig:diverse-map">5.7</a> suggests that the greatest diversity
+(with an index representing both sociodemographic and land-use
+diversity) is found in areas adjacent to the center of the region.</p>
+<div class="figure"><span style="display:block;" id="fig:diverse-map"></span>
+<img src="04_figures/diverse.png" alt="Spatial variation in diversity index" width="100%" />
+<p class="caption">
+Figure 5.7: Spatial variation in diversity index
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:amenities-map"></span>
+<img src="04_figures/amenities.png" alt="Spatial variation in amenity-richness index" width="100%" />
+<p class="caption">
+Figure 5.8: Spatial variation in amenity-richness index
+</p>
+</div>
+<p>Finally, Figure <a href="quantitative-results.html#fig:amenities-map">5.8</a> suggests an amenity-poor
+area at the center of the region surrounded by and amenity-rich ring,
+with remainder of the county having an amenity richness closer to the
+county average.</p>
+<p>Figure <a href="quantitative-results.html#fig:factor-cor">5.9</a> illustrates the distribution of each factor and the
+relationships among them. In general, there appears to be a
+trade-off between drivability and walkability and between drivability and diversity.
+There also appears to be a negative association
+between density and diversity. This may be because land-use diversity was measured
+as the number of unique land uses
+within the smallest buffer containing at least 2,000 residents. In very dense places,
+this buffer might be too small to include a large number of unique land uses.</p>
+<div class="figure"><span style="display:block;" id="fig:factor-cor"></span>
+<img src="04_figures/factor-cor.png" alt="Spatial variation in amenity-richness index" width="100%" />
+<p class="caption">
+Figure 5.9: Spatial variation in amenity-richness index
+</p>
+</div>
+</div>
+<div id="factor-validation-through-regression" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Factor validation through regression<a href="quantitative-results.html#factor-validation-through-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Table <a href="quantitative-results.html#tab:regress">5.1</a> shows the results of three alternative regression models. The first of these is a
+null model, which assumes that likelihood of the modeled outcome (in this case, a building permit for construction
+or demolition) is constant across all sites. The second model
+(labeled as the “full model”) predicts that likelihood based
+on the variation in the three indices generated by the
+factor analysis. As shown, four of the five factors are
+statistically significant predictors of the likelihood of
+a building permit at a 99.9 percent confidence level, and this model fits the data better than the null model
+based on three measures of model fit: The Akaike Information
+Criterion (AIC), the Bayesian Information Criterion (BIC), and the pseudo R^2. Based on the results of the full model, the amenity-richness index is not a significant predictor
+of the likelihood of a building permit, so a reduced model
+was estimated without that variable. In this reduced model,
+the remaining model coefficients were unchanged and the
+model fit was essentially unchanged.</p>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:regress">
+<caption style="caption-side: top; text-align: center;"><span id="tab:regress">Table 5.1: </span> Results of logistic regression predicting likelihood of a demolition or construction permit over a one-year period.</caption><col><col><col><col><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Null model</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Full model</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Reduced model</th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-8.04 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-9.57 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-9.57 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.11)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.25)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.24)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Drivable</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.35 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.35 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.16)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.14)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Walkable</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.38 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.38 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.15)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.11)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Dense</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.90 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.90 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.12)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.12)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Diverse</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.98 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.98 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.12)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.11)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Amenities</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.00&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(SE = 0.07)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">269151&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">269151&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">269151&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1574.43&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1414.33&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1412.33&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">BIC</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1584.93&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1477.35&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1464.84&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Pseudo R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.00&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.11&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.11&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</table>
+
+<p>Figure <a href="quantitative-results.html#fig:effect-plot">5.10</a> shows how the predicted probability
+of development changes as each index varies from -5 to 5
+(i.e. from five standard deviations below the average to
+five standard deviations above the average).</p>
+<div class="figure"><span style="display:block;" id="fig:effect-plot"></span>
+<img src="_main_files/figure-html/effect-plot-1.png" alt="Effect of drivability, walkabilty, diversity, and density on development probability" width="100%" />
+<p class="caption">
+Figure 5.10: Effect of drivability, walkabilty, diversity, and density on development probability
+</p>
+</div>
+</div>
+<div id="combined-index-1" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Combined index<a href="quantitative-results.html#combined-index-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recent development activity has been consistent with a hypothesis that four of the
+five indices developed from the factor analysis results represent dimensions of
+urban quality that matter to developers and property owners. We can combine these
+four indices into a combined index by calculated a weighted average, where weights
+are derived from the coefficients of the regression model described above. The
+distribution of the resulting index is shown in Figure <a href="quantitative-results.html#fig:combined-hist">5.11</a>.
+Figure <a href="quantitative-results.html#fig:combined-pitt">5.12</a> shows the spatial distribution of this index
+across Pittsburgh, with the locations of the building permits used to estimate
+the model shown for reference.</p>
+<div class="figure"><span style="display:block;" id="fig:combined-hist"></span>
+<img src="04_figures/combined-hist.png" alt="Distribution of combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition" width="100%" />
+<p class="caption">
+Figure 5.11: Distribution of combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:combined-pitt"></span>
+<img src="04_figures/combined-pitt.png" alt="Locations of building permits for new construction and demolition and their estimated likelihood" width="100%" />
+<p class="caption">
+Figure 5.12: Locations of building permits for new construction and demolition and their estimated likelihood
+</p>
+</div>
+<p>Figure <a href="quantitative-results.html#fig:combined-map">5.13</a> shows the spatial distribution of the combined index
+across the entire study area. It is noteworthy that there is less variation within
+the inset area than there is for any of the four indices it comprises. This is because
+low scores on one index generally compensate for high scores on another.</p>
+<div class="figure"><span style="display:block;" id="fig:combined-map"></span>
+<img src="04_figures/combined.png" alt="Spatial variation in combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition" width="100%" />
+<p class="caption">
+Figure 5.13: Spatial variation in combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="quantitative-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="connecting-the-qualitative-to-the-quantitative.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-results.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,17 +1,30 @@
-# Results
+# Quantitative Results
 
-```{r}
+```{r, include=FALSE}
 library(here)
 library(tidyverse)
 library(readxl)
 library(jtools)
 library(cowplot)
+library(kableExtra)
+library(knitr)
+library(huxtable)
 ```
+
+This chapter summarizes the results of the factor analysis, index development, 
+index validation, and the development of a combined index to describe site-level
+variation in urban quality.
 
 ## Factor analysis
 
-Both the Hull method (\@ref(fig:hull-figure)) and the Kaiser-Guttman
-criterion (\@ref(fig:kgc-figure)) suggested a five-factor solution.
+Both the Hull method and the Kaiser-Guttman
+criterion suggested a five-factor solution would
+be appropriate for out data set. Figure \@ref(fig:hull-figure) illustrates 
+the results of the Hull method with a plot of 
+goodness-of-fit versus degrees of freedom for potential solutions with numbers 
+of factors ranging from zero to fourteen. Figure \@ref(fig:kgc-figure) illustrates that there are 
+five eigenvalues greater than one, suggesting a 
+five-factor solution according to the Kaiser-Guttman Criterion.
 
 ```{r hull-figure, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Results of Kaiser-Guttman criterion for determining the number of factors'}
 here("04_figures",
@@ -25,8 +38,7 @@ here("04_figures",
 knitr::include_graphics()
 ```
 
-The loadings resulting from the factor analysis are illustrated in 
-\@ref(fig:loading-fig). We assigned names to each factor based on a visual 
+We assigned names to each factor based on a visual 
 inspection of the results. The _drivable_ factor had the highest loadings
 for variables representing access by car to most destination types. The
 _walkable_ factor has high loadings for variables representing access
@@ -139,8 +151,11 @@ ggplot(long_loadings) +
   
 ```
 
+## Indices from factors
+
 Figures \@ref(fig:drive-map) through \@ref(fig:amenities-map) show the spatial
-variation in the drivability, walkability, density, diversity, and amenity-richness indices, respectively.
+variation in the drivability, walkability, density, diversity, and 
+amenity-richness indices, respectively. 
 
 ```{r drive-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in drivability index'}
 here("04_figures",
@@ -148,17 +163,39 @@ here("04_figures",
 knitr::include_graphics()
 ```
 
+As illistrated in Figure 
+\@ref(fig:drive-map), there is an area in the center of the
+region (downtown Pittsburgh) with particularly low 
+drivablity (likely due to traffic congestion), surrounded 
+by a ring around the center with particularly high 
+drivability.
+
 ```{r walk-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in walkability index'}
 here("04_figures",
      "walkable.png") %>%
 knitr::include_graphics()
 ```
+Figure 
+\@ref(fig:walk-map) shows the opposite pattern for walkabilty, 
+with particularly high walkability in the center of the
+region and a ring of surrounding the center with particularly low walkability.
+
+Figure \@ref(fig:dense-map) shows pockets of low density in the 
+center of the region, possibly because the density index is
+driven by residental density and these are commercial centers
+with relatively few residents. With the exception of those
+pockets, the density is generally highest in the center of the 
+county and lowest closer to the boundaries.
 
 ```{r dense-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in density index'}
 here("04_figures",
      "dense.png") %>%
 knitr::include_graphics()
 ```
+
+Figure \@ref(fig:diverse-map) suggests that the greatest diversity
+(with an index representing both sociodemographic and land-use
+diversity) is found in areas adjacent to the center of the region.
 
 ```{r diverse-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in diversity index'}
 here("04_figures",
@@ -172,8 +209,19 @@ here("04_figures",
 knitr::include_graphics()
 ```
 
+Finally, Figure \@ref(fig:amenities-map) suggests an amenity-poor
+area at the center of the region surrounded by and amenity-rich ring, 
+with remainder of the county having an amenity richness closer to the 
+county average.
+
 Figure \@ref(fig:factor-cor) illustrates the distribution of each factor and the
-relationships among them.
+relationships among them. In general, there appears to be a
+trade-off between drivability and walkability and between drivability and diversity. 
+There also appears to be a negative association
+between density and diversity. This may be because land-use diversity was measured 
+as the number of unique land uses
+within the smallest buffer containing at least 2,000 residents. In very dense places,
+this buffer might be too small to include a large number of unique land uses.
 
 ```{r factor-cor, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in amenity-richness index'}
 here("04_figures",
@@ -181,9 +229,7 @@ here("04_figures",
 knitr::include_graphics()
 ```
 
-## Factor validation
-
-
+## Factor validation through regression
 
 ```{r, include=FALSE}
 months <- c("july-2021",
@@ -260,7 +306,20 @@ data <- here("02_data",
          permit)
 ```
 
-
+Table \@ref(tab:regress) shows the results of three alternative regression models. The first of these is a 
+null model, which assumes that likelihood of the modeled outcome (in this case, a building permit for construction
+or demolition) is constant across all sites. The second model
+(labeled as the "full model") predicts that likelihood based
+on the variation in the three indices generated by the 
+factor analysis. As shown, four of the five factors are 
+statistically significant predictors of the likelihood of 
+a building permit at a 99.9 percent confidence level, and this model fits the data better than the null model 
+based on three measures of model fit: The Akaike Information
+Criterion (AIC), the Bayesian Information Criterion (BIC), and the pseudo R^2. Based on the results of the full model, the amenity-richness index is not a significant predictor 
+of the likelihood of a building permit, so a reduced model
+was estimated without that variable. In this reduced model,
+the remaining model coefficients were unchanged and the 
+model fit was essentially unchanged.
 
 ```{r, echo=FALSE}
 model_null <- glm(permit ~ 1,
@@ -296,21 +355,30 @@ export_summs(model_null,
              model_all, 
              model_four, 
              model.names = c("Null model", "Full model", "Reduced model"),
-             error_pos = "right",
-             error_format = "(SE = {std.error}, p = {p.value})",
+             error_pos = "below",
+             error_format = "(SE = {std.error})",
              coefs = c("(Intercept)" = "(Intercept)",
                        "Drivable" = "f_drivable",
                        "Walkable" = "f_walkable",
                        "Dense" = "f_dense",
                        "Diverse" = "f_diverse",
-                       "Amenities" = "f_amenities"))
+                       "Amenities" = "f_amenities")) %>% 
+  set_caption("Results of logistic regression predicting likelihood of a demolition or construction permit over a one-year period.") %>% 
+  set_label("tab:regress")
+  
 
 write_csv(tibble(variable = names(model_four$coefficients), 
                  value = model_four$coefficients),
           file = here("02_data", "model_coefs.csv"))
+
 ```
 
-```{r, echo=FALSE, warning=FALSE}
+Figure \@ref(fig:effect-plot) shows how the predicted probability
+of development changes as each index varies from -5 to 5 
+(i.e. from five standard deviations below the average to 
+five standard deviations above the average).
+
+```{r effect-plot, echo=FALSE, warning=FALSE, fig.asp=1.0, out.width='100%', fig.cap='Effect of drivability, walkabilty, diversity, and density on development probability'}
 
 blank_graph <- ggplot(loadings) +
   geom_point(aes(x = f_drivable,
@@ -367,6 +435,17 @@ ggdraw() +
 
 ```
 
+## Combined index
+
+Recent development activity has been consistent with a hypothesis that four of the 
+five indices developed from the factor analysis results represent dimensions of 
+urban quality that matter to developers and property owners. We can combine these
+four indices into a combined index by calculated a weighted average, where weights 
+are derived from the coefficients of the regression model described above. The 
+distribution of the resulting index is shown in Figure \@ref(fig:combined-hist). 
+Figure \@ref(fig:combined-pitt) shows the spatial distribution of this index
+across Pittsburgh, with the locations of the building permits used to estimate 
+the model shown for reference.
 
 ```{r combined-hist, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Distribution of combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition'}
 here("04_figures",
@@ -381,6 +460,10 @@ here("04_figures",
 knitr::include_graphics()
 ```
 
+Figure \@ref(fig:combined-map) shows the spatial distribution of the combined index 
+across the entire study area. It is noteworthy that there is less variation within 
+the inset area than there is for any of the four indices it comprises. This is because
+low scores on one index generally compensate for high scores on another.
 
 ```{r combined-map, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Spatial variation in combined index, weighted according to coefficients from regression predicting the likelihood of a building permit for construction or demolition'}
 here("04_figures",

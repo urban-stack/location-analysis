@@ -1,5 +1,5 @@
 --- 
-title: "Urban Quality at the Parcel Level"
+title: "Assessing Urban Quality at the Parcel Level"
 author: "Carole Voulgaris and Elizabeth Christoforetti"
 site: bookdown::bookdown_site
 documentclass: book
