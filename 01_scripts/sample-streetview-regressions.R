@@ -38,6 +38,19 @@ summary(pred_gini_model)
 
 AIC(pred_gini_model)
 
+pred_pct_rental_E_model <- lm(pct_rental_E ~
+                        paved_score +
+                        built_score +
+                        terrain_score +
+                        sky_score +
+                        vegetation_score+
+                        pole_score,
+                      data = image_data)
+
+summary(pred_pct_rental_E_model)
+
+AIC(pred_pct_rental_E_model)
+
 ### Come up with a few regression models that predict an 
 ## image variable using only census variables
 
