@@ -14,6 +14,7 @@ from sklearn.svm import SVR
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, GradientBoostingRegressor, BaggingRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.neural_network import MLPRegressor
+from sklearn.tree import ExtraTreeRegressor, DecisionTreeRegressor
 from sklearn import preprocessing
 import imblearn
 from imblearn.over_sampling import RandomOverSampler
@@ -35,22 +36,44 @@ print(len(all_se[all_se.isnull().T.any()]),"rows contain NA.")
 select = all_se.dropna()
 print(len(select))
   
-y_ros = np.array(select)[:,8]
-X_ros = np.array(select) [:,0:6]
-x_train, x_test, y_train, y_test = train_test_split(X_ros, y_ros ,test_size = 0.15, random_state=5)
+# y_ros = np.array(select)[:,8]
+# X_ros = np.array(select) [:,0:6]
+select1 = select[['median_income_E','gini_index_E','pct_rental_E','pct_sf_homes_E','annual_loans_per_sf_home','pct_sf_purchase','pct_sf_refi','mean_rate']]
+y_ros = np.array(select)[:,0]
+X_ros = np.array(select1)
+x_train, x_test, y_train, y_test = train_test_split(X_ros, y_ros ,test_size = 0.15, random_state=6)
 
-# sc = StandardScaler()
-# X_train = sc.fit_transform(x_train)
-# X_test = sc.transform(x_test)
+sc = StandardScaler()
+X_train = sc.fit_transform(x_train)
+X_test = sc.transform(x_test)
 
+#
 clf_rf = RandomForestRegressor(n_estimators = 20)
 rf = clf_rf.fit (x_train, y_train)
 y_pred_rf = rf.predict(x_test)
 r2_rf = r2_score(y_test, y_pred_rf)
 adj_r2_rf = adjusted_r2(r2_rf,X_ros.shape[1]-1,len(x_test))
 print('Random Forest R2 =',r2_rf)
-print('Random Forest Adj R2 =,', adj_r2_rf)
+print('Random Forest Adj R2 =', adj_r2_rf)
 print('Random Forest Mean Squared Error =', mean_squared_error(y_test, y_pred_rf))
+
+clf_dt = DecisionTreeRegressor()
+dt = clf_dt.fit (x_train, y_train)
+y_pred_dt = dt.predict(x_test)
+r2_dt = r2_score(y_test, y_pred_dt)
+adj_r2_dt = adjusted_r2(r2_dt,X_ros.shape[1]-1,len(x_test))
+print('Decision Tree Regressor R2 =',r2_dt)
+print('Decision Tree Regressor Adj R2 =', adj_r2_dt)
+print('Decision Tree Regressor Mean Squared Error =', mean_squared_error(y_test, y_pred_dt))
+
+clf_et = ExtraTreeRegressor()
+et = clf_et.fit (x_train, y_train)
+y_pred_et = et.predict(x_test)
+r2_et = r2_score(y_test, y_pred_et)
+adj_r2_et = adjusted_r2(r2_et,X_ros.shape[1]-1,len(x_test))
+print('Extra Tree Regressor R2 =',r2_et)
+print('Extra Tree Regressor Adj R2 =', adj_r2_et)
+print('Extra Tree Regressor Mean Squared Error =', mean_squared_error(y_test, y_pred_et))
 
 clf_knn = KNeighborsRegressor()
 knn = clf_knn.fit (x_train, y_train)
@@ -58,16 +81,17 @@ y_pred_knn = knn.predict(x_test)
 r2_knn = r2_score(y_test, y_pred_knn)
 adj_r2_knn = adjusted_r2(r2_knn,X_ros.shape[1]-1,len(x_test))
 print('KNN R2 =',r2_knn)
-print('KNN Adj R2 =,', adj_r2_knn)
+print('KNN Adj R2 =', adj_r2_knn)
 print('KNN Mean Squared Error =', mean_squared_error(y_test, y_pred_knn))
 
+#
 clf_svm = SVR()
 svm = clf_svm.fit(x_train, y_train)
 y_pred_svm = svm.predict(x_test)
 r2_svm = r2_score(y_test, y_pred_svm)
 adj_r2_svm = adjusted_r2(r2_svm,X_ros.shape[1]-1,len(x_test))
 print('SVR R2 =',r2_svm)
-print('SVR Adj R2 =,', adj_r2_svm)
+print('SVR Adj R2 =', adj_r2_svm)
 print('SVR Mean Squared Error =', mean_squared_error(y_test, y_pred_svm))
 
 clf_linr = LinearRegression()
@@ -76,16 +100,17 @@ y_pred_linr = linr.predict(x_test)
 r2_linr = r2_score(y_test, y_pred_linr)
 adj_r2_linr = adjusted_r2(r2_linr,X_ros.shape[1]-1,len(x_test))
 print('Linear Regression R2 =',r2_linr)
-print('Linear Regression Adj R2 =,', adj_r2_linr)
+print('Linear Regression Adj R2 =', adj_r2_linr)
 print('Linear Regression Mean Squared Error =', mean_squared_error(y_test, y_pred_linr))
 
+##
 clf_rid = Ridge()
 rid = clf_rid.fit (x_train, y_train)
 y_pred_rid = rid.predict(x_test)
 r2_rid = r2_score(y_test, y_pred_rid)
 adj_r2_rid = adjusted_r2(r2_rid,X_ros.shape[1]-1,len(x_test))
 print('Ridge R2 =',r2_rid)
-print('Ridge Adj R2 =,', adj_r2_rid)
+print('Ridge Adj R2 =', adj_r2_rid)
 print('Ridge Mean Squared Error =', mean_squared_error(y_test, y_pred_rid))
 
 clf_las = Lasso()
@@ -94,7 +119,7 @@ y_pred_las = las.predict(x_test)
 r2_las = r2_score(y_test, y_pred_las)
 adj_r2_las = adjusted_r2(r2_las,X_ros.shape[1]-1,len(x_test))
 print('Lasso R2 =',r2_las)
-print('Lasso Adj R2 =,', adj_r2_las)
+print('Lasso Adj R2 =', adj_r2_las)
 print('Lasso Mean Squared Error =', mean_squared_error(y_test, y_pred_las))
 
 clf_mlp = MLPRegressor()
@@ -103,7 +128,7 @@ y_pred_mlp = mlp.predict(x_test)
 r2_mlp = r2_score(y_test, y_pred_mlp)
 adj_r2_mlp = adjusted_r2(r2_mlp,X_ros.shape[1]-1,len(x_test))
 print('MLP Regressor R2 =',r2_mlp)
-print('MLP Regressor Adj R2 =,', adj_r2_mlp)
+print('MLP Regressor Adj R2 =', adj_r2_mlp)
 print('MLP Regressor Mean Squared Error =', mean_squared_error(y_test, y_pred_mlp))
 
 ###
@@ -113,7 +138,7 @@ y_pred_ada = ada.predict(x_test)
 r2_ada = r2_score(y_test, y_pred_ada)
 adj_r2_ada = adjusted_r2(r2_ada,X_ros.shape[1]-1,len(x_test))
 print('Ada Boost Regressor R2 =',r2_ada)
-print('Ada Boost Regressor Adj R2 =,', adj_r2_ada)
+print('Ada Boost Regressor Adj R2 =', adj_r2_ada)
 print('Ada Boost Regressor Mean Squared Error =', mean_squared_error(y_test, y_pred_ada))
 
 clf_gra = GradientBoostingRegressor()
@@ -122,7 +147,7 @@ y_pred_gra = gra.predict(x_test)
 r2_gra = r2_score(y_test, y_pred_gra)
 adj_r2_gra = adjusted_r2(r2_gra,X_ros.shape[1]-1,len(x_test))
 print('Gradient Boosting Regressor R2 =',r2_gra)
-print('Gradient Boosting Regressor Adj R2 =,', adj_r2_gra)
+print('Gradient Boosting Regressor Adj R2 =', adj_r2_gra)
 print('Gradient Boosting Regressor Mean Squared Error =', mean_squared_error(y_test, y_pred_gra))
 
 clf_bag = BaggingRegressor()
@@ -131,5 +156,5 @@ y_pred_bag = bag.predict(x_test)
 r2_bag = r2_score(y_test, y_pred_bag)
 adj_r2_bag = adjusted_r2(r2_bag,X_ros.shape[1]-1,len(x_test))
 print('Bagging Regressor R2 =',r2_bag)
-print('Bagging Regressor Adj R2 =,', adj_r2_bag)
+print('Bagging Regressor Adj R2 =', adj_r2_bag)
 print('Bagging Regressor Mean Squared Error =', mean_squared_error(y_test, y_pred_bag))

@@ -18,6 +18,15 @@ from sklearn.metrics import confusion_matrix
 from tabulate import tabulate
 import tensorflow as tf
 print(tf.__version__)
+import time
+
+input_path = "E:/GSD/2022 Summer/RA/location-analysis/"
+img_path=input_path+'google street view images'
+seg_path=img_path+'/segmentation'
+csv = input_path + "02_data/sample_sites_tract_data.csv"
+location = pd.read_csv(csv)
+print(location)
+
 
 def download(url, path, n, error_list):   
   try:
@@ -31,12 +40,7 @@ def download(url, path, n, error_list):
     print(n, 'error:', url)
   return error_list
     
-input_path = "E:/GSD/2022 Summer/RA/location-analysis/"
-csv = input_path + "02_data/sample_sites_tract_data.csv"
-location = pd.read_csv(csv)
-print(location)
 
-img_path=input_path+'google street view images'
 if not os.path.exists(img_path):
   os.makedirs(img_path, exist_ok=False)
   print('New dir google street view images has been created.')
@@ -50,8 +54,10 @@ for i in range(0,len(location)):
   lng = str(location.iloc[i,2])
   path = img_path +"/"+ str(i) +"_" +lat + "_" + lng + "_-5.JPG"  
   url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=350&return_error_code=true&key="+API_key 
-  error_list = download(url, path, i, error_list) 
+  error_list = download(url, path, i, error_list)
+  time.sleep(0.95)
 print('error_list = ',error_list)
+print('length error_list = ', len(error_list))
 
 f = open(img_path+'/far_list.txt','w')
 f.write(str(error_list))
@@ -63,6 +69,7 @@ for i in error_list:
   path = img_path +"/"+ str(i) +"_" +lat + "_" + lng + "_-5.JPG"  
   url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=1000&return_error_code=true&key="+API_key 
   error_list = download(url, path, i, error_list)
+  time.sleep(1.1)
   
 all_files = [f for f in listdir(img_path)]
 ### Get only jpg files
@@ -80,7 +87,6 @@ print (jpg_files)
 
 #original_code: 'https://github.com/lexfridman/mit-deep-learning/blob/master/tutorial_driving_scene_segmentation/tutorial_driving_scene_segmentation.ipynb'
 
-seg_path=img_path+'/segmentation'
 if not os.path.exists(seg_path):
   print('Making new dir segmentation.')
   os.makedirs(seg_path, exist_ok=False)
