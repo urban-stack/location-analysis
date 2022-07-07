@@ -6,25 +6,37 @@ library(tidycensus)
 library(sf)
 library(here)
 
+`%!in%` <- Negate(`%in%`)
+
 sites <- here("02_data",
               "sites.csv") %>%
   read_csv(show_col_types = FALSE)
 
 # load parcel locations data
-# parcels <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
-#                    options = c("X_POSSIBLE_NAMES=x",
-#                                "Y_POSSIBLE_NAMES=y")) %>%
-parcels <- st_read('E:/GSD/2022 Summer/RA/location-analysis/02_data/parcelcoords.csv',
-                   options = c("X_POSSIBLE_NAMES=x", 
+parcels <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
+                   options = c("X_POSSIBLE_NAMES=x",
                                "Y_POSSIBLE_NAMES=y")) %>%
   rename(id = PIN) %>%
   st_set_crs("WGS84")
 
-n_sites <- 1000
+initial_sites <- here("02_data",
+                      "sample_sites_tract_data.csv") %>%
+  read_csv() %>%
+  select(id, lat, lon) %>%
+  rename(x = lon, y = lat)
+
+n_sites <- 4001
 
 sample_locs <- parcels %>%
   filter(id %in% sites$PARID) %>%
-  sample_n(n_sites)
+  filter(id %!in% initial_sites$id) %>%
+  sample_n(n_sites) %>%
+  st_drop_geometry() %>%
+  rbind(initial_sites)
+
+write_csv(sample_locs, 
+          file = here("02_data",
+                      "sample-sites-5k.csv"))
 
 ## Yixin: Feel free to select additional census variables (if you want).
 ## You can see a list of available variables by typing:
