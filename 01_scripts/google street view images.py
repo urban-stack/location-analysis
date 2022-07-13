@@ -68,7 +68,7 @@ for i in error_list:
   lng = str(location.iloc[i,2])
   path = img_path +"/"+ str(i) +"_" +lat + "_" + lng + "_-5.JPG"  
   url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=1000&return_error_code=true&key="+API_key 
-  error_list = download(url, path, i, error_list)
+  a = download(url, path, i, error_list)
   time.sleep(1.1)
   
 all_files = [f for f in listdir(img_path)]
