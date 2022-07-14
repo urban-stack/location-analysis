@@ -370,4 +370,3 @@ allvar = pd.concat([location,imgvar],axis = 1)
 allvar.to_csv('all_image_features.csv')
 print('all_image_features.csv created!')
 
-
