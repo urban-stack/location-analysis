@@ -50,12 +50,12 @@ else:
 API_key = ""#your key here
 error_list=[]
 for i in range(0,len(location)): 
-  lat = str(location.iloc[i,1]) 
-  lng = str(location.iloc[i,2])
+  lat = str(location.iloc[i,1]) # change according to file
+  lng = str(location.iloc[i,2]) # change according to file
   path = img_path +"/"+ str(i) +"_" +lat + "_" + lng + "_-5.JPG"  
   url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=350&return_error_code=true&key="+API_key 
   error_list = download(url, path, i, error_list)
-  time.sleep(0.95)
+  time.sleep(1)
 print('error_list = ',error_list)
 print('length error_list = ', len(error_list))
 
@@ -64,8 +64,8 @@ f.write(str(error_list))
 f.close()
 
 for i in error_list: 
-  lat = str(location.iloc[i,1]) 
-  lng = str(location.iloc[i,2])
+  lat = str(location.iloc[i,1]) # change according to file
+  lng = str(location.iloc[i,2]) # change according to file
   path = img_path +"/"+ str(i) +"_" +lat + "_" + lng + "_-5.JPG"  
   url = "https://maps.googleapis.com/maps/api/streetview?size=800x450&location="+lat+","+lng+"&pitch=-5&fov=110&radius=1000&return_error_code=true&key="+API_key 
   a = download(url, path, i, error_list)
@@ -87,12 +87,13 @@ print (jpg_files)
 
 #original_code: 'https://github.com/lexfridman/mit-deep-learning/blob/master/tutorial_driving_scene_segmentation/tutorial_driving_scene_segmentation.ipynb'
 
-if not os.path.exists(seg_path):
-  print('Making new dir segmentation.')
-  os.makedirs(seg_path, exist_ok=False)
-else:
-  print('Segmentation dir already exist.')
-os.chdir(seg_path)
+#comment these 6 lines below out if do not want segmented image output
+# if not os.path.exists(seg_path):
+#   print('Making new dir segmentation.')
+#   os.makedirs(seg_path, exist_ok=False)
+# else:
+#   print('Segmentation dir already exist.')
+# os.chdir(seg_path)
 
 # Comment this out if you want to see Deprecation warnings
 import warnings
@@ -284,7 +285,7 @@ for jpg in jpg_files:
       original_im = Image.open(SAMPLE_IMAGE)
       global seg_map
       seg_map = MODEL.run(original_im)
-      vis_segmentation(original_im, seg_map)
+      # vis_segmentation(original_im, seg_map) # comment this line if do not want creating segmented images
  
   run_visualization(SAMPLE_IMAGE)
  
@@ -334,13 +335,27 @@ for jpg in jpg_files:
   auto_score = car_score + bus_score + truck_score + motorcycle_score
   human_score = person_score + rider_score
   nature_score = terrain_score + vegetation_score
+  
+  # score without consider auto and human, which may vary according to the time for taking photos
+  built_score_ad = (built_score/(100-human_score-auto_score-train_score-bicycle_score))*100
+  paved_score_ad = (paved_score/(100-human_score-auto_score-train_score-bicycle_score))*100
+  sky_score_ad = (sky_score/(100-human_score-auto_score-train_score-bicycle_score))*100
+  nature_score_ad = (nature_score/(100-human_score-auto_score-train_score-bicycle_score))*100
+  road_score_ad = (road_score/(100-human_score-auto_score-train_score-bicycle_score))*100
+  sidewalk_score_ad = (sidewalk_score/(100-human_score-auto_score-train_score-bicycle_score))*100
+  terrain_score_ad = (terrain_score/(100-human_score-auto_score-train_score-bicycle_score))*100
+  vegetation_score_ad = (vegetation_score/(100-human_score-auto_score-train_score-bicycle_score))*100
  
  
-  extracted_features.append([image_id,built_score,paved_score,auto_score,sky_score,nature_score,human_score,latitude,longitude,road_score,sidewalk_score,building_score,wall_score,fence_score,pole_score,traffic_light_score,traffic_sign_score,vegetation_score,terrain_score,sky_score,person_score,rider_score,car_score,truck_score,bus_score,train_score,motorcycle_score,bicycle_score,void_score])
+  # extracted_features.append([image_id,built_score,paved_score,auto_score,sky_score,nature_score,human_score,latitude,longitude,road_score,sidewalk_score,building_score,wall_score,fence_score,pole_score,traffic_light_score,traffic_sign_score,vegetation_score,terrain_score,sky_score,person_score,rider_score,car_score,truck_score,bus_score,train_score,motorcycle_score,bicycle_score,void_score])
+  # scores with adjusted scores
+  extracted_features.append([image_id,built_score_ad,paved_score_ad,sky_score_ad,nature_score_ad,road_score_ad,sidewalk_score_ad,terrain_score_ad,vegetation_score_ad,built_score,paved_score,auto_score,sky_score,nature_score,human_score,latitude,longitude,road_score,sidewalk_score,building_score,wall_score,fence_score,pole_score,traffic_light_score,traffic_sign_score,vegetation_score,terrain_score,sky_score,person_score,rider_score,car_score,truck_score,bus_score,train_score,motorcycle_score,bicycle_score,void_score])
 
 image_features = pd.DataFrame(extracted_features)
 
-image_features.columns = ['image_id','built_score','paved_score','auto_score','sky_score','nature_score','human_score','latitude', 'longitude','road_score','sidewalk_score','building_score','wall_score','fence_score','pole_score','traffic_light_score','traffic_sign_score','vegetation_score','terrain_score','sky_score','person_score','rider_score','car_score','truck_score','bus_score','train_score','motorcycle_score','bicycle_score','void_score']
+# image_features.columns = ['image_id','built_score','paved_score','auto_score','sky_score','nature_score','human_score','latitude', 'longitude','road_score','sidewalk_score','building_score','wall_score','fence_score','pole_score','traffic_light_score','traffic_sign_score','vegetation_score','terrain_score','sky_score','person_score','rider_score','car_score','truck_score','bus_score','train_score','motorcycle_score','bicycle_score','void_score']
+# scores with adjusted scores
+image_features.columns = ['image_id','built_score_ad','paved_score_ad','sky_score_ad','nature_score_ad','road_score_ad','sidewalk_score_ad','terrain_score_ad','vegetation_score_ad','built_score','paved_score','auto_score','sky_score','nature_score','human_score','latitude', 'longitude','road_score','sidewalk_score','building_score','wall_score','fence_score','pole_score','traffic_light_score','traffic_sign_score','vegetation_score','terrain_score','sky_score','person_score','rider_score','car_score','truck_score','bus_score','train_score','motorcycle_score','bicycle_score','void_score']
 image_features = image_features.set_index('image_id')
 
 os.chdir(img_path)
@@ -354,3 +369,9 @@ imgvar = pd.read_csv('google street view_image_features.csv').drop('image_id',ax
 allvar = pd.concat([location,imgvar],axis = 1)
 allvar.to_csv('all_image_features.csv')
 print('all_image_features.csv created!')
+
+
+
+# allvar.to_csv('all_image_features.csv')
+# allvar.to_csv('all_image_features.csv')
+# print('all_image_features.csv created!')
