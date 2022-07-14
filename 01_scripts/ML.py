@@ -31,16 +31,18 @@ def adjusted_r2(r2,k,n):
   adj_r2_score =  1 - ((1-r2)*(n-1)/(n-k-1))
   return adj_r2_score
 
-all_se = all[['built_score','paved_score','sky_score','terrain_score','vegetation_score','pole_score','median_income_E','gini_index_E','pct_rental_E','pct_sf_homes_E','annual_loans_per_sf_home','annual_loans_per_mf_home', 'income_ratio_sf','pct_sf_purchase','pct_sf_refi','pct_sf_rehab','pct_sf_cashout','mean_rate']]
+all_se = all[['built_score_ad','paved_score_ad','sky_score_ad','terrain_score_ad','vegetation_score_ad','road_score_ad','sidewalk_score_ad','pole_score_ad','median_income_E','gini_index_E','pct_rental_E','pct_sf_homes_E','annual_loans_per_sf_home','annual_loans_per_mf_home', 'income_ratio_sf','pct_sf_purchase','pct_sf_refi','pct_sf_rehab','pct_sf_cashout','mean_rate']]
 print(len(all_se[all_se.isnull().T.any()]),"rows contain NA.")
 select = all_se.dropna()
 print(len(select))
   
-# y_ros = np.array(select)[:,8]
-# X_ros = np.array(select) [:,0:6]
-select1 = select[['median_income_E','gini_index_E','pct_rental_E','pct_sf_homes_E','annual_loans_per_sf_home','pct_sf_purchase','pct_sf_refi','mean_rate']]
-y_ros = np.array(select)[:,0]
+y_ros = np.array(select)[:,10]
+# X_ros = np.array(select) [:,0:8]
+select1 = select[['built_score_ad','sky_score_ad','terrain_score_ad','vegetation_score_ad','road_score_ad','sidewalk_score_ad','pole_score_ad']]
 X_ros = np.array(select1)
+# select1 = select[['median_income_E','gini_index_E','pct_rental_E','pct_sf_homes_E','annual_loans_per_sf_home','pct_sf_purchase','pct_sf_refi','mean_rate']]
+# y_ros = np.array(select)[:,0]
+# X_ros = np.array(select1)
 x_train, x_test, y_train, y_test = train_test_split(X_ros, y_ros ,test_size = 0.15, random_state=6)
 
 sc = StandardScaler()
