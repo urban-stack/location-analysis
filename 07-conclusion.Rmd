@@ -9,8 +9,16 @@ In more detail, we find that a combination of buffering and discreet site-level 
 While initial ambitions for this parcel-level analysis and visualization relate specifically to small-scale (2-4 unit) infill housing, we are aware that there are other relevant applications and stakeholders. Future work may focus on transportation planning or use-related zoning optimization. Applications that focus more on recommendations for unit or housing type would also be useful.
 For our research team, future work should prioritize 1) refinement of the data sets and quantitative analysis based upon the inclusion of an approximation of human perspective at the site level, 2) deeper exploration of variables related to building-level sustainability, 3) collection of additional workshop related data from experts in real estate development and community advocacy, and 4) pursuit of a web application for data visualization that utilizes the values-driven perspectives of disciplinary experts to drive the design of an interface layer between human stakeholders and quantitative analysis at the site level.
 
-[Screen captures of the web application demonstrate early tests to translate quantitative analysis into a platform to visualize urban quality at the site level.]
+```{r fig_7a, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Screen captures of the web application demonstrate early tests that translate quantitative analysis into an interactive application to visualize urban quality at the site level. The images show how the indices can be weighted by the user to reflect user values and needs.'}
+here("04_figures",
+     "fig_7a.jpg") %>%
+knitr::include_graphics()
+```
 
-[An early version of the web application tests interaction with a set of factors or values that enable the user to personalize their visualization of the research results and their understanding of the site-level qualities of the study area. This function allows users to self-weight the data according to their individual needs.]
+```{r fig_7b, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Early interaction design tests with a two different versions of user controls that weight the indices to enable the user to personalize their visualization of the research results and their understanding of the site-level qualities of the study area. This function allows users to self-weight the data according to their individual needs. Right now we have directly translated the results of quantitative analysis into the application. In the future, the label of the indices will change for clarity and to align with disciplinary values.'}
+here("04_figures",
+     "fig_7b.jpg") %>%
+knitr::include_graphics()
+```
 
 Such a tool would enable stakeholders to access and calibrate indices based upon essential expert values alongside the individual stakeholder value systems and information needs. We have already begun this work and have created a web application that enables users to calibrate the visualization of the data presented above through the lens of the quantitative indices. Progress on this aspect of the work can be explored at this link: https://leahwelch.github.io/projects/pittsburgh-map-sm/. The optimization of this substantial data set for web visualization is a work in progress and we are currently working to employ a better strategy for both virtual machine use and legible interactivity. Additional consideration around the meaning of the factors vis a vis disciplinary values (the creation of a just city, for instance) is needed in order for such a tool to optimize relevance in practice with the aim of better rather than (simply) more development.
