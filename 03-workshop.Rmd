@@ -4,7 +4,7 @@ We designed a series of in-person and digital workshops with the goal of underst
 
 Expert stakeholders invited to the workshop included municipal planners, private sector urban designers and planners, academic planners and designers, and real estate developers. Due to COVID-19 related complications and a variety of other scheduling factors, we were not able to engage real estate developers in this round of workshop sessions. We hope to include their input in future sessions as we refine the work.
 
-```{r fig_3a, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Photograph from a May 2022 workshop with municipal and academic urban designers'}
+```{r fig_3a, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Photograph from a May 2022 workshop with municipal and academic urban designers.'}
 here("04_figures",
      "fig_3a.jpg") %>%
 knitr::include_graphics()
@@ -21,10 +21,18 @@ Next, we asked the group to share their responses, discuss, and refine the outco
 
 Top categories cited by participants across all workshops included connectivity (access to jobs and resources, transportation availability and frequency, pedestrian network density, etc.) and parcel viability (scale of parcel, near-by land use designations that are compatible or not, property value and year-over-year sales price, ownership costs, local median rent). The issue of climate risk (based upon resource use in construction or re-use, length of commute, and access to transit) was cited in two out of three workshops. The experts discussed concern over equity in relationship to change commonly referred to as gentrification in all of the workshops, each with a different allocation of related metrics across the categories of parcel connectivity (e.g., access to jobs via transit) and viability (e.g., in an effort to support workforce housing, development would need to be viable for a “local median income” rather than the area median income).
 
-[We designed a card deck with key questions, variables, and metrics to facilitate the discussion and visualization of categories or factors driving urban quality in relationship to housing development.] 
+```{r fig_3b, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='We designed a card deck with key questions, variables, and metrics to facilitate the discussion and visualization of categories or factors driving urban quality in relationship to housing development.'}
+here("04_figures",
+     "fig_3b.jpg") %>%
+knitr::include_graphics()
+```
 
 Using a deck of cards designed by the research team, workshop participants placed variables relevant to housing location and type on a spectrum and within categories based upon importance and relevance. Through this method, we were able to gain an understanding of the experts’ perspective on essential values-driven factors or categories of metrics and related data that should drive a sustainable method of locating new housing. 
 
 We ran this qualitative process of analysis in parallel to our quantitative analysis. Separate researchers conducted these two modes of analysis such that each was “blind” to the work of the other. Once both streams of analysis concluded we were able to relate and compare the quantitative (data-driven) indices to the qualitative (values-driven) categories (see chapter 6). 
 
- [Participants in remote and in-person workshops arranged these digital (right) or physical (left) cards into categories and created new cards with new metrics as needed.]
+```{r fig_3c, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Participants in remote and in-person workshops arranged these digital (right) or physical (left) cards into categories and created new cards with new metrics as needed.'}
+here("04_figures",
+     "fig_3c.jpg") %>%
+knitr::include_graphics()
+```
