@@ -4,7 +4,10 @@ We designed a series of in-person and digital workshops with the goal of underst
 
 Expert stakeholders invited to the workshop included municipal planners, private sector urban designers and planners, academic planners and designers, and real estate developers. Due to COVID-19 related complications and a variety of other scheduling factors, we were not able to engage real estate developers in this round of workshop sessions. We hope to include their input in future sessions as we refine the work.
 
-[Photograph from a May 2022 workshop with municipal and academic urban designers]
+```{r hull-figure, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Photograph from a May 2022 workshop with municipal and academic urban designers'}
+here("04_figures",
+     "hull-n-factors.png") %>%
+knitr::include_graphics()
 
 We prompted participants with the following questions to initiate the workshop conversation:
 
