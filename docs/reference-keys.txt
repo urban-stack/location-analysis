@@ -1,3 +1,6 @@
+fig:fig3a
+fig:fig3b
+fig:fig3c
 tab:list-site-uses
 fig:assessor-hist
 tab:dest-uses
@@ -21,12 +24,15 @@ fig:effect-plot
 fig:combined-hist
 fig:combined-pitt
 fig:combined-map
+fig:fig7a
+fig:fig7b
 introduction
 report-organization
 related-work
 neighborhood-classification
 quantification-of-sprawl
 conceptualizing-urban-quality-at-the-site-level
+barriers-to-site-level-urban-quality-evaluation
 expert-perspectives
 quantitative-methods
 data

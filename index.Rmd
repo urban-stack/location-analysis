@@ -18,7 +18,6 @@ Practical motivations for this work exist at the levels of both planning and des
 
 In order to match the provision of more units with the provision of more relevant, sustainable, and contextually sensitive development, particularly in low-rise neighborhood fabric, better and more accessible data is required. The ambition of this research, which we consider a work in progress, is to bridge planning level concerns around the existing conditions and future location of housing with site level concerns over the design of future housing and unit types in relationship to the immediate context in terms of both physical character and demographic need.
 
-
 The research also aims to visualize this site-level data in an accessible format with the intent of future action. This aspect of the work aims for practical relevance and applied action. In addition to the diagrams, charts, and images provided in this report, we are working to present the analysis described below in an accessible web-based format that allows key stakeholders to personalize and self-weight a place-based index of parcel level data to meet their own needs in relationship to understanding and incrementally changing urban fabric on a site-by-site basis.
 
 The analysis is designed to serve a very specific band of public and private development-related stakeholders by exploring and daylighting an otherwise latent or invisible view onto urban fabric through the lens of value systems that are related to the mission or agenda of key stakeholders within the housing crisis. Stakeholders include local community advocates, civic leaders and policy makers, real estate developers, and designers who aim to better respond to the particularities of a place through site-level response to context. 
@@ -32,7 +31,6 @@ Residents and community stakeholders often lack the information and resources to
 To varying degrees, each stakeholder group currently lacks the tools and information to adequately understand local conditions on their own terms and in a way that is relevant to their particular roles in the provision, regulation, and advocacy of desperately needed housing. This information gap, which we aim to approach through this research, is a barrier to more and more relevant housing. 
 
 In summary, we aim to utilize site level quantitative analysis to both build upon existing identification and classification efforts, and to provide a practical tool for a range of critical stakeholders within the housing crisis to understand, describe, and advocate for change in urban quality through the lens of their own value systems.
-
 
 ## Report organization
 

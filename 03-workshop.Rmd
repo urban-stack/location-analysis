@@ -1,29 +1,58 @@
 # Expert Perspectives
 
-We designed a series of in-person and digital workshops with the goal of understanding what elements or dimensions of urban quality are essential to sustainable (socially, economically, and environmentally) site-level development, and what values should drive an index to measure an ideal location for new housing from the perspective of expert stakeholders. The workshops utilized a simple set of verbal prompts, physical props, and group discussion to explore the value systems of the experts with the intent to understand alignment (or misalignment) between factors drawn from expert values around place-based quality and the factors generated through quantitative analysis.
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(here)
+```
 
-Expert stakeholders invited to the workshop included municipal planners, private sector urban designers and planners, academic planners and designers, and real estate developers. Due to COVID-19 related complications and a variety of other scheduling factors, we were not able to engage real estate developers in this round of workshop sessions. We hope to include their input in future sessions as we refine the work.
+We designed a series of in-person and digital workshops with the
+goal of understanding what elements or dimensions of urban quality
+are essential to sustainable (socially, economically, and
+environmentally) site-level development, and what values should
+drive an index to measure an ideal location for new housing from the
+perspective of expert stakeholders. The workshops utilized a simple
+set of verbal prompts, physical props, and group discussion to
+explore the value systems of the experts with the intent to
+understand alignment (or misalignment) between factors drawn from
+expert values around place-based quality and the factors generated
+through quantitative analysis.
 
-```{r fig_3a, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Photograph from a May 2022 workshop with municipal and academic urban designers.'}
+Expert stakeholders invited to the workshop included municipal
+planners, private sector urban designers and planners, academic
+planners and designers, and real estate developers. Due to COVID-19
+related complications and a variety of other scheduling factors, we
+were not able to engage real estate developers in this round of
+workshop sessions. We hope to include their input in future sessions
+as we refine the work.
+
+```{r fig3a, echo = FALSE, out.width='100%', fig.cap='Photograph from May 2022 workshop'}
+
 here("04_figures",
      "fig_3a.jpg") %>%
 knitr::include_graphics()
+
 ```
 
-We prompted participants with the following questions to initiate the workshop conversation:
+We prompted participants with the following questions to initiate 
+the workshop conversation:
+* The best location to build new housing is. . .
+* The most suitable location to build new housing is. . .
+* The most feasible location to build new housing is. . .
+* We should building more housing on site that are. . .
 
-The best location to build new housing is. . .
-The most suitable location to build new housing is. . .
-The most feasible location to build new housing is. . .
-We should building more housing on site that are. . .
-
-Next, we asked the group to share their responses, discuss, and refine the outcomes down to five variables using a system of voting. Once the group converged upon a set of values and characteristics, they developed a set of 3-5 quantitative metrics that could be utilized to measure each value. This step helped us broaden our consideration regarding data set selection. The final step focused on sorting the variables into categories that could be compared to the factor-based outcomes of the quantitative analysis. 
+Next, we asked the group to share their responses, discuss, and 
+refine the outcomes down to five variables using a system of voting.
+Once the group converged upon a set of values and characteristics,
+they developed a set of 3-5 quantitative metrics that could be
+utilized to measure each value. This step helped us broaden our
+consideration regarding data set selection. The final step focused
+on sorting the variables into categories that could be compared to the factor-based outcomes of the quantitative analysis. 
 
 Top categories cited by participants across all workshops included connectivity (access to jobs and resources, transportation availability and frequency, pedestrian network density, etc.) and parcel viability (scale of parcel, near-by land use designations that are compatible or not, property value and year-over-year sales price, ownership costs, local median rent). The issue of climate risk (based upon resource use in construction or re-use, length of commute, and access to transit) was cited in two out of three workshops. The experts discussed concern over equity in relationship to change commonly referred to as gentrification in all of the workshops, each with a different allocation of related metrics across the categories of parcel connectivity (e.g., access to jobs via transit) and viability (e.g., in an effort to support workforce housing, development would need to be viable for a “local median income” rather than the area median income).
 
-```{r fig_3b, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='We designed a card deck with key questions, variables, and metrics to facilitate the discussion and visualization of categories or factors driving urban quality in relationship to housing development.'}
+```{r fig3b, echo = FALSE, out.width='100%', fig.cap='Examples from card deck with key questions for workshop'}
 here("04_figures",
-     "fig_3b.jpg") %>%
+     "fig_3b.png") %>%
 knitr::include_graphics()
 ```
 
@@ -31,7 +60,7 @@ Using a deck of cards designed by the research team, workshop participants place
 
 We ran this qualitative process of analysis in parallel to our quantitative analysis. Separate researchers conducted these two modes of analysis such that each was “blind” to the work of the other. Once both streams of analysis concluded we were able to relate and compare the quantitative (data-driven) indices to the qualitative (values-driven) categories (see chapter 6). 
 
-```{r fig_3c, echo = FALSE, fig.asp=1.0, out.width='100%', fig.cap='Participants in remote and in-person workshops arranged these digital (right) or physical (left) cards into categories and created new cards with new metrics as needed.'}
+```{r fig3c, echo = FALSE, out.width='100%', fig.cap='Participants in remote and in-person workshops arranged these digital (right) or physical (left) cards into categories and created new cards with new metrics as needed.'}
 here("04_figures",
      "fig_3c.jpg") %>%
 knitr::include_graphics()
