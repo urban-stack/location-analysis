@@ -5,6 +5,7 @@ library(tidyverse)
 library(tidycensus)
 library(sf)
 library(here)
+# census_api_key("",install = TRUE) #your key here
 
 `%!in%` <- Negate(`%in%`)
 
@@ -12,37 +13,43 @@ sites <- here("02_data",
               "sites.csv") %>%
   read_csv(show_col_types = FALSE)
 
-# load parcel locations data
-parcels <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
-                   options = c("X_POSSIBLE_NAMES=x",
-                               "Y_POSSIBLE_NAMES=y")) %>%
-  rename(id = PIN) %>%
-  st_set_crs("WGS84")
+## load parcel locations data
+## method 1:
+# parcels <- st_read('https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv',
+#                    options = c("X_POSSIBLE_NAMES=x",
+#                                "Y_POSSIBLE_NAMES=y")) %>%
+#   rename(id = PIN) %>%
+#   st_set_crs("WGS84")
+# 
+#method 2: st_as_sf:convert foreign objects into sf objects, remove=F(default is T):do not delete columns after converting into coords
+#also see st_as_sf: https://r-spatial.github.io/sf/reference/st_as_sf.html
+parcels <- st_as_sf(read.csv("https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv"),
+               coords=c("x","y"),remove=F, crs = "WGS84")%>%
+  rename(id =PIN)
+# 
+## method 3:
+# csv_path <- here("02_data","parcelcoords.csv")
+# download.file("https://data.wprdc.org/dataset/6bb2a968-761d-48cf-ac5b-c1fc80b4fe6a/resource/42231cab-8341-48d6-b695-47612dd6514a/download/parcelcoords.csv",
+#               csv_path,mode="wb")
+# parcels <- st_read(csv_path,
+#                    options = c("X_POSSIBLE_NAMES=x",
+#                                "Y_POSSIBLE_NAMES=y")) %>%
+#   rename(id = PIN) %>%
+#   st_set_crs("WGS84")
 
-initial_sites <- here("02_data",
-                      "sample_sites_tract_data.csv") %>%
-  read_csv() %>%
-  select(id, lat, lon) %>%
-  rename(x = lon, y = lat)
-
-n_sites <- 4001
+n_sites <- 1000
 
 sample_locs <- parcels %>%
   filter(id %in% sites$PARID) %>%
-  filter(id %!in% initial_sites$id) %>%
-  sample_n(n_sites) %>%
-  st_drop_geometry() %>%
-  rbind(initial_sites)
-
-write_csv(sample_locs, 
-          file = here("02_data",
-                      "sample-sites-5k.csv"))
+  slice_sample(n = n_sites)
 
 ## Yixin: Feel free to select additional census variables (if you want).
 ## You can see a list of available variables by typing:
 # View(load_variables(2020, "acs5")) in to your RStudio console
-variables <- data.frame(load_variables(2020, "acs5"))
-write.csv(variables2,"E:/GSD/2022 Summer/RA/siting tool/R/variables for census.csv", row.names = FALSE)
+
+# variables <- data.frame(load_variables(2020, "acs5"))
+# there <- here() %>% str_remove("location-analysis") %>% str_c("siting tool/R/variables for census.csv")
+# write.csv(variables,there, row.names = FALSE)
 
 # See tidycensus documentation here: 
 #             https://walker-data.com/tidycensus/articles/basic-usage.html
@@ -97,11 +104,24 @@ loan_data <- here("02_data",
          mf_refinance,
          mf_rehab,
          mf_cashout)  %>%
+  filter(sf_num_loans>0 |
+           sf_med_income>0 |
+           sf_med_upb>0 |
+           sf_purchase>0 |
+           sf_refinance>0 |
+           sf_rehab>0 |
+           sf_cashout>0 |
+           mf_num_loans>0 |
+           mf_purchase>0 |
+           mf_refinance>0 |
+           mf_rehab>0 |
+           mf_cashout>0) %>% 
   replace_na(replace = list(mf_num_loans = 0,
                             mf_purchase = 0,
                             mf_refinance = 0,
                             mf_rehab = 0,
                             mf_cashout = 0))
+
 
 rate_data <- here("02_data",
                   "loan-data",
@@ -143,5 +163,25 @@ site_tracts_loans <- left_join(site_tracts, loan_data) %>%
 write_csv(site_tracts_loans,
   here("02_data",
        "sample_sites_tract_data.csv"))
+
+###################################################################################
+# second generation
   
-  
+initial_sites <- here("02_data",
+                      "sample_sites_tract_data.csv") %>%
+  read_csv() %>%
+  select(id, lat, lon) %>%
+  rename(x = lon, y = lat)
+
+n_sites <- 4001
+
+sample_locs <- parcels %>% 
+  filter(id %in% sites$PARID) %>% 
+  filter(id %!in% initial_sites$id) %>% 
+  slice_sample(n=n_sites) %>% 
+  st_drop_geometry() %>% 
+  rbind(initial_sites)
+
+write_csv(sample_locs,
+          file = here("02_data",
+                      "sample-sites-5k.csv"))

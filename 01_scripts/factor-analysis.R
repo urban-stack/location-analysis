@@ -34,12 +34,18 @@ site_data <- inner_join(access, assessor) %>%
   inner_join(proximity)
 
 factor_data <- site_data %>%
-  select(-PARID)
+  select(-PARID,-PROPERTYCITY)
 
 #### Check data to see if factor analysis is okay
 
 KMO(factor_data)
 
+Sys.time()
+n_factors <- N_FACTORS(factor_data,
+                        #criteria = c("CD", "EKC", "HULL", "KGC", "PARALLEL", "SCREE", "SMT")
+)
+Sys.time()
+n_factors
 ### Get the number of factors - 5 based on CD & Kaiser Guttman with EFA
 
 Sys.time()
