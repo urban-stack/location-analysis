@@ -143,6 +143,14 @@ here("04_figures",
          height = 4,
          units = "in")
 
+here("04_figures",
+     "vector-figs",
+     "drivable.pdf") %>%
+  ggsave(plot = drivable_inset, 
+         width = 12,
+         height = 12,
+         units = "in")
+
 # walkable map
 walkable_big <- ggplot(sites) +
   geom_sf(aes(color = f_walkable),
@@ -201,6 +209,14 @@ here("04_figures",
   ggsave(plot = walkable_inset, 
          width = 4,
          height = 4,
+         units = "in")
+
+here("04_figures",
+     "vector-figs",
+     "walkable.pdf") %>%
+  ggsave(plot = walkable_inset, 
+         width = 12,
+         height = 12,
          units = "in")
 
 # dense map
@@ -543,6 +559,14 @@ here("04_figures",
   ggsave(plot = combined_pitt, 
          width = 6,
          height = 4,
+         units = "in")
+
+here("04_figures",
+     "vector-figs",
+     "combined-pitt.pdf") %>%
+  ggsave(plot = combined_pitt, 
+         width = 12,
+         height = 8,
          units = "in")
 
 combined_hist <- ggplot(sites,
@@ -1017,3 +1041,11 @@ here("04_figures",
        height = 5.2,
        width = 6.5,
        units = "in")
+
+here("04_figures",
+     "vector-figs",
+     "factor-cor.pdf") %>%
+  ggsave(plot = cor_w_legend,
+         height = 9.5,
+         width = 12,
+         units = "in")

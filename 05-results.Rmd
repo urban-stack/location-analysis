@@ -55,6 +55,11 @@ by non-motorized and transit access to retail and grocery locations. Figure
 onto each of the five factors.
 
 ```{r loading-fig, echo = FALSE, fig.asp=1.9, out.width='100%', fig.cap='Factor loadings'}
+# library(extrafont)
+# 
+# font_import()
+# font_install("fontcm")
+# loadfonts()
 
 loadings <- here("02_data",
                  "loadings.csv") %>%
@@ -77,11 +82,11 @@ long_loadings <- loadings  %>%
                                     "f_diverse",
                                     "f_dense",
                                     "f_amenities"),
-                         labels = c("Drivable",
-                                    "Walkable",
-                                    "Diverse",
-                                    "Dense",
-                                    "Amenities"))) 
+                         labels = c("Accessibility by\ndriving",
+                                    "Accessibility by\nwalking",
+                                    "Diversity of\npeople and\nbuildings",
+                                    "Accessibility by\ncycling",
+                                    "Accessibility to\nshopping \n(food and retail)"))) 
 
 figure_labels <- rev(c("Car access to hospitality jobs",
                               "Car acces to high-paying jobs",
@@ -134,7 +139,7 @@ figure_labels <- rev(c("Car access to hospitality jobs",
                               "Walking access to grocery stores",
                               "Transit access to grocery stores"))
 
-ggplot(long_loadings) +
+plot <- ggplot(long_loadings) +
   geom_point(aes(x = Loading,
                  y = reorder(variable, order),
                  color = Factor,
@@ -148,6 +153,33 @@ ggplot(long_loadings) +
         axis.text.x = element_blank(),
         panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank())
+
+plot
+
+big_plot <- ggplot(long_loadings) +
+  geom_point(size = 5,
+             aes(x = Loading,
+                 y = reorder(variable, order),
+                 color = Factor,
+                 alpha = abs(Loading))) +
+  facet_wrap(facet = vars(Factor), ncol = 5) +
+  scale_y_discrete(name = "",
+                   labels = figure_labels) +
+  scale_x_continuous(name = "Influence of variable on factor score") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        text = element_text(size = 18))
+
+here("exhibition",
+     "factors2.pdf") |>
+  ggsave(big_plot,
+         height = 24,
+         width = 12,
+         units = "in",
+         device = cairo_pdf)
   
 ```
 
